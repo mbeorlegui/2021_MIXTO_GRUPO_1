@@ -4,10 +4,10 @@
 
 ### Integrantes del grupo:
 
-| Nombre        				| Mail           					| Usuario  |
-| ------------- 				|:-------------:					| -----:|
-| Matías Beorlegui      		| mbeorlegui@frba.utn.edu.ar 		| [@mbeorlegui](https://github.com/mbeorlegui) |
-| Olaf Querol					| olafquerol@frba.utn.edu.ar    	| [@felipealborch](https://github.com/FelipeAlborch) |
-| Lucas Rodriguez 				| lucasrodriguez@frba.utn.edu.ar	|   @ |
-| Felipe Alborch				| felipealborch444@gmail.com     	|   @ |
-| Limberth Vasquez Estrada 		| lvasquezestrada@frba.utn.edu.ar 	|   @  |
+| Nombre        				| Mail           					| Curso  		| Usuario  	|
+| ------------- 				|-------------						|	--------	| -----		|
+| Matías Beorlegui      		| mbeorlegui@frba.utn.edu.ar 		|		K2002		| [@mbeorlegui](https://github.com/mbeorlegui) |
+| Olaf Querol					| olafquerol@frba.utn.edu.ar    	| 		K2001		|[@felipealborch](https://github.com/FelipeAlborch) |
+| Lucas Rodriguez 				| lucasrodriguez@frba.utn.edu.ar	|   	K2001		| @ |
+| Felipe Alborch				| felipealborch444@gmail.com     	|   	K2002		| @ |
+| Limberth Vasquez Estrada 		| lvasquezestrada@frba.utn.edu.ar 	|   	K2001		| @ |
