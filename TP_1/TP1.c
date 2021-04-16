@@ -33,18 +33,22 @@ void RecorrerArchivo(FILE* aEntrada, FILE* aSalida, bool* finalDelArchivo) {
         int caracterActual = 0;
 
         fread(&numeroArchivoEntrada, sizeof(char), 1, aEntrada);
-        while (!feof(aEntrada) && numeroArchivoEntrada != ',') {
-            estado = MaquinaDeEstados(numeroArchivoEntrada, estado);
+        while (!feof(aEntrada)) {
+
             printf("%c", numeroArchivoEntrada);
-            fwrite(&numeroArchivoEntrada, sizeof(char), 1, aSalida);
+            if(numeroArchivoEntrada != ','){
+                estado = MaquinaDeEstados(numeroArchivoEntrada, estado);
+                fwrite(&numeroArchivoEntrada, sizeof(char), 1, aSalida);
+            }
+            else{
+                ImprimirArchivo(aSalida, estado);
+            }
             fread(&numeroArchivoEntrada, sizeof(char), 1, aEntrada);
         }
 
         if (feof(aEntrada) != 0) {
             *finalDelArchivo = true;  // <------
         }
-
-        ImprimirArchivo(aSalida, estado);
     }
 }
 
