@@ -2,7 +2,8 @@
 #include <stdio.h>
 
 void RecorrerArchivo(FILE*, FILE*, bool*);
-int MaquinaDeEstados(char caracter, int estado);
+int MaquinaDeEstados(char, int);
+void ImprimirArchivo(FILE*, int);
 
 enum estados { q0,
                q1,
@@ -43,7 +44,7 @@ void RecorrerArchivo(FILE* aEntrada, FILE* aSalida, bool* finalDelArchivo) {
             *finalDelArchivo = true;  // <------
         }
 
-        ImprimirArchivo();
+        ImprimirArchivo(aSalida, estado);
     }
 }
 
@@ -81,7 +82,7 @@ int MaquinaDeEstados(char caracter, int estado) {
     }
 }
 
-void ImprimirArchivo(void) {
+void ImprimirArchivo(FILE* aSalida, int estado) {
     if (estado == q2)
         fprintf(aSalida, "\t\t->\t\tDECIMAL\n");
     else if (estado == q4)
