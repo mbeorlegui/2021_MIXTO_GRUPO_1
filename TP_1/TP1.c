@@ -40,8 +40,9 @@ void RecorrerArchivo(FILE* aEntrada, FILE* aSalida, bool* finalDelArchivo) {
                 estado = MaquinaDeEstados(numeroArchivoEntrada, estado);
                 fwrite(&numeroArchivoEntrada, sizeof(char), 1, aSalida);
             }
-            else{
+            else if(numeroArchivoEntrada == ',' && numeroArchivoEntrada != '\0'){
                 ImprimirArchivo(aSalida, estado);
+                estado = q0;
             }
             fread(&numeroArchivoEntrada, sizeof(char), 1, aEntrada);
         }
