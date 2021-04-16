@@ -43,14 +43,7 @@ void RecorrerArchivo(FILE* aEntrada, FILE* aSalida, bool* finalDelArchivo) {
             *finalDelArchivo = true;  // <------
         }
 
-        if (estado == q2)
-            fprintf(aSalida, "\t\t->\t\tDECIMAL\n");
-        else if (estado == q4)
-            fprintf(aSalida, "\t\t->\t\tHEXADECIMAL\n");
-        else if (estado == q1 || estado == q5)
-            fprintf(aSalida, "\t\t->\t\tOCTAL\n");
-        else
-            fprintf(aSalida, "\t\t->\t\tNO RECONOCIDO\n");
+        ImprimirArchivo();
     }
 }
 
@@ -86,4 +79,15 @@ int MaquinaDeEstados(char caracter, int estado) {
         default:
             break;
     }
+}
+
+void ImprimirArchivo(void) {
+    if (estado == q2)
+        fprintf(aSalida, "\t\t->\t\tDECIMAL\n");
+    else if (estado == q4)
+        fprintf(aSalida, "\t\t->\t\tHEXADECIMAL\n");
+    else if (estado == q1 || estado == q5)
+        fprintf(aSalida, "\t\t->\t\tOCTAL\n");
+    else
+        fprintf(aSalida, "\t\t->\t\tNO RECONOCIDO\n");
 }
