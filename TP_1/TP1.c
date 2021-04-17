@@ -28,22 +28,24 @@ void main(void) {
 
 void RecorrerArchivo(FILE* aEntrada, FILE* aSalida, bool* finalDelArchivo) {
     if (aEntrada != NULL) {
-        char numeroArchivoEntrada;
+        char datoEntrada;
         int estado = q0;
         int caracterActual = 0;
 
-        fread(&numeroArchivoEntrada, sizeof(char), 1, aEntrada);
-        if (numeroArchivoEntrada != ',') {
+        fread(&datoEntrada, sizeof(char), 1, aEntrada);
+        if (datoEntrada != ',') {
             while (!feof(aEntrada)) {
-                printf("%c", numeroArchivoEntrada);
-                if (numeroArchivoEntrada != ',') {
-                    estado = MaquinaDeEstados(numeroArchivoEntrada, estado);
-                    fwrite(&numeroArchivoEntrada, sizeof(char), 1, aSalida);
-                } else if (numeroArchivoEntrada == ',' && numeroArchivoEntrada != '\0') {
+                printf("%c", datoEntrada);
+                if (datoEntrada != ',') {
+                    estado = MaquinaDeEstados(datoEntrada, estado);
+                    fwrite(&datoEntrada, sizeof(char), 1, aSalida);
+                } else if (datoEntrada != '\0') {
                     ImprimirArchivo(aSalida, estado);
                     estado = q0;
                 }
-                fread(&numeroArchivoEntrada, sizeof(char), 1, aEntrada);
+                fread(&datoEntrada, sizeof(char), 1, aEntrada);
+                if (feof(aEntrada) != 0 && datoEntrada != '\0' && datoEntrada != ',')
+                    ImprimirArchivo(aSalida, estado);
             }
         }
 

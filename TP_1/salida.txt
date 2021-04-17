@@ -5,4 +5,4 @@
 000		->		OCTAL
 666		->		DECIMAL
 0xXxG		->		NO RECONOCIDO
-xD
+xD		->		NO RECONOCIDO
