@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 void RecorrerArchivo(FILE*, FILE*, bool*);
-int MaquinaDeEstados(char, int);
+void MaquinaDeEstados(char, int*);
 void ImprimirArchivo(FILE*, int);
 
 enum estados { q0,
@@ -28,7 +28,7 @@ void main(void) {
 
 void RecorrerArchivo(FILE* aEntrada, FILE* aSalida, bool* finalDelArchivo) {
     if (aEntrada != NULL) {
-        char datoEntrada;
+        char datoEntrada, string[30];
         int estado = q0;
         int caracterActual = 0;
 
@@ -37,7 +37,7 @@ void RecorrerArchivo(FILE* aEntrada, FILE* aSalida, bool* finalDelArchivo) {
             while (!feof(aEntrada)) {
                 printf("%c", datoEntrada);
                 if (datoEntrada != ',') {
-                    estado = MaquinaDeEstados(datoEntrada, estado);
+                    MaquinaDeEstados(datoEntrada, &estado);
                     fwrite(&datoEntrada, sizeof(char), 1, aSalida);
                 } else if (datoEntrada != '\0') {
                     ImprimirArchivo(aSalida, estado);
@@ -55,36 +55,37 @@ void RecorrerArchivo(FILE* aEntrada, FILE* aSalida, bool* finalDelArchivo) {
     }
 }
 
-int MaquinaDeEstados(char caracter, int estado) {
+void MaquinaDeEstados(char caracter, int* estado) {
     int q6 = ERROR;
-    int tabla[7][5] = {
-        {q1, q2, q2, q6, q6},
-        {q5, q5, q6, q6, q3},
-        {q2, q2, q2, q6, q6},
-        {q4, q4, q4, q4, q6},
-        {q4, q4, q4, q4, q6},
-        {q5, q5, q6, q6, q6},
-        {q6, q6, q6, q6, q6}};
+    int tabla[7][6] = {
+        {q1, q2, q2, q6, q6, q6},
+        {q5, q5, q6, q6, q3, q6},
+        {q2, q2, q2, q6, q6, q6},
+        {q4, q4, q4, q4, q6, q6},
+        {q4, q4, q4, q4, q6, q6},
+        {q5, q5, q6, q6, q6, q6},
+        {q6, q6, q6, q6, q6, q6}};
 
     switch (caracter) {
         case '0':
-            estado = tabla[estado][0];
+            *estado = tabla[*estado][0];
             break;
         case '1' ... '7':
-            estado = tabla[estado][1];
+            *estado = tabla[*estado][1];
             break;
         case '8' ... '9':
-            estado = tabla[estado][2];
+            *estado = tabla[*estado][2];
             break;
         case 'a' ... 'f':
-        case 'F' ... 'F':
-            estado = tabla[estado][3];
+        case 'A' ... 'F':
+            *estado = tabla[*estado][3];
             break;
         case 'x':
         case 'X':
-            estado = tabla[estado][4];
+            *estado = tabla[*estado][4];
             break;
         default:
+            *estado = tabla[*estado][5];
             break;
     }
 }
