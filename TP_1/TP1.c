@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 void RecorrerArchivo(FILE*, FILE*, bool*);
 void MaquinaDeEstados(char, int*);
@@ -11,7 +12,7 @@ enum estados { q0,
                q3,
                q4,
                q5,
-               ERROR };
+               q6 };
 
 void main(void) {
     FILE* aEntrada = fopen("entrada.txt", "r");
@@ -24,28 +25,28 @@ void main(void) {
 
     fclose(aEntrada);
     fclose(aSalida);
+
+    system("PAUSE");
 }
 
 void RecorrerArchivo(FILE* aEntrada, FILE* aSalida, bool* finalDelArchivo) {
     if (aEntrada != NULL) {
-        char datoEntrada, string[30];
-        int estado = q0;
-        int caracterActual = 0;
+        char datoEntrada;
+        int estadoActual = q0;
 
-        fread(&datoEntrada, sizeof(char), 1, aEntrada);
+        datoEntrada = fgetc(aEntrada);
         if (datoEntrada != ',') {
             while (!feof(aEntrada)) {
-                printf("%c", datoEntrada);
                 if (datoEntrada != ',') {
-                    MaquinaDeEstados(datoEntrada, &estado);
+                    MaquinaDeEstados(datoEntrada, &estadoActual);
                     fwrite(&datoEntrada, sizeof(char), 1, aSalida);
                 } else if (datoEntrada != '\0') {
-                    ImprimirArchivo(aSalida, estado);
-                    estado = q0;
+                    ImprimirArchivo(aSalida, estadoActual);
+                    estadoActual = q0;
                 }
                 fread(&datoEntrada, sizeof(char), 1, aEntrada);
                 if (feof(aEntrada) != 0 && datoEntrada != '\0' && datoEntrada != ',')
-                    ImprimirArchivo(aSalida, estado);
+                    ImprimirArchivo(aSalida, estadoActual);
             }
         }
 
@@ -56,7 +57,6 @@ void RecorrerArchivo(FILE* aEntrada, FILE* aSalida, bool* finalDelArchivo) {
 }
 
 void MaquinaDeEstados(char caracter, int* estado) {
-    int q6 = ERROR;
     int tabla[7][6] = {
         {q1, q2, q2, q6, q6, q6},
         {q5, q5, q6, q6, q3, q6},

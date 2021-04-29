@@ -1,10 +1,12 @@
-# 2021_MIXTO_GRUPO_1
+# 21-001-09
 
-### Repositorio de TPs de la materia Sintaxis y Semántica de los Lenguajes - UTN FRBA
+### Repositorio del Grupo Mixto 21-001-09
 
 ### Profesor: Santiago Ferreiros
 
 ### Integrantes del grupo:
+
+<div align="center">
 
 | Nombre        			| Mail           					| Curso		| Usuario  	|
 | ------------- 			|-------------						|--------	| -----		|
@@ -12,4 +14,5 @@
 | Olaf Querol				| olafquerol@frba.utn.edu.ar    	| 	K2001	| [@olafq](https://github.com/olafq)|
 | Lucas Rodriguez 			| lucasrodriguez@frba.utn.edu.ar	|   K2001	| [@lucasirod](https://github.com/lucasirod) |
 | Felipe Alborch			| falborchdeguzman@frba.utn.edu.ar  |   K2002	| [@felipealborch](https://github.com/FelipeAlborch) |
-| Limberth Vasquez Estrada 	| lvasquezestrada@frba.utn.edu.ar 	|   K2001	| [@limberth-estrada-utn](https://github.com/limberth-estrada-utn) |
+
+</div>
