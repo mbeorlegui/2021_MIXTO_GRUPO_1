@@ -25,6 +25,7 @@ typedef struct matrizAutomata{
     Alfabeto alfabeto;
 }t_estadoAutomata;
 
+
 typedef struct nodo {
     char caracter;
     struct nodo *sgte;
@@ -35,11 +36,14 @@ typedef t_nodo *t_pila;
 void push(t_nodo **, char);
 char pop(t_nodo **);
 void imprimirLista(t_nodo **);
+void ingresoDeDatos(char, t_nodo*);
+int recorridoDelAutomata(char, t_estadoAutomata, t_nodo*);
 
 int main(void) {
     t_nodo *pila = NULL;
+    char caracter;
 
-    push(&pila, 'h');
+    push(&pila, '$');
     imprimirLista(&pila);
 
     char out = pop(&pila);
@@ -73,22 +77,23 @@ void imprimirLista(t_nodo **pila) {
     }
 }
 
-void ingresoDeDatos(char caracter){
-    int primerEstado = q0;
+void ingresoDeDatos(char caracter, t_nodo *pila){
+    t_estadoAutomata primerEstado;
+    primerEstado.estadoAutomata = q1;
     char seguirIngresando = 'S';
 
     while(seguirIngresando == 's' || seguirIngresando == 'S'){
         printf("Ingrese un caracter: ");
         scanf("%c\n", &caracter);
 
-        recorridoDelAutomata(caracter, primerEstado);
+        recorridoDelAutomata(caracter, primerEstado, &pila);
         printf("Desea seguir ingresando caracteres: ");
         scanf("%c\n", &seguirIngresando);
     }
 }
 
-int recorridoDelAutomata(char caracter, int estado){
-    int q3 = ERROR;
+int recorridoDelAutomata(char caracter, t_estadoAutomata estado, t_nodo *pila){
+    int q3 = ERROR, estadoActual;
 
     t_estadoAutomata tabla[6][5] = {  //Matriz del AFP
         {q3, (q1, $), q3, (q0, R$), q3},
@@ -98,5 +103,39 @@ int recorridoDelAutomata(char caracter, int estado){
         {q3, q3, (q0, R), q3, (q2, epsilon)},
         {q3, q3, (q0, $), q3, q3}};
 
+    /*switch (caracter)  // REVISAR
+    {
+    case '0':
+        estado = tabla[estado.estadoAutomata][0];
+        if(estadoActual == (q1, $))
+            push(&pila, '$');
+        else if(estadoActual == (q1, R))
+            push(&pila, 'R');
+        break;
+    case '[1-9]':
+        estado = tabla[estado.estadoAutomata][1];
+        if(estadoActual == (q1, $) && estado.estadoAutomata == q0){
+            //pop(&pila);
+            //push(&pila, '$');
+        }
+        else if(estadoActual == (q1, $) && estado.estadoAutomata == q1){
+            //pop(&pila);
+           //push(&pila, '$');
+        }
+        else if(estadoActual == (q1, R) && estado.estadoAutomata == q0){
 
+        }
+        break;
+    case '+':
+    case '-':
+    case '*':
+    case '/': 
+        estado = tabla[estado.estadoAutomata][2];
+        break;
+
+        break;
+    
+    default:
+        break;
+    } */
 }
