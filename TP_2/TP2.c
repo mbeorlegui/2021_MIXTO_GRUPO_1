@@ -36,15 +36,14 @@ typedef t_nodo *t_pila;
 void push(t_nodo **, char);
 char pop(t_nodo **);
 void imprimirLista(t_nodo **);
-void ingresoDeDatos(char, t_nodo*);
-int recorridoDelAutomata(char, t_estadoAutomata, t_nodo*);
+void ingresoDeDatos(t_nodo*);
+int recorridoDelAutomata(char*, EstadosAutomata, t_nodo*);
 
 int main(void) {
     t_nodo *pila = NULL;
-    char caracter;
 
     push(&pila, '$');
-    imprimirLista(&pila);
+    //imprimirLista(&pila);
 
     char out = pop(&pila);
     printf("\nEl ultimo dato sacado de la pila es: %c", out);
@@ -77,14 +76,14 @@ void imprimirLista(t_nodo **pila) {
     }
 }
 
-void ingresoDeDatos(char caracter, t_nodo *pila){
-    t_estadoAutomata primerEstado;
-    primerEstado.estadoAutomata = q1;
+void ingresoDeDatos(t_nodo *pila){
+    char caracter[50];
+    EstadosAutomata primerEstado = q0;
     char seguirIngresando = 'S';
 
     while(seguirIngresando == 's' || seguirIngresando == 'S'){
         printf("Ingrese un caracter: ");
-        scanf("%c\n", &caracter);
+        scanf("%s\n", &caracter);
 
         recorridoDelAutomata(caracter, primerEstado, &pila);
         printf("Desea seguir ingresando caracteres: ");
@@ -92,50 +91,80 @@ void ingresoDeDatos(char caracter, t_nodo *pila){
     }
 }
 
-int recorridoDelAutomata(char caracter, t_estadoAutomata estado, t_nodo *pila){
-    int q3 = ERROR, estadoActual;
+int recorridoDelAutomata(char *caracter, EstadosAutomata estado, t_nodo *pila){
+    t_estadoAutomata q3 = {ERROR, epsilon}, estadoActual;
+    char resultadoPila;
+    int matrizElegida, matrizFila, matrizColumna, quePushear;
 
-    t_estadoAutomata tabla[6][5] = {  //Matriz del AFP
-        {q3, (q1, $), q3, (q0, R$), q3},
-        {(q1, $), (q1, $), (q0, $), q3, q3},
-        {q3, (q1, R), q3, (q0, RR), q3},
-        {(q1, R), (q1, R), (q0, R), q3, (q2,  epsilon)},
-        {q3, q3, (q0, R), q3, (q2, epsilon)},
-        {q3, q3, (q0, $), q3, q3}};
+    t_estadoAutomata tabla[1][2][4] = {  //Matriz del AFP
+        {{q3, {q1, $}, q3, {q0, R$}, q3},
+        {{q1, $}, {q1, $}, {q0, $}, q3, q3},
+        {q3, q3, {q0, $}, q3, q3}},
+        
+        {{q3, {q1, R}, q3, {q0, RR}, q3},
+        {{q1, R}, {q1, R}, {q0, R}, q3, {q2,  epsilon}},
+        {q3, q3, {q0, R}, q3, {q2, epsilon}}}};
 
-    /*switch (caracter)  // REVISAR
-    {
-    case '0':
-        estado = tabla[estado.estadoAutomata][0];
-        if(estadoActual == (q1, $))
-            push(&pila, '$');
-        else if(estadoActual == (q1, R))
-            push(&pila, 'R');
-        break;
-    case '[1-9]':
-        estado = tabla[estado.estadoAutomata][1];
-        if(estadoActual == (q1, $) && estado.estadoAutomata == q0){
-            //pop(&pila);
-            //push(&pila, '$');
-        }
-        else if(estadoActual == (q1, $) && estado.estadoAutomata == q1){
-            //pop(&pila);
-           //push(&pila, '$');
-        }
-        else if(estadoActual == (q1, R) && estado.estadoAutomata == q0){
-
-        }
-        break;
-    case '+':
-    case '-':
-    case '*':
-    case '/': 
-        estado = tabla[estado.estadoAutomata][2];
-        break;
-
-        break;
     
-    default:
-        break;
-    } */
+    matrizFila = estado;
+    while(*caracter != '\0'){
+        resultadoPila = pop(&pila);
+
+        if(resultadoPila == '$')
+            matrizElegida = 0;
+        else if(resultadoPila == 'R')
+            matrizElegida = 1;
+       
+        switch (*caracter){
+        case '0':
+            matrizColumna = 0;
+            break;
+        case '[1-9]':
+            matrizColumna = 1;
+            break;
+        case '+':
+        case '-':
+        case '*':
+        case '/': 
+            matrizColumna = 2;
+            break;
+        
+        case '(': 
+            matrizColumna = 3;
+            break;
+
+        case ')':
+            matrizColumna = 4;
+            break;
+        
+        default:
+
+        } 
+        caracter++;
+
+        quePushear = tabla[matrizElegida][matrizFila][matrizColumna].alfabeto;
+
+        switch (quePushear)
+        {
+            case 0:
+                push(&pila, 'R');
+                break;
+            case 1: 
+                push(&pila, '$');
+                break;
+            case 2:
+                break;
+            case 3:
+                push(&pila, 'R');
+                push(&pila, 'R');
+                break;
+            case 4: 
+                push(&pila, '$');
+                push(&pila, 'R');
+                break;
+        }
+        matrizFila = tabla[matrizElegida][matrizFila][matrizColumna].estadoAutomata;
+    }
+
+    //VAMOS A TENER EL ESTADO ACTUAL Y EL ELEMENTO DE LA PILA ACA
 }
