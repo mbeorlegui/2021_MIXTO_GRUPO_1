@@ -38,15 +38,16 @@ char pop(t_nodo **);
 void imprimirLista(t_nodo **);
 void ingresoDeDatos(t_nodo*);
 int recorridoDelAutomata(char*, EstadosAutomata, t_nodo*);
+void verificarPilaVacia(t_nodo*);
 
 int main(void) {
     t_nodo *pila = NULL;
-
     push(&pila, '$');
     //imprimirLista(&pila);
-
-    char out = pop(&pila);
-    printf("\nEl ultimo dato sacado de la pila es: %c", out);
+    ingresoDeDatos(&pila);
+    //char out = pop(&pila);
+    //printf("\nEl ultimo dato sacado de la pila es: %c", out);
+    verificarPilaVacia(&pila);
 }
 
 void push(t_nodo **pila, char dato) {
@@ -84,7 +85,6 @@ void ingresoDeDatos(t_nodo *pila){
     while(seguirIngresando == 's' || seguirIngresando == 'S'){
         printf("Ingrese un caracter: ");
         scanf("%s\n", &caracter);
-
         recorridoDelAutomata(caracter, primerEstado, &pila);
         printf("Desea seguir ingresando caracteres: ");
         scanf("%c\n", &seguirIngresando);
@@ -119,7 +119,7 @@ int recorridoDelAutomata(char *caracter, EstadosAutomata estado, t_nodo *pila){
         case '0':
             matrizColumna = 0;
             break;
-        case '[1-9]':
+        case '1' ... '9':
             matrizColumna = 1;
             break;
         case '+':
@@ -138,7 +138,7 @@ int recorridoDelAutomata(char *caracter, EstadosAutomata estado, t_nodo *pila){
             break;
         
         default:
-
+            break;
         } 
         caracter++;
 
@@ -147,18 +147,22 @@ int recorridoDelAutomata(char *caracter, EstadosAutomata estado, t_nodo *pila){
         switch (quePushear)
         {
             case 0:
+                pop(&pila);
                 push(&pila, 'R');
                 break;
             case 1: 
+                pop(&pila);
                 push(&pila, '$');
                 break;
             case 2:
                 break;
             case 3:
+                pop(&pila);
                 push(&pila, 'R');
                 push(&pila, 'R');
                 break;
             case 4: 
+                pop(&pila);
                 push(&pila, '$');
                 push(&pila, 'R');
                 break;
@@ -167,4 +171,15 @@ int recorridoDelAutomata(char *caracter, EstadosAutomata estado, t_nodo *pila){
     }
 
     //VAMOS A TENER EL ESTADO ACTUAL Y EL ELEMENTO DE LA PILA ACA
+}
+
+void verificarPilaVacia(t_nodo *pila){
+    char resultadoPila;
+    
+    pop(&pila);
+
+    if(resultadoPila == '$')
+        printf("La pila se vacio correctamente");
+    else
+        printf("ERROR, la pila no vacia");
 }
