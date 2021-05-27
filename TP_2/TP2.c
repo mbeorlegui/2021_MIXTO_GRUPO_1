@@ -79,16 +79,16 @@ void imprimirLista(t_nodo **pila) {
 
 void ingresoDeDatos(t_nodo *pila){
     char caracter[50];
-    EstadosAutomata primerEstado = q0;
-    char seguirIngresando = 'S';
+    EstadosAutomata estado = q0;
+    //char seguirIngresando = 'S';
 
-    while(seguirIngresando == 's' || seguirIngresando == 'S'){
-        printf("Ingrese un caracter: ");
-        scanf("%s\n", &caracter);
-        recorridoDelAutomata(caracter, primerEstado, &pila);
-        printf("Desea seguir ingresando caracteres: ");
-        scanf("%c\n", &seguirIngresando);
-    }
+    //while(seguirIngresando == 's' || seguirIngresando == 'S'){
+    printf("Ingrese un caracter: ");
+    scanf("%s\n", &caracter);
+    recorridoDelAutomata(caracter, estado, &pila);
+        //printf("Desea seguir ingresando caracteres: ");
+       // scanf("%c\n", &seguirIngresando);
+    //}
 }
 
 int recorridoDelAutomata(char *caracter, EstadosAutomata estado, t_nodo *pila){
@@ -99,14 +99,15 @@ int recorridoDelAutomata(char *caracter, EstadosAutomata estado, t_nodo *pila){
     t_estadoAutomata tabla[1][2][4] = {  //Matriz del AFP
         {{q3, {q1, $}, q3, {q0, R$}, q3},
         {{q1, $}, {q1, $}, {q0, $}, q3, q3},
-        {q3, q3, {q0, $}, q3, q3}},
+        {q3, {q1, R}, q3, {q0, RR}, q3}},
         
-        {{q3, {q1, R}, q3, {q0, RR}, q3},
-        {{q1, R}, {q1, R}, {q0, R}, q3, {q2,  epsilon}},
-        {q3, q3, {q0, R}, q3, {q2, epsilon}}}};
+        {{{q1, R}, {q1, R}, {q0, R}, q3, {q2, epsilon}},
+        {q3, q3, {q0, R}, q3, {q2,  epsilon}},
+        {q3, q3, {q0, $}, q3, q3}}};
 
     
     matrizFila = estado;
+
     while(*caracter != '\0'){
         resultadoPila = pop(&pila);
 
@@ -147,22 +148,18 @@ int recorridoDelAutomata(char *caracter, EstadosAutomata estado, t_nodo *pila){
         switch (quePushear)
         {
             case 0:
-                pop(&pila);
                 push(&pila, 'R');
                 break;
             case 1: 
-                pop(&pila);
                 push(&pila, '$');
                 break;
             case 2:
                 break;
             case 3:
-                pop(&pila);
                 push(&pila, 'R');
                 push(&pila, 'R');
                 break;
             case 4: 
-                pop(&pila);
                 push(&pila, '$');
                 push(&pila, 'R');
                 break;
