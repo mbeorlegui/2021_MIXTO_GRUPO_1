@@ -16,12 +16,16 @@ int determinarColumna(char);
 
 int main(void) {
     t_nodo *pila = NULL;
+    char operacion[30];
 
     push(&pila, 'h');
     imprimirLista(&pila);
 
     char out = pop(&pila);
     printf("\nEl ultimo dato sacado de la pila es: %c", out);
+
+    printf("\nIngrese la operacion a analizar: ");
+    scanf("%29s", operacion);
 }
 
 void push(t_nodo **pila, char dato) {
