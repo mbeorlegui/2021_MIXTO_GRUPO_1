@@ -6,10 +6,10 @@ enum estados {  //Los distintos estados que tendra el AFP
     q0,
     q1,
     q2,
-    ERROR 
+    ERROR
 };
 
-enum alfabetoPila { //Las distintas combinaciones que se pueden dar con el alfabeto dado
+enum alfabetoPila {  //Las distintas combinaciones que se pueden dar con el alfabeto dado
     R,
     $,
     epsilon,
@@ -20,11 +20,10 @@ enum alfabetoPila { //Las distintas combinaciones que se pueden dar con el alfab
 typedef enum estados EstadosAutomata;
 typedef enum alfabetoPila Alfabeto;
 
-typedef struct matrizAutomata{
+typedef struct matrizAutomata {
     EstadosAutomata estadoAutomata;
     Alfabeto alfabeto;
-}t_estadoAutomata;
-
+} t_estadoAutomata;
 
 typedef struct nodo {
     char caracter;
@@ -36,9 +35,9 @@ typedef t_nodo *t_pila;
 void push(t_nodo **, char);
 char pop(t_nodo **);
 void imprimirLista(t_nodo **);
-void ingresoDeDatos(t_nodo*);
-int recorridoDelAutomata(char*, EstadosAutomata, t_nodo*);
-void verificarPilaVacia(t_nodo*);
+void ingresoDeDatos(t_nodo **);
+int recorridoDelAutomata(char *, EstadosAutomata, t_nodo *);
+void verificarPilaVacia(t_nodo *);
 
 int main(void) {
     t_nodo *pila = NULL;
@@ -77,7 +76,7 @@ void imprimirLista(t_nodo **pila) {
     }
 }
 
-void ingresoDeDatos(t_nodo *pila){
+void ingresoDeDatos(t_nodo **pila) {
     char caracter[50];
     EstadosAutomata estado = q0;
     //char seguirIngresando = 'S';
@@ -86,71 +85,69 @@ void ingresoDeDatos(t_nodo *pila){
     printf("Ingrese un caracter: ");
     scanf("%s\n", &caracter);
     recorridoDelAutomata(caracter, estado, &pila);
-        //printf("Desea seguir ingresando caracteres: ");
-       // scanf("%c\n", &seguirIngresando);
+    //printf("Desea seguir ingresando caracteres: ");
+    // scanf("%c\n", &seguirIngresando);
     //}
 }
 
-int recorridoDelAutomata(char *caracter, EstadosAutomata estado, t_nodo *pila){
+int recorridoDelAutomata(char *caracter, EstadosAutomata estado, t_nodo *pila) {
     t_estadoAutomata q3 = {ERROR, epsilon}, estadoActual;
     char resultadoPila;
     int matrizElegida, matrizFila, matrizColumna, quePushear;
 
-    t_estadoAutomata tabla[1][2][4] = {  //Matriz del AFP
-        {{q3, {q1, $}, q3, {q0, R$}, q3},
-        {{q1, $}, {q1, $}, {q0, $}, q3, q3},
-        {q3, {q1, R}, q3, {q0, RR}, q3}},
-        
-        {{{q1, R}, {q1, R}, {q0, R}, q3, {q2, epsilon}},
-        {q3, q3, {q0, R}, q3, {q2,  epsilon}},
-        {q3, q3, {q0, $}, q3, q3}}};
+    t_estadoAutomata tabla[2][3][5] = {//Matriz del AFP
+                                       {{q3, {q1, $}, q3, {q0, R$}, q3},
+                                        {{q1, $}, {q1, $}, {q0, $}, q3, q3},
+                                        {q3, {q1, R}, q3, {q0, RR}, q3}},
 
-    
+                                       {{{q1, R}, {q1, R}, {q0, R}, q3, {q2, epsilon}},
+                                        {q3, q3, {q0, R}, q3, {q2, epsilon}},
+                                        {q3, q3, {q0, $}, q3, q3}}};
+
     matrizFila = estado;
 
-    while(*caracter != '\0'){
+    while (*caracter != '\0') {
         resultadoPila = pop(&pila);
 
-        if(resultadoPila == '$')
+        if (resultadoPila == '$')
             matrizElegida = 0;
-        else if(resultadoPila == 'R')
+        else if (resultadoPila == 'R')
             matrizElegida = 1;
-       
-        switch (*caracter){
-        case '0':
-            matrizColumna = 0;
-            break;
-        case '1' ... '9':
-            matrizColumna = 1;
-            break;
-        case '+':
-        case '-':
-        case '*':
-        case '/': 
-            matrizColumna = 2;
-            break;
-        
-        case '(': 
-            matrizColumna = 3;
-            break;
 
-        case ')':
-            matrizColumna = 4;
-            break;
-        
-        default:
-            break;
-        } 
+        switch (*caracter) {
+            case '0':
+                matrizColumna = 0;
+                break;
+            case '1' ... '9':
+                matrizColumna = 1;
+                break;
+            case '+':
+            case '-':
+            case '*':
+            case '/':
+                matrizColumna = 2;
+                break;
+
+            case '(':
+                matrizColumna = 3;
+                break;
+
+            case ')':
+                matrizColumna = 4;
+                break;
+
+            default:
+                break;
+        }
         caracter++;
 
         quePushear = tabla[matrizElegida][matrizFila][matrizColumna].alfabeto;
 
-        switch (quePushear)
-        {
+        switch (quePushear) {
             case 0:
                 push(&pila, 'R');
                 break;
-            case 1: 
+            case 1:
                 push(&pila, '$');
                 break;
             case 2:
@@ -159,7 +156,7 @@ int recorridoDelAutomata(char *caracter, EstadosAutomata estado, t_nodo *pila){
                 push(&pila, 'R');
                 push(&pila, 'R');
                 break;
-            case 4: 
+            case 4:
                 push(&pila, '$');
                 push(&pila, 'R');
                 break;
@@ -170,12 +167,12 @@ int recorridoDelAutomata(char *caracter, EstadosAutomata estado, t_nodo *pila){
     //VAMOS A TENER EL ESTADO ACTUAL Y EL ELEMENTO DE LA PILA ACA
 }
 
-void verificarPilaVacia(t_nodo *pila){
+void verificarPilaVacia(t_nodo *pila) {
     char resultadoPila;
-    
+
     pop(&pila);
 
-    if(resultadoPila == '$')
+    if (resultadoPila == '$')
         printf("La pila se vacio correctamente");
     else
         printf("ERROR, la pila no vacia");
