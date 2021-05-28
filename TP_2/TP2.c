@@ -12,6 +12,7 @@ typedef t_nodo *t_pila;
 void push(t_nodo **, char);
 char pop(t_nodo **);
 void imprimirLista(t_nodo **);
+int determinarColumna(char);
 
 int main(void) {
     t_nodo *pila = NULL;
@@ -48,4 +49,39 @@ void imprimirLista(t_nodo **pila) {
         printf("%c\n", aux->caracter);
         aux = aux->sgte;
     }
+}
+
+int determinarColumna(char caracter) {
+    int columna = -1;
+
+    switch (caracter) {
+        case '0':
+            columna = 0;
+            break;
+
+        case '1' ... '9':
+            columna = 1;
+            break;
+
+        case '+':
+        case '-':
+        case '*':
+        case '/':
+            columna = 2;
+            break;
+
+        case '(':
+            columna = 3;
+            break;
+
+        case ')':
+            columna = 4;
+            break;
+        default:
+            break;
+    }
+
+    //printf("%d\n", columna);
+
+    return columna;
 }
