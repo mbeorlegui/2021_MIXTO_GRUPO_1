@@ -34,12 +34,10 @@ int determinarColumna(char caracter) {
             break;
     }
 
-    //printf("%d\n", columna);
-
     return columna;
 }
 
-void recorrerCadena(t_estado estadoPila, char *caracter) {
+void recorrerCadena(t_estado estadoPila, t_pila *pila, char *caracter) {
     t_estado error = {q3, e};
     t_estado tabla[2][4][6] =
         {//q0,$                      q1,$            q2,$                q3,$
@@ -53,13 +51,33 @@ void recorrerCadena(t_estado estadoPila, char *caracter) {
           {error, error, {q0, R}, error, {q2, e}, error},
           {error, error, error, error, error, error}}};
 
+    int matrizColumna = 5, matrizFila = estadoPila.estado, matrizElegida;
+    int quePushear;
+    char resultadoPila;
+
     while (*caracter != '\0') {
-        printf("%c", *caracter);
+        printf("Entro al while\n");
+        resultadoPila = pop(pila);
+
+        if (resultadoPila == '$')
+            matrizElegida = $;
+        else if (resultadoPila == 'R')
+            matrizElegida = R;
+
+        matrizColumna = determinarColumna(*caracter);
+
+        t_estado resultadoMatriz = tabla[matrizElegida][matrizFila][matrizColumna];
+        matrizFila = resultadoMatriz.estado;
+        quePushear = resultadoMatriz.to_push;
+
+        agregarCaracter(pila, quePushear);
+
         caracter++;
     }
 }
 
 void push(t_nodo **pila, char dato) {
+    printf("Hago PUSH de %c\n", dato);
     t_nodo *aux;
     aux = (t_nodo *)malloc(sizeof(t_nodo));  // Casteo antes del malloc
     aux->caracter = dato;
@@ -74,6 +92,7 @@ char pop(t_nodo **pila) {
     *pila = aux->sgte;
     char dato = aux->caracter;
     free(aux);
+    printf("Hago POP de %c\n", dato);
     return dato;
 }
 
@@ -83,5 +102,33 @@ void imprimirLista(t_nodo **pila) {
     while (aux) {
         printf("%c\n", aux->caracter);
         aux = aux->sgte;
+    }
+}
+
+void agregarCaracter(t_pila *pila, int to_push) {
+    switch (to_push) {
+        case $:
+            printf("Pusheo $\n");
+            push(pila, '$');
+            break;
+        case R:
+            printf("Pusheo R\n");
+            push(pila, 'R');
+            break;
+        case R$:
+            printf("Pusheo R$\n");
+            push(pila, '$');
+            push(pila, 'R');
+            break;
+        case RR:
+            printf("Pusheo RR\n");
+            push(pila, 'R');
+            push(pila, 'R');
+            break;
+        case e:
+            printf("No pusheo\n");
+        default:
+            printf("No pusheo x2\n");
+            break;
     }
 }

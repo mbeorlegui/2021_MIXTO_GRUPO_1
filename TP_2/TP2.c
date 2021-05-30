@@ -5,14 +5,14 @@
 #include "funciones.h"
 
 void main(void) {
-    t_nodo* pila = NULL;
+    t_pila pila = NULL;
     t_estado estadoPila = {q0, $};
     char operacion[30];
 
-    push(&pila, $);  // <-- Cambiar tipo de dato de pila
+    agregarCaracter(&pila, $);
 
     printf("Ingrese la operacion a analizar: ");
     scanf("%29s", operacion);
 
-    recorrerCadena(estadoPila, operacion);
+    recorrerCadena(estadoPila, &pila, operacion);
 }

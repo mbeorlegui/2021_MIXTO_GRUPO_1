@@ -32,6 +32,7 @@ void push(t_nodo **, char);
 char pop(t_nodo **);
 void imprimirLista(t_nodo **);
 int determinarColumna(char);
-void recorrerCadena(t_estado, char *);
+void recorrerCadena(t_estado, t_pila *, char *);
+void agregarCaracter(t_pila *, int);
 
 #endif
