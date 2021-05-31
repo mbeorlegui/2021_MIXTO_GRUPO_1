@@ -1,9 +1,9 @@
 #include "funciones.h"
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
 
 int determinarColumna(char caracter) {
     int columna = -1;
@@ -39,12 +39,12 @@ int determinarColumna(char caracter) {
 }
 
 void recorrerCadena(t_estado estadoPila, t_pila *pila, char *caracter, bool *estadoDeError) {
-     char cimaPila;
-     bool igualAOperador;
-     
-    push(pila, $); 
+    char cimaPila;
+    bool igualAOperador;
+
+    push(pila, $);
     agregarCaracter(pila, $, &cimaPila);
-    
+
     char ultimoCaraterDeCadena;
     t_estado error = {q3, e}, resultadoMatriz;
     t_estado tabla[2][4][6] =
@@ -83,54 +83,46 @@ void recorrerCadena(t_estado estadoPila, t_pila *pila, char *caracter, bool *est
         agregarCaracter(pila, quePushear, &cimaPila);
 
         caracter++;
-    } 
+    }
 
     printf("Me quede en el estado: q%i\n", resultadoMatriz.estado);
     printf("Cima de la pila: %c\n", cimaPila);
     igualAOperador = distintoDeOperadores(ultimoCaraterDeCadena);
 
     //printf("Resultado Pila: %c\n", resultadoPila);
-    
-    if(resultadoMatriz.estado == 3 && cimaPila == '$' && ultimoCaraterDeCadena == '0'){
+
+    if (resultadoMatriz.estado == 3 && cimaPila == '$' && ultimoCaraterDeCadena == '0') {
         *estadoDeError = true;
         printf("El numero ingresado no es reconocido\n");
-    }  
-    else if(resultadoMatriz.estado == 3 && cimaPila == '$' && ultimoCaraterDeCadena == ')'){
+    } else if (resultadoMatriz.estado == 3 && cimaPila == '$' && ultimoCaraterDeCadena == ')') {
         *estadoDeError = true;
         printf("Se espera un '('\n");
-    }   
-    else if(resultadoMatriz.estado == 3 && cimaPila == '$' && !igualAOperador){
+    } else if (resultadoMatriz.estado == 3 && cimaPila == '$' && !igualAOperador) {
         *estadoDeError = true;
         printf("Se espera un/os numero/s antes o entre de un operador\n");
-    }
-    else if(resultadoMatriz.estado == 3 && cimaPila == '$' && igualAOperador){
+    } else if (resultadoMatriz.estado == 3 && cimaPila == '$' && igualAOperador) {
         *estadoDeError = true;
         printf("Se espera un/os numero/s entre o despues de algun signo de operacion\n");
-    }
-    else if(resultadoMatriz.estado == 0 && cimaPila == '$'){  ///CHEQUEAR
+    } else if (resultadoMatriz.estado == 0 && cimaPila == '$') {  ///CHEQUEAR
         *estadoDeError = true;
         printf("Falta un numero despues de una operacion\n");
-    }
-    else if(resultadoMatriz.estado == 3 && cimaPila == 'R' && ultimoCaraterDeCadena != ')'){  ///CHEQUEAR
+    } else if (resultadoMatriz.estado == 3 && cimaPila == 'R' && ultimoCaraterDeCadena != ')') {  ///CHEQUEAR
         *estadoDeError = true;
         printf("Falta un numero despues de una operacion\n");
-    }
-    else if(resultadoMatriz.estado == 1 && cimaPila == 'R'){
+    } else if (resultadoMatriz.estado == 1 && cimaPila == 'R') {
         *estadoDeError = true;
         printf("Se espera un ')'\n");
-    }
-    else if(resultadoMatriz.estado == 2 && cimaPila == 'R' && ultimoCaraterDeCadena != ')'){
+    } else if (resultadoMatriz.estado == 2 && cimaPila == 'R' && ultimoCaraterDeCadena != ')') {
         *estadoDeError = true;
         printf("Se espera un ')'\n");
-    }
-    else if(resultadoMatriz.estado == 3 && cimaPila == 'R' && ultimoCaraterDeCadena == ')'){
+    } else if (resultadoMatriz.estado == 3 && cimaPila == 'R' && ultimoCaraterDeCadena == ')') {
         *estadoDeError = true;
         printf("Faltan numeros entre los parentesis\n");
     }
 }
 
-bool distintoDeOperadores(char ultimoCaracter){
-    if(ultimoCaracter != '+' && ultimoCaracter != '-' && ultimoCaracter != '*' && ultimoCaracter != '/')
+bool distintoDeOperadores(char ultimoCaracter) {
+    if (ultimoCaracter != '+' && ultimoCaracter != '-' && ultimoCaracter != '*' && ultimoCaracter != '/')
         return true;
     else
         return false;
@@ -198,12 +190,12 @@ void agregarCaracter(t_pila *pila, int to_push, char *cimaPila) {
     }
 }
 
-void verificarPilaVacia(t_pila *pila, bool *estadoFinalDeLaPila){
+void verificarPilaVacia(t_pila *pila, bool *estadoFinalDeLaPila) {
     char resultadoPila;
-    
+
     resultadoPila = pop(pila);
 
-    if(resultadoPila == '$')
+    if (resultadoPila == '$')
         *estadoFinalDeLaPila = true;
     else
         *estadoFinalDeLaPila = false;

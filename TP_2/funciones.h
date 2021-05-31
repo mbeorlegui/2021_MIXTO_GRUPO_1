@@ -1,6 +1,6 @@
 #ifndef FUNCIONES_H
 #define FUNCIONES_H
-#include <stdbool.h>;
+#include <stdbool.h>
 
 typedef struct nodo {
     char caracter;
