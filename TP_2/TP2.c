@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+<<<<<<< HEAD
 enum estados {  //Los distintos estados que tendra el AFP
     q0,
     q1,
@@ -30,9 +31,16 @@ typedef struct nodo {
     char caracter;
     struct nodo *sgte;
 } t_nodo;
+=======
+#include "funciones.h"
+>>>>>>> cb1cce2a65213ea4465b99ccba96bdaa300c9ee4
 
-typedef t_nodo *t_pila;
+void main(void) {
+    t_pila pila = NULL;
+    t_estado estadoPila = {q0, $};
+    char operacion[30];
 
+<<<<<<< HEAD
 void push(t_nodo **, char);
 char pop(t_nodo **);
 void imprimirLista(t_nodo **);
@@ -180,3 +188,12 @@ void verificarPilaVacia(t_nodo *pila){
     else
         printf("ERROR, la pila no vacia");
 }
+=======
+    agregarCaracter(&pila, $);
+
+    printf("Ingrese la operacion a analizar: ");
+    scanf("%29s", operacion);
+
+    recorrerCadena(estadoPila, &pila, operacion);
+}
+>>>>>>> cb1cce2a65213ea4465b99ccba96bdaa300c9ee4
