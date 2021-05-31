@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 int determinarColumna(char caracter) {
     int columna = -1;
@@ -37,8 +38,15 @@ int determinarColumna(char caracter) {
     return columna;
 }
 
-void recorrerCadena(t_estado estadoPila, t_pila *pila, char *caracter) {
-    t_estado error = {q3, e};
+void recorrerCadena(t_estado estadoPila, t_pila *pila, char *caracter, bool *estadoDeError) {
+     char cimaPila;
+     bool igualAOperador;
+     
+    push(pila, $); 
+    agregarCaracter(pila, $, &cimaPila);
+    
+    char ultimoCaraterDeCadena;
+    t_estado error = {q3, e}, resultadoMatriz;
     t_estado tabla[2][4][6] =
         {//q0,$                      q1,$            q2,$                q3,$
          {{error, {q1, $}, error, {q0, R$}, error, error},
@@ -51,12 +59,13 @@ void recorrerCadena(t_estado estadoPila, t_pila *pila, char *caracter) {
           {error, error, {q0, R}, error, {q2, e}, error},
           {error, error, error, error, error, error}}};
 
-    int matrizColumna = 5, matrizFila = estadoPila.estado, matrizElegida;
+    int matrizColumna = 0, matrizFila = estadoPila.estado, matrizElegida;
     int quePushear;
     char resultadoPila;
 
-    while (*caracter != '\0') {
-        printf("Entro al while\n");
+    while (*caracter != '\0' && resultadoMatriz.estado != 3) {
+        printf("%c\n", *caracter);
+        ultimoCaraterDeCadena = *caracter;
         resultadoPila = pop(pila);
 
         if (resultadoPila == '$')
@@ -66,14 +75,65 @@ void recorrerCadena(t_estado estadoPila, t_pila *pila, char *caracter) {
 
         matrizColumna = determinarColumna(*caracter);
 
-        t_estado resultadoMatriz = tabla[matrizElegida][matrizFila][matrizColumna];
+        resultadoMatriz = tabla[matrizElegida][matrizFila][matrizColumna];
+        //printf("Voy al estado: q%i", resultadoMatriz.estado);
         matrizFila = resultadoMatriz.estado;
         quePushear = resultadoMatriz.to_push;
 
-        agregarCaracter(pila, quePushear);
+        agregarCaracter(pila, quePushear, &cimaPila);
 
         caracter++;
+    } 
+
+    printf("Me quede en el estado: q%i\n", resultadoMatriz.estado);
+    printf("Cima de la pila: %c\n", cimaPila);
+    igualAOperador = distintoDeOperadores(ultimoCaraterDeCadena);
+
+    //printf("Resultado Pila: %c\n", resultadoPila);
+    
+    if(resultadoMatriz.estado == 3 && cimaPila == '$' && ultimoCaraterDeCadena == '0'){
+        *estadoDeError = true;
+        printf("El numero ingresado no es reconocido\n");
+    }  
+    else if(resultadoMatriz.estado == 3 && cimaPila == '$' && ultimoCaraterDeCadena == ')'){
+        *estadoDeError = true;
+        printf("Se espera un '('\n");
+    }   
+    else if(resultadoMatriz.estado == 3 && cimaPila == '$' && !igualAOperador){
+        *estadoDeError = true;
+        printf("Se espera un/os numero/s antes o entre de un operador\n");
     }
+    else if(resultadoMatriz.estado == 3 && cimaPila == '$' && igualAOperador){
+        *estadoDeError = true;
+        printf("Se espera un/os numero/s entre o despues de algun signo de operacion\n");
+    }
+    else if(resultadoMatriz.estado == 0 && cimaPila == '$'){  ///CHEQUEAR
+        *estadoDeError = true;
+        printf("Falta un numero despues de una operacion\n");
+    }
+    else if(resultadoMatriz.estado == 3 && cimaPila == 'R' && ultimoCaraterDeCadena != ')'){  ///CHEQUEAR
+        *estadoDeError = true;
+        printf("Falta un numero despues de una operacion\n");
+    }
+    else if(resultadoMatriz.estado == 1 && cimaPila == 'R'){
+        *estadoDeError = true;
+        printf("Se espera un ')'\n");
+    }
+    else if(resultadoMatriz.estado == 2 && cimaPila == 'R' && ultimoCaraterDeCadena != ')'){
+        *estadoDeError = true;
+        printf("Se espera un ')'\n");
+    }
+    else if(resultadoMatriz.estado == 3 && cimaPila == 'R' && ultimoCaraterDeCadena == ')'){
+        *estadoDeError = true;
+        printf("Faltan numeros entre los parentesis\n");
+    }
+}
+
+bool distintoDeOperadores(char ultimoCaracter){
+    if(ultimoCaracter != '+' && ultimoCaracter != '-' && ultimoCaracter != '*' && ultimoCaracter != '/')
+        return true;
+    else
+        return false;
 }
 
 void push(t_nodo **pila, char dato) {
@@ -105,30 +165,46 @@ void imprimirLista(t_nodo **pila) {
     }
 }
 
-void agregarCaracter(t_pila *pila, int to_push) {
+void agregarCaracter(t_pila *pila, int to_push, char *cimaPila) {
     switch (to_push) {
         case $:
-            printf("Pusheo $\n");
+            printf(" Pusheo $\n");
             push(pila, '$');
+            *cimaPila = '$';
             break;
         case R:
-            printf("Pusheo R\n");
+            printf(" Pusheo R\n");
             push(pila, 'R');
+            *cimaPila = 'R';
             break;
         case R$:
-            printf("Pusheo R$\n");
+            printf(" Pusheo R$\n");
             push(pila, '$');
             push(pila, 'R');
+            *cimaPila = 'R';
             break;
         case RR:
-            printf("Pusheo RR\n");
+            printf(" Pusheo RR\n");
             push(pila, 'R');
             push(pila, 'R');
+            *cimaPila = 'R';
             break;
         case e:
-            printf("No pusheo\n");
+            printf(" No pusheo\n");
+            break;
         default:
-            printf("No pusheo x2\n");
+            printf(" No pusheo\n");
             break;
     }
+}
+
+void verificarPilaVacia(t_pila *pila, bool *estadoFinalDeLaPila){
+    char resultadoPila;
+    
+    resultadoPila = pop(pila);
+
+    if(resultadoPila == '$')
+        *estadoFinalDeLaPila = true;
+    else
+        *estadoFinalDeLaPila = false;
 }
