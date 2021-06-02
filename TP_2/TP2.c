@@ -17,9 +17,7 @@ void main(void) {
 
     recorrerCadena(estadoPila, &pila, operacion, &estadoDeError);
     verificarPilaVacia(&pila, &estadoFinalDeLaPila);
-
-    if(estadoFinalDeLaPila == false || estadoDeError == true)
-        printf("La operacion ingresada es sintacticamente incorrecta\n");
-    else
+    
+    if(estadoFinalDeLaPila == true && estadoDeError == false)
         printf("La palabra ingresada es sintacticamente correcta\n");
 }
