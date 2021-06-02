@@ -45,7 +45,7 @@ void recorrerCadena(t_estado estadoPila, t_pila *pila, char *caracter, bool *est
         agregarCaracter(pila, quePushear, &cimaPila);
 
         caracter++;
-    } 
+    }
 
     //printf("Me quede en el estado: q%i\n", resultadoMatriz.estado);
     //printf("Cima de la pila: %c\n", cimaPila);
@@ -125,8 +125,8 @@ int determinarColumna(char caracter) {
     return columna;
 }
 
-bool distintoDeOperadores(char ultimoCaracter){
-    if(ultimoCaracter != '+' && ultimoCaracter != '-' && ultimoCaracter != '*' && ultimoCaracter != '/')
+bool distintoDeOperadores(char ultimoCaracter) {
+    if (ultimoCaracter != '+' && ultimoCaracter != '-' && ultimoCaracter != '*' && ultimoCaracter != '/')
         return true;
     else
         return false;
@@ -165,12 +165,12 @@ void agregarCaracter(t_pila *pila, int to_push, char *cimaPila) {
     }
 }
 
-void verificarPilaVacia(t_pila *pila, bool *estadoFinalDeLaPila){
+void verificarPilaVacia(t_pila *pila, bool *estadoFinalDeLaPila) {
     char resultadoPila;
-    
+
     resultadoPila = pop(pila);
 
-    if(resultadoPila == '$')
+    if (resultadoPila == '$')
         *estadoFinalDeLaPila = true;
     else
         *estadoFinalDeLaPila = false;

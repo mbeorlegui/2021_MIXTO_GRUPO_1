@@ -11,7 +11,6 @@ void main(void) {
     t_estado estadoPila = {q0, $};
     char operacion[30], cimaPila;
 
-
     printf("Ingrese la operacion a analizar: ");
     scanf("%29s", operacion);
 
