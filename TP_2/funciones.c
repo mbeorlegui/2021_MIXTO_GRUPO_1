@@ -1,43 +1,9 @@
 #include "funciones.h"
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
-
-int determinarColumna(char caracter) {
-    int columna = -1;
-
-    switch (caracter) {
-        case '0':
-            columna = 0;
-            break;
-
-        case '1' ... '9':
-            columna = 1;
-            break;
-
-        case '+':
-        case '-':
-        case '*':
-        case '/':
-            columna = 2;
-            break;
-
-        case '(':
-            columna = 3;
-            break;
-
-        case ')':
-            columna = 4;
-            break;
-        default:
-            columna = 5;
-            break;
-    }
-
-    return columna;
-}
 
 void recorrerCadena(t_estado estadoPila, t_pila *pila, char *caracter, bool *estadoDeError) {
      char cimaPila, resultadoPila, ultimoCaraterDeCadena;
@@ -129,40 +95,41 @@ void recorrerCadena(t_estado estadoPila, t_pila *pila, char *caracter, bool *est
     }
 }
 
+int determinarColumna(char caracter) {
+    int columna = -1;
+
+    switch (caracter) {
+        case '0':
+            columna = 0;
+            break;
+        case '1' ... '9':
+            columna = 1;
+            break;
+        case '+':
+        case '-':
+        case '*':
+        case '/':
+            columna = 2;
+            break;
+        case '(':
+            columna = 3;
+            break;
+        case ')':
+            columna = 4;
+            break;
+        default:
+            columna = 5;
+            break;
+    }
+
+    return columna;
+}
+
 bool distintoDeOperadores(char ultimoCaracter){
     if(ultimoCaracter != '+' && ultimoCaracter != '-' && ultimoCaracter != '*' && ultimoCaracter != '/')
         return true;
     else
         return false;
-}
-
-void push(t_nodo **pila, char dato) {
-    printf("Hago PUSH de %c\n", dato);
-    t_nodo *aux;
-    aux = (t_nodo *)malloc(sizeof(t_nodo));  // Casteo antes del malloc
-    aux->caracter = dato;
-    aux->sgte = *pila;
-    *pila = aux;
-}
-
-char pop(t_nodo **pila) {
-    t_nodo *aux;
-    aux = (t_nodo *)malloc(sizeof(t_nodo));
-    aux = *pila;
-    *pila = aux->sgte;
-    char dato = aux->caracter;
-    free(aux);
-    printf("Hago POP de %c\n", dato);
-    return dato;
-}
-
-void imprimirLista(t_nodo **pila) {
-    t_nodo *aux = *pila;
-
-    while (aux) {
-        printf("%c\n", aux->caracter);
-        aux = aux->sgte;
-    }
 }
 
 void agregarCaracter(t_pila *pila, int to_push, char *cimaPila) {
@@ -193,7 +160,7 @@ void agregarCaracter(t_pila *pila, int to_push, char *cimaPila) {
             //printf(" No pusheo\n");
             break;
         default:
-            printf(" No pusheo\n");
+            //printf(" No pusheo\n");
             break;
     }
 }
@@ -207,4 +174,32 @@ void verificarPilaVacia(t_pila *pila, bool *estadoFinalDeLaPila){
         *estadoFinalDeLaPila = true;
     else
         *estadoFinalDeLaPila = false;
+}
+
+void push(t_nodo **pila, char dato) {
+    //printf("Hago PUSH de %c\n", dato);
+    t_nodo *aux;
+    aux = (t_nodo *)malloc(sizeof(t_nodo));  // Casteo antes del malloc
+    aux->caracter = dato;
+    aux->sgte = *pila;
+    *pila = aux;
+}
+
+char pop(t_nodo **pila) {
+    t_nodo *aux;
+    aux = (t_nodo *)malloc(sizeof(t_nodo));
+    aux = *pila;
+    *pila = aux->sgte;
+    char dato = aux->caracter;
+    free(aux);
+    //printf("Hago POP de %c\n", dato);
+    return dato;
+}
+
+void imprimirLista(t_nodo **pila) {
+    t_nodo *aux = *pila;
+    while (aux) {
+        printf("%c\n", aux->caracter);
+        aux = aux->sgte;
+    }
 }
