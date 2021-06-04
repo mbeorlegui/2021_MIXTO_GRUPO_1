@@ -72,7 +72,7 @@ void recorrerCadena(t_estado estadoPila, t_pila *pila, char *caracter, bool *est
             *estadoDeError = true;
             printf("Se espera un/os numero/s entre o despues de algun signo de operacion\n");
         }
-        else if(resultadoMatriz.estado == 0 && cimaPila == '$'){  ///CHEQUEAR
+        else if(resultadoMatriz.estado == 0 && cimaPila == '$'){  
             *estadoDeError = true;
             printf("Falta un numero despues de una operacion\n");
         }
