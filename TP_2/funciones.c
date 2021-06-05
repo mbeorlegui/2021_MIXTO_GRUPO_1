@@ -6,9 +6,9 @@
 #include <string.h>
 
 void recorrerCadena(t_estado estadoPila, t_pila *pila, char *caracter, bool *estadoDeError) {
-     char cimaPila, resultadoPila, ultimoCaraterDeCadena;
-     bool igualAOperador;
-     int matrizColumna = 0, matrizFila = estadoPila.estado, matrizElegida, quePushear;
+    char cimaPila, resultadoPila, ultimoCaraterDeCadena;
+    bool igualAOperador;
+    int matrizColumna = 0, matrizFila = estadoPila.estado, matrizElegida, quePushear;
     t_estado error = {q3, e}, resultadoMatriz;
     t_estado tabla[2][4][6] =
         {//q0,$                      q1,$            q2,$                q3,$
@@ -22,7 +22,7 @@ void recorrerCadena(t_estado estadoPila, t_pila *pila, char *caracter, bool *est
           {error, error, {q0, R}, error, {q2, e}, error},
           {error, error, error, error, error, error}}};
 
-    push(pila, $); 
+    push(pila, $);
     agregarCaracter(pila, $, &cimaPila);
 
     while (*caracter != '\0' && resultadoMatriz.estado != 3) {
@@ -50,45 +50,36 @@ void recorrerCadena(t_estado estadoPila, t_pila *pila, char *caracter, bool *est
     //printf("Me quede en el estado: q%i\n", resultadoMatriz.estado);
     //printf("Cima de la pila: %c\n", cimaPila);
     igualAOperador = distintoDeOperadores(ultimoCaraterDeCadena);
-    
-    if(matrizColumna == 5){
+
+    if (matrizColumna == 5) {
         *estadoDeError = true;
         printf("Caracter no reconocido por el programa\n");
-    }
-    else{
-        if(resultadoMatriz.estado == 3 && cimaPila == '$' && ultimoCaraterDeCadena == '0'){
-        *estadoDeError = true;
-        printf("El numero ingresado no es reconocido\n");
-        }  
-        else if(resultadoMatriz.estado == 3 && cimaPila == '$' && ultimoCaraterDeCadena == ')'){
+    } else {
+        if (resultadoMatriz.estado == 3 && cimaPila == '$' && ultimoCaraterDeCadena == '0') {
+            *estadoDeError = true;
+            printf("El numero ingresado no es reconocido\n");
+        } else if (resultadoMatriz.estado == 3 && cimaPila == '$' && ultimoCaraterDeCadena == ')') {
             *estadoDeError = true;
             printf("Se espera un '('\n");
-        }   
-        else if(resultadoMatriz.estado == 3 && cimaPila == '$' && !igualAOperador){
+        } else if (resultadoMatriz.estado == 3 && cimaPila == '$' && !igualAOperador) {
             *estadoDeError = true;
             printf("Se espera un/os numero/s antes o entre de un operador\n");
-        }
-        else if(resultadoMatriz.estado == 3 && cimaPila == '$' && igualAOperador){
+        } else if (resultadoMatriz.estado == 3 && cimaPila == '$' && igualAOperador) {
             *estadoDeError = true;
             printf("Se espera un/os numero/s entre o despues de algun signo de operacion\n");
-        }
-        else if(resultadoMatriz.estado == 0 && cimaPila == '$'){  
+        } else if (resultadoMatriz.estado == 0 && cimaPila == '$') {
             *estadoDeError = true;
             printf("Falta un numero despues de una operacion\n");
-        }
-        else if(resultadoMatriz.estado == 3 && cimaPila == 'R' && ultimoCaraterDeCadena != ')'){  
+        } else if (resultadoMatriz.estado == 3 && cimaPila == 'R' && ultimoCaraterDeCadena != ')') {
             *estadoDeError = true;
             printf("Falta un numero despues de una operacion\n");
-        }
-        else if(resultadoMatriz.estado == 1 && cimaPila == 'R'){
+        } else if (resultadoMatriz.estado == 1 && cimaPila == 'R') {
             *estadoDeError = true;
             printf("Se espera un ')'\n");
-        }
-        else if(resultadoMatriz.estado == 2 && cimaPila == 'R'){
+        } else if (resultadoMatriz.estado == 2 && cimaPila == 'R') {
             *estadoDeError = true;
             printf("Se espera un ')'\n");
-        }
-        else if(resultadoMatriz.estado == 3 && cimaPila == 'R' && ultimoCaraterDeCadena == ')'){
+        } else if (resultadoMatriz.estado == 3 && cimaPila == 'R' && ultimoCaraterDeCadena == ')') {
             *estadoDeError = true;
             printf("Faltan numeros entre los parentesis\n");
         }
