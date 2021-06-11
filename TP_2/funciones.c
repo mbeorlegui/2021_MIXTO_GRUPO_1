@@ -11,18 +11,19 @@ void recorrerCadena(t_estado estadoPila, t_pila *pila, char *caracter, bool *est
     int matrizColumna = 0, matrizFila = estadoPila.estado, matrizElegida, quePushear;
     t_estado error = {q3, e}, resultadoMatriz;
     t_estado tabla[2][4][6] =
-        {//q0,$                      q1,$            q2,$                q3,$
-         {{error, {q1, $}, error, {q0, R$}, error, error},
-          {{q1, $}, {q1, $}, {q0, $}, error, error, error},
-          {error, error, {q0, $}, error, error, error},
-          {error, error, error, error, error, error}},
-         //q0,R                      q1,R            q2,R                q3,R
-         {{error, {q1, R}, error, {q0, RR}, error, error},
-          {{q1, R}, {q1, R}, {q0, R}, error, {q2, e}, error},
-          {error, error, {q0, R}, error, {q2, e}, error},
-          {error, error, error, error, error, error}}};
+        // Tabla de los $
+        {
+            {{error, {q1, $}, error, {q0, R$}, error, error},   //q0,$
+             {{q1, $}, {q1, $}, {q0, $}, error, error, error},  //q1,$
+             {error, error, {q0, $}, error, error, error},      //q2,$
+             {error, error, error, error, error, error}},       //q3,$
 
-    push(pila, $);
+            //Tabla de los R
+            {{error, {q1, R}, error, {q0, RR}, error, error},     //q0,R
+             {{q1, R}, {q1, R}, {q0, R}, error, {q2, e}, error},  //q1,R
+             {error, error, {q0, R}, error, {q2, e}, error},      //q2,R
+             {error, error, error, error, error, error}}};        //q3,R
+
     agregarCaracter(pila, $, &cimaPila);
 
     while (*caracter != '\0' && resultadoMatriz.estado != 3) {
@@ -192,5 +193,13 @@ void imprimirLista(t_nodo **pila) {
     while (aux) {
         printf("%c\n", aux->caracter);
         aux = aux->sgte;
+    }
+}
+
+void vaciarPila(t_pila *pila) {
+    char out;
+    while (*pila) {
+        out = pop(pila);
+        printf("%c ", out);
     }
 }

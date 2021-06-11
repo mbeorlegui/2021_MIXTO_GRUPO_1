@@ -29,6 +29,8 @@ typedef struct estadoAutomata {
     int to_push;
 } t_estado;
 
+#define ESC 27
+
 void push(t_nodo **, char);
 char pop(t_nodo **);
 void imprimirLista(t_nodo **);
@@ -37,5 +39,6 @@ void verificarPilaVacia(t_pila *, bool *);
 void recorrerCadena(t_estado, t_pila *, char *, bool *);
 void agregarCaracter(t_pila *, int, char *);
 bool distintoDeOperadores(char);
+void vaciarPila(t_pila *);
 
 #endif
