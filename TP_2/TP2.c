@@ -13,7 +13,7 @@ void main(void) {
         t_nodo* pila = NULL;
         t_estado estadoPila = {q0, $};
         bool estadoFinalDeLaPila = true, estadoDeError = false;
-        char operacion[30], cimaPila;
+        char operacion[30];
         int a = 0, i, largoCadena;
         printf("Ingrese la operacion a analizar: ");
         gets(operacion);
@@ -29,9 +29,6 @@ void main(void) {
             }
             a++;
         }
-
-        printf("Operacion (sin espacios): ");
-        puts(operacion);
 
         recorrerCadena(estadoPila, &pila, operacion, &estadoDeError);
         verificarPilaVacia(&pila, &estadoFinalDeLaPila);

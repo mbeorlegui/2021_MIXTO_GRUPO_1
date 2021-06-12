@@ -37,7 +37,7 @@ void imprimirLista(t_nodo **);
 int determinarColumna(char);
 void verificarPilaVacia(t_pila *, bool *);
 void recorrerCadena(t_estado, t_pila *, char *, bool *);
-void agregarCaracter(t_pila *, int, char *);
+void agregarCaracter(t_pila *, int);
 bool distintoDeOperadores(char);
 void vaciarPila(t_pila *);
 
