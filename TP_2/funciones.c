@@ -39,6 +39,7 @@ void recorrerCadena(t_estado estadoPila, t_pila *pila, char *caracter, bool *est
         matrizColumna = determinarColumna(*caracter);
 
         resultadoMatriz = tabla[matrizElegida][matrizFila][matrizColumna];
+        //printf("Voy al estado: q%i\n", resultadoMatriz.estado);
         matrizFila = resultadoMatriz.estado;
         quePushear = resultadoMatriz.to_push;
 
@@ -49,6 +50,8 @@ void recorrerCadena(t_estado estadoPila, t_pila *pila, char *caracter, bool *est
 
     resultadoPila = pop(pila);
 
+    //printf("Me quede en el estado: q%i\n", resultadoMatriz.estado);
+    //printf("Cima de la pila: %c\n", resultadoPila);
     igualAOperador = distintoDeOperadores(ultimoCaraterDeCadena);
     push(pila, resultadoPila);
 
@@ -143,6 +146,7 @@ void agregarCaracter(t_pila *pila, int to_push) {
         case e:
             break;
         default:
+            //printf(" No pusheo\n");
             pop(pila);
             break;
     }
