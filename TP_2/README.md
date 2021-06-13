@@ -25,3 +25,14 @@ Tener en cuenta:
 - Símbolo de pila vacía: `p0 = $`
 - Los espacios entre números y operadores no son obligatorios. El programa debe omitirlos en caso de que los hubiese.
 
+---
+## Compilar
+```
+gcc -o TP2 *.c
+```
+## Correr
+```
+./TP2
+```
+---
+[< Trabajo práctico anterior](https://github.com/utn-frba-ssl/21-001-09/tree/main/01-Implementacion-de-un-AFD-para-GR)

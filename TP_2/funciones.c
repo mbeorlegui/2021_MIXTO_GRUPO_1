@@ -54,8 +54,9 @@ void recorrerCadena(t_estado estadoPila, t_pila *pila, char *caracter, bool *est
 
     if (matrizColumna == 5) {
         *estadoDeError = true;
-        printf("Caracter no reconocido por el programa\n");
+        printf("\nSe ha introducido un caracter no reconocido por el programa\n");
     } else {
+        printf("\nLa palabra ingresada es sintacticamente INCORRECTA\n");
         if (resultadoMatriz.estado == 0 && resultadoPila == 'R') {
             *estadoDeError = true;
             printf("Se esperan mas caracteres despues de un '('\n");
@@ -184,16 +185,12 @@ char pop(t_nodo **pila) {
 
 void imprimirLista(t_nodo **pila) {
     t_nodo *aux = *pila;
-    while (aux) {
-        printf("%c\n", aux->caracter);
+    while (aux)
         aux = aux->sgte;
-    }
 }
 
 void vaciarPila(t_pila *pila) {
     char out;
-    while (*pila) {
+    while (*pila)
         out = pop(pila);
-        printf("%c ", out);
-    }
 }

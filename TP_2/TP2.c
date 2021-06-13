@@ -33,11 +33,12 @@ void main(void) {
         recorrerCadena(estadoPila, &pila, operacion, &estadoDeError);
         verificarPilaVacia(&pila, &estadoFinalDeLaPila);
 
-        if (estadoFinalDeLaPila == true && estadoDeError == false)
-            printf("La palabra ingresada es sintacticamente correcta\n");
+        if (estadoFinalDeLaPila == true && estadoDeError == false) {
+            printf("\nLa palabra ingresada es sintacticamente correcta\n");
+        }
 
         vaciarPila(&pila);
-        printf("Presione ESC para salir del programa o cualquier otra tecla para analizar otra cadena\n");
+        printf("\n\nPresione ESC para salir del programa o cualquier otra tecla para analizar otra cadena\n");
         fflush(stdin);
         caracterDeFinalizacion = getch();
         fflush(stdin);
