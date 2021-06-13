@@ -58,7 +58,11 @@ void recorrerCadena(t_estado estadoPila, t_pila *pila, char *caracter, bool *est
         *estadoDeError = true;
         printf("Caracter no reconocido por el programa\n");
     } else {
-        if (resultadoMatriz.estado == 3 && ultimoCaraterDeCadena == '0' && resultadoPila == '$') { //cimaPila == '$'
+         if(resultadoMatriz.estado == 0 && resultadoPila == 'R'){
+            *estadoDeError = true;
+            printf("Se esperan mas caracteres despues de un '('\n");
+        }
+        else if (resultadoMatriz.estado == 3 && ultimoCaraterDeCadena == '0' && resultadoPila == '$') { //cimaPila == '$'
             *estadoDeError = true;
             printf("El numero ingresado no es reconocido\n");
         } else if (resultadoMatriz.estado == 3 && ultimoCaraterDeCadena == ')' && resultadoPila == '$') { //cimaPila == '$'
