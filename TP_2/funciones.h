@@ -1,3 +1,8 @@
+#include <conio.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #ifndef FUNCIONES_H
 #define FUNCIONES_H
 
@@ -28,11 +33,16 @@ typedef struct estadoAutomata {
     int to_push;
 } t_estado;
 
+#define ESC 27
+
 void push(t_nodo **, char);
 char pop(t_nodo **);
 void imprimirLista(t_nodo **);
 int determinarColumna(char);
-void recorrerCadena(t_estado, t_pila *, char *);
+void verificarPilaVacia(t_pila *, bool *);
+void recorrerCadena(t_estado, t_pila *, char *, bool *);
 void agregarCaracter(t_pila *, int);
+bool distintoDeOperadores(char);
+void vaciarPila(t_pila *);
 
 #endif
