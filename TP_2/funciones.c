@@ -1,4 +1,5 @@
 #include "funciones.h"
+
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,20 +9,20 @@ void recorrerCadena(t_estado estadoPila, t_pila *pila, char *caracter, bool *est
     char resultadoPila, ultimoCaraterDeCadena;
     bool igualAOperador;
     int matrizColumna = 0, matrizFila = estadoPila.estado, matrizElegida, quePushear;
-    t_estado errorMatrizCero = {q3, $}, errorMatrizUno = {q3, R} , resultadoMatriz;
+    t_estado errorMatrizCero = {q3, $}, errorMatrizUno = {q3, R}, resultadoMatriz;
     t_estado tabla[2][4][6] =
         // Tabla de los $
         {
-            {{errorMatrizCero, {q1, $}, errorMatrizCero, {q0, R$}, errorMatrizCero, errorMatrizCero},   //q0,$
-             {{q1, $}, {q1, $}, {q0, $}, errorMatrizCero, errorMatrizCero, errorMatrizCero},  //q1,$
-             {errorMatrizCero, errorMatrizCero, {q0, $}, errorMatrizCero, errorMatrizCero, errorMatrizCero},      //q2,$
-             {errorMatrizCero, errorMatrizCero, errorMatrizCero, errorMatrizCero, errorMatrizCero, errorMatrizCero}},       //q3,$
+            {{errorMatrizCero, {q1, $}, errorMatrizCero, {q0, R$}, errorMatrizCero, errorMatrizCero},                  //q0,$
+             {{q1, $}, {q1, $}, {q0, $}, errorMatrizCero, errorMatrizCero, errorMatrizCero},                           //q1,$
+             {errorMatrizCero, errorMatrizCero, {q0, $}, errorMatrizCero, errorMatrizCero, errorMatrizCero},           //q2,$
+             {errorMatrizCero, errorMatrizCero, errorMatrizCero, errorMatrizCero, errorMatrizCero, errorMatrizCero}},  //q3,$
 
             //Tabla de los R
-            {{errorMatrizUno, {q1, R}, errorMatrizUno, {q0, RR}, errorMatrizUno, errorMatrizUno},     //q0,R
-             {{q1, R}, {q1, R}, {q0, R}, errorMatrizUno, {q2, e}, errorMatrizUno},  //q1,R
-             {errorMatrizUno, errorMatrizUno, {q0, R}, errorMatrizUno, {q2, e}, errorMatrizUno},      //q2,R
-             {errorMatrizUno, errorMatrizUno, errorMatrizUno, errorMatrizUno, errorMatrizUno, errorMatrizUno}}};        //q3,R
+            {{errorMatrizUno, {q1, R}, errorMatrizUno, {q0, RR}, errorMatrizUno, errorMatrizUno},                 //q0,R
+             {{q1, R}, {q1, R}, {q0, R}, errorMatrizUno, {q2, e}, errorMatrizUno},                                //q1,R
+             {errorMatrizUno, errorMatrizUno, {q0, R}, errorMatrizUno, {q2, e}, errorMatrizUno},                  //q2,R
+             {errorMatrizUno, errorMatrizUno, errorMatrizUno, errorMatrizUno, errorMatrizUno, errorMatrizUno}}};  //q3,R
 
     agregarCaracter(pila, $);
 
@@ -38,7 +39,6 @@ void recorrerCadena(t_estado estadoPila, t_pila *pila, char *caracter, bool *est
         matrizColumna = determinarColumna(*caracter);
 
         resultadoMatriz = tabla[matrizElegida][matrizFila][matrizColumna];
-        //printf("Voy al estado: q%i\n", resultadoMatriz.estado);
         matrizFila = resultadoMatriz.estado;
         quePushear = resultadoMatriz.to_push;
 
@@ -48,9 +48,7 @@ void recorrerCadena(t_estado estadoPila, t_pila *pila, char *caracter, bool *est
     }
 
     resultadoPila = pop(pila);
-    
-    //printf("Me quede en el estado: q%i\n", resultadoMatriz.estado);
-    //printf("Cima de la pila: %c\n", resultadoPila);
+
     igualAOperador = distintoDeOperadores(ultimoCaraterDeCadena);
     push(pila, resultadoPila);
 
@@ -58,35 +56,34 @@ void recorrerCadena(t_estado estadoPila, t_pila *pila, char *caracter, bool *est
         *estadoDeError = true;
         printf("Caracter no reconocido por el programa\n");
     } else {
-         if(resultadoMatriz.estado == 0 && resultadoPila == 'R'){
+        if (resultadoMatriz.estado == 0 && resultadoPila == 'R') {
             *estadoDeError = true;
             printf("Se esperan mas caracteres despues de un '('\n");
-        }
-        else if (resultadoMatriz.estado == 3 && ultimoCaraterDeCadena == '0' && resultadoPila == '$') { //cimaPila == '$'
+        } else if (resultadoMatriz.estado == 3 && ultimoCaraterDeCadena == '0' && resultadoPila == '$') {
             *estadoDeError = true;
             printf("El numero ingresado no es reconocido\n");
-        } else if (resultadoMatriz.estado == 3 && ultimoCaraterDeCadena == ')' && resultadoPila == '$') { //cimaPila == '$'
+        } else if (resultadoMatriz.estado == 3 && ultimoCaraterDeCadena == ')' && resultadoPila == '$') {
             *estadoDeError = true;
             printf("Se espera un '('\n");
-        } else if (resultadoMatriz.estado == 3 && !igualAOperador && resultadoPila == '$') { //cimaPila == '$'
+        } else if (resultadoMatriz.estado == 3 && !igualAOperador && resultadoPila == '$') {
             *estadoDeError = true;
             printf("Se espera un/os numero/s antes o entre de un operador\n");
-        } else if (resultadoMatriz.estado == 3 && igualAOperador && resultadoPila == '$') { //cimaPila == '$'
+        } else if (resultadoMatriz.estado == 3 && igualAOperador && resultadoPila == '$') {
             *estadoDeError = true;
             printf("Se espera un/os numero/s entre o despues de algun signo de operacion\n");
-        } else if (resultadoMatriz.estado == 0 && resultadoPila == '$') { //cimaPila == '$'
+        } else if (resultadoMatriz.estado == 0 && resultadoPila == '$') {
             *estadoDeError = true;
             printf("Falta un numero despues de una operacion\n");
-        } else if (resultadoMatriz.estado == 3 && ultimoCaraterDeCadena != ')' && resultadoPila == 'R') { //cimaPila == 'R'
+        } else if (resultadoMatriz.estado == 3 && ultimoCaraterDeCadena != ')' && resultadoPila == 'R') {
             *estadoDeError = true;
             printf("Falta un numero despues de una operacion\n");
-        } else if (resultadoMatriz.estado == 1 && resultadoPila == 'R') { //cimaPila == 'R'
+        } else if (resultadoMatriz.estado == 1 && resultadoPila == 'R') {
             *estadoDeError = true;
             printf("Se espera un ')'\n");
-        } else if (resultadoMatriz.estado == 2 && resultadoPila == 'R') { //cimaPila == 'R'
+        } else if (resultadoMatriz.estado == 2 && resultadoPila == 'R') {
             *estadoDeError = true;
             printf("Se espera un ')'\n");
-        } else if (resultadoMatriz.estado == 3 && ultimoCaraterDeCadena == ')' && resultadoPila == 'R') { //cimaPila == 'R'
+        } else if (resultadoMatriz.estado == 3 && ultimoCaraterDeCadena == ')' && resultadoPila == 'R') {
             *estadoDeError = true;
             printf("Faltan numeros entre los parentesis\n");
         }
@@ -133,28 +130,22 @@ bool distintoDeOperadores(char ultimoCaracter) {
 void agregarCaracter(t_pila *pila, int to_push) {
     switch (to_push) {
         case $:
-            //printf(" Pusheo $\n");
             push(pila, '$');
             break;
         case R:
-            //printf(" Pusheo R\n");
             push(pila, 'R');
             break;
         case R$:
-            //printf(" Pusheo R$\n");
             push(pila, '$');
             push(pila, 'R');
             break;
         case RR:
-            //printf(" Pusheo RR\n");
             push(pila, 'R');
             push(pila, 'R');
             break;
         case e:
-            //printf(" No pusheo\n");
             break;
         default:
-            //printf(" No pusheo\n");
             pop(pila);
             break;
     }

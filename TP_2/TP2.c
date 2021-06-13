@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "funciones.h"
 
 void main(void) {
@@ -12,7 +13,7 @@ void main(void) {
         t_nodo* pila = NULL;
         t_estado estadoPila = {q0, $};
         bool estadoFinalDeLaPila = true, estadoDeError = false;
-        char operacion[30], cimaPila;
+        char operacion[30];
         int a = 0, i, largoCadena;
         printf("Ingrese la operacion a analizar: ");
         gets(operacion);
