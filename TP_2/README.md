@@ -28,11 +28,11 @@ Tener en cuenta:
 ---
 ## Compilar
 ```
-gcc -o TP2 *.c
+$ gcc -o TP2 *.c
 ```
 ## Correr
 ```
-./TP2
+$ ./TP2
 ```
 ---
 [< Trabajo práctico anterior](https://github.com/utn-frba-ssl/21-001-09/tree/main/01-Implementacion-de-un-AFD-para-GR)
