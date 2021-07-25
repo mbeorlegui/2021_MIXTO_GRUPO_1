@@ -49,6 +49,12 @@ DIRECTIVAS #(include|define).*
 
 %%
 
+ /* Para cada categoria lexica debo agregar elementos a la lista con yytext,
+    salvo para el identificador y los operadores de puntuacion que deben ir
+    ordenados.
+    * Para los saltos de linea debo agregar iterar sobre una varaible,
+      asi puedo contar la linea en la que estan las categorias lexicas
+ */
 {CONSTANTE_DECIMAL}     {printf("Encontre una constante entera decimal \n");}
 {CONSTANTE_OCTAL}       {printf("Encontre una constante entera octal \n");}
 {CONSTANTE_HEXADECIMAL} {printf("Encontre una constante entera hexadecimal \n");}
