@@ -4,6 +4,9 @@
 %{
 
 #include <stdio.h>
+#include "Funciones.h"
+/**** Lista donde guardamos tokens ****/ 
+NODO* lista = NULL;
 
 struct nodo{
     char *info;
@@ -44,8 +47,7 @@ COMENTARIO_LARGO "/*"([^*]|\*+[^/])*\*+\/
 ESPACIO_TAB (\ |"	")*
 SALTO_DE_LINEA \n
 CARACTER_RECHAZO .
-DIRECTIVAS #(include|define).*
-
+DIRECTIVAS #(include|define).*                 
 
 %%
 
