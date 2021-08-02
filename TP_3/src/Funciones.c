@@ -1,100 +1,111 @@
 #include "Funciones.h"
 
-int buscarEnLista(NODO* lista, char* texto){
-    NODO* aux = lista;
-
-    while (aux != NULL){
-        if(strcmp(aux->texto, texto) == 0)
-            return 1;
-
-        aux = aux->siguiente;    
-    }
-    
-    return 0;
-}
-
-void insertarAlFinalDeLaLista(NODO**lista, int numeroDeLinea, enum tipoToken token, char* texto, int longitudTexto){
-    if(buscarEnLista(*lista, texto)==0){
-        NODO* actual = *lista;
-        NODO* nuevo = (NODO*) malloc(sizeof(NODO));
-
-        nuevo->numeroDeLinea = numeroDeLinea;
-        nuevo->token = token;
-        nuevo->texto = strdup(texto);
-        nuevo->longitudDeTexto = longitudTexto;
-
-        if(*lista == NULL){
-            nuevo->siguiente = *lista;
-            *lista = nuevo;
-        }
-        else{
-            while(actual->siguiente != NULL)
-                actual = actual->siguiente; 
-
-            nuevo->siguiente = actual->siguiente;
-            actual->siguiente = nuevo;
+// Funcion para insertar ordenado cada elemento en su debida lista
+void insertarOrdenado(char texto[], nodo **lista) {
+    nodo *lista_aux;
+    nodo *nuevo = malloc(sizeof(nodo));
+    nuevo->info = strdup(texto);
+    nuevo->cantidad = 1;
+    if (!(*lista) || (*lista && strcmp((*lista)->info, texto) > 0)) {
+        nuevo->sgte = (*lista);
+        (*lista) = nuevo;
+    } else {
+        lista_aux = *lista;
+        if (existeEnLaLista(texto, *lista)) {
+            while (lista_aux && strcmp(lista_aux->info, texto))
+                lista_aux = lista_aux->sgte;
+            (lista_aux->cantidad)++;
+        } else {
+            while (lista_aux && lista_aux->sgte && strcmp(lista_aux->sgte->info, texto) < 0)
+                lista_aux = lista_aux->sgte;
+            nuevo->sgte = lista_aux->sgte;
+            lista_aux->sgte = nuevo;
         }
     }
 }
 
-int longitudMaximaDeTexto(NODO* lista){
-    NODO* aux = lista;
-    int maximo = 0;
-
-    while(aux != NULL){
-        if(aux->longitudDeTexto > maximo)
-            maximo = aux->longitudDeTexto;
-
-        aux = aux->siguiente;
+// Funcion para insertar cada elemento en su debida lista, sin contemplar orden
+void insertarElemento(char texto[], nodo **lista) {
+    for (int i = 0; i < strlen(texto); i++) {
+        if (texto[i] == '\n')
+            lineas++;
     }
-
-    return maximo;
+    texto = sacarComillas(texto);
+    nodo *lista_aux;
+    if (*lista) {
+        lista_aux = obtenerUltimoNodo(*lista);
+        lista_aux->sgte = malloc(sizeof(nodo));
+        lista_aux = lista_aux->sgte;
+        lista_aux->info = strdup(texto);
+        lista_aux->cantidad = -1;
+        lista_aux->posicion = lineas;
+        lista_aux->sgte = NULL;
+    } else {
+        *lista = malloc(sizeof(nodo));
+        (*lista)->info = strdup(texto);
+        (*lista)->cantidad = -1;
+        (*lista)->posicion = lineas;
+        (*lista)->sgte = NULL;
+    }
+    return;
 }
 
-void imprimirListaEnArchivo(FILE* archivo, NODO* lista){
-    int i, longMaxima;
-    NODO* temp = lista;
+void mostrarLista(nodo **lista, int literalCadena, char *texto) {
+    nodo *lista_aux;
+    if (*lista) {
+        if (literalCadena) {
+            printf("Literales Cadena:\n");
+            while (*lista) {
+                printf("%s cuya longitud es %d\n", (*lista)->info, strlen((*lista)->info));
+                lista_aux = (*lista)->sgte;
+                free(*lista);
+                *lista = lista_aux;
+            }
+        } else {
+            printf(texto);
+            while (*lista) {
+                if ((*lista)->cantidad != -1)
+                    printf("%s que aparece %d veces\n", (*lista)->info, (*lista)->cantidad);
+                else
+                    printf("%s\n", (*lista)->info);
 
-    longMaxima = longitudMaximaDeTexto(lista);
-    fprintf(archivo, "\n_____________________________________________________________________\n\n");    
-    fprintf(archivo, "\tNRO.LINEA\t\tLEXEMA");
-    
-    // Para alinear la tabla
-    for(i = 0; i < (longMaxima - strlen("TOKEN")); i++){
-        fprintf(archivo, " ");
-    }
-
-    fprintf(archivo, "TOKEN\n");
-    fprintf(archivo, "\n_____________________________________________________________________\n\n");
-
-    while(temp != NULL){
-        fprintf(archivo, "\t\t%d\t\t\t%s", temp->numeroDeLinea, temp->texto);
-        // Para alinear la tabla
-        for(i = 0; i < (longMaxima - temp->longitudDeTexto); i++){
-            fprintf(archivo, " ");
+                lista_aux = (*lista)->sgte;
+                free(*lista);
+                *lista = lista_aux;
+            }
         }
-
-        switch(temp->token){
-            case palabraReservada: fprintf(archivo, "Palabra reservada\n");
-                                   break;
-            case identificador: fprintf(archivo, "Identificador\n");
-                                break;
-            case operadorOCaracterDePuntuacion: fprintf(archivo, "Operador o caracter de puntuacion\n");
-                                                break;
-            case literalCadena: fprintf(archivo, "Literal cadena\n");
-                                break;
-            case constanteOctal: fprintf(archivo, "Constante octal\n");
-                                 break;
-        }
-
-        fprintf(archivo, "\n_____________________________________________________________________\n\n");
-        temp = temp->siguiente;
+        printf("\n");
     }
 }
 
-void liberarMemoriaOcupadaPorLista(NODO* lista){
-    if(lista != NULL){
-        liberarMemoriaOcupadaPorLista(lista->siguiente);
-        free(lista);
+int existeEnLaLista(char texto[], nodo *lista) {
+    nodo *actual = malloc(sizeof(nodo));
+    int encontrado = 0;
+    actual = lista;
+    while (actual && strcmp(actual->info, texto) <= 0) {
+        if (!strcmp(actual->info, texto)) {
+            encontrado = 1;
+        }
+        actual = actual->sgte;
     }
+    return encontrado;
+}
+
+char *sacarComillas(char texto[]) {
+    char *auxiliar = malloc(strlen(texto));
+    int j = 0;
+    for (int i = 0; i < strlen(texto); i++) {
+        if (texto[i] != 34) {
+            auxiliar[j] = texto[i];
+            j++;
+        }
+    }
+    auxiliar[j] = '\0';
+    return auxiliar;
+}
+
+nodo *obtenerUltimoNodo(nodo *lista) {
+    while (lista && lista->sgte)
+        lista = lista->sgte;
+    return lista;
 }

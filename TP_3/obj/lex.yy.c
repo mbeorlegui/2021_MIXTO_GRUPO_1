@@ -289,25 +289,25 @@ static void yy_fatal_error YY_PROTO(( yyconst char msg[] ));
 #define YY_END_OF_BUFFER 17
 static yyconst short int yy_accept[181] =
     {   0,
-       12,   12,   17,   14,   12,   13,    9,   14,    9,    9,
-        9,    9,    9,   14,    9,    9,    2,    1,    9,    4,
-        4,    4,    4,    4,    4,    4,    4,    4,    4,    4,
-        4,    4,    4,    4,    4,    9,   14,   12,    9,    0,
-        7,    0,    0,    0,    0,    5,    0,   10,    5,    2,
-        0,    0,    0,    1,    4,    4,    4,    4,    4,    4,
-        4,    4,    4,    4,    4,    4,    4,    4,    4,    4,
-        4,    4,    4,    4,    4,    4,    4,    4,    4,    4,
-        0,    0,    0,    6,    0,    0,    5,    0,    0,   10,
-        0,    5,    3,    4,    4,    4,    4,    4,    4,    4,
+       14,   14,   17,   15,   14,   13,   10,   15,   10,   10,
+       10,   10,   10,   15,   10,   10,    2,    3,   10,    9,
+        9,    9,    9,    9,    9,    9,    9,    9,    9,    9,
+        9,    9,    9,    9,    9,   10,   15,   14,   10,    0,
+        7,    0,    0,    0,    0,    5,    0,   11,    5,    2,
+        0,    0,    0,    3,    9,    9,    9,    9,    9,    9,
+        9,    8,    9,    9,    9,    9,    9,    9,    8,    9,
+        9,    9,    9,    9,    9,    9,    9,    9,    9,    9,
+        0,    0,    0,    6,    0,    0,    5,    0,    0,   11,
+        0,    5,    4,    9,    9,    9,    9,    9,    9,    9,
 
-        4,    4,    4,    4,    4,    4,    4,    4,    4,    4,
-        4,    4,    4,    4,    4,    4,    4,    4,    4,    4,
-        0,    0,    0,    5,    0,   11,    4,    4,    4,    4,
-        4,    4,    4,    4,    4,    4,    4,    4,    4,    4,
-        4,    4,    4,    4,    4,    4,    0,    0,    0,   11,
-        4,    4,    4,    4,    4,    4,    4,    4,    4,    4,
-        4,    4,    4,    4,    0,    0,    4,    4,    4,    4,
-        4,    4,   15,    0,    4,    4,    4,    4,   15,    0
+        9,    9,    9,    9,    9,    9,    9,    9,    9,    9,
+        9,    9,    9,    9,    9,    9,    9,    9,    9,    9,
+        0,    0,    0,    5,    0,   12,    9,    9,    9,    9,
+        9,    9,    9,    9,    9,    9,    9,    9,    9,    9,
+        9,    9,    9,    9,    9,    9,    0,    0,    0,   12,
+        9,    9,    9,    9,    9,    9,    9,    9,    9,    9,
+        9,    9,    9,    9,    0,    0,    9,    9,    9,    9,
+        9,    9,    1,    0,    9,    9,    9,    9,    1,    0
     } ;
 
 static yyconst int yy_ec[256] =
@@ -514,11 +514,44 @@ static char *yy_last_accepting_cpos;
 char *yytext;
 #line 1 "../src/TP3.l"
 #define INITIAL 0
-#line 5 "../src/TP3.l"
+#line 4 "../src/TP3.l"
 
 #include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
 
-#line 522 "lex.yy.c"
+struct nodo{
+    char *info;
+    int cantidad;
+    struct nodo *sgte;
+    int posicion;
+};
+
+typedef struct nodo nodo;
+
+void insertarElemento(char texto[], nodo **lista);
+void insertarOrdenado(char texto[], nodo **lista);
+
+nodo *listaLiterales = NULL;
+nodo *listaPalabrasReservadas = NULL;
+nodo *listaIdentificadores = NULL;
+nodo *listaOctales = NULL;
+nodo *listaHexa = NULL;
+nodo *listaDecimales = NULL;
+nodo *listaConstantesCaracter = NULL;
+nodo *listaOperadores = NULL;
+nodo *listaComentariosCortos = NULL;
+nodo *listaComentariosLargos = NULL;
+nodo *listaReales = NULL;
+nodo *listaNoReconocidos = NULL;
+nodo *listaDirectivas = NULL;
+
+
+int mostrarTotal = 0;
+int lineas = 1;
+
+#line 555 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -669,10 +702,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 26 "../src/TP3.l"
+#line 57 "../src/TP3.l"
 
 
-#line 676 "lex.yy.c"
+#line 709 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -757,85 +790,85 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 28 "../src/TP3.l"
-{printf("Encontre una constante entera decimal \n");}
+#line 59 "../src/TP3.l"
+{ insertarElemento(yytext, &listaDirectivas)        ;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 29 "../src/TP3.l"
-{printf("Encontre una constante entera octal \n");}
+#line 60 "../src/TP3.l"
+{ insertarElemento(yytext, &listaOctales)           ;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 30 "../src/TP3.l"
-{printf("Encontre una constante entera hexadecimal \n");}
+#line 61 "../src/TP3.l"
+{ insertarElemento(yytext, &listaDecimales)         ;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 31 "../src/TP3.l"
-{printf("Encontre un identificador \n");}
+#line 62 "../src/TP3.l"
+{ insertarElemento(yytext, &listaHexa)              ;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 32 "../src/TP3.l"
-{printf("Encontre una constante real\n");}
+#line 63 "../src/TP3.l"
+{ insertarElemento(yytext, &listaReales)            ;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 33 "../src/TP3.l"
-{printf("Encontre una constante caracter\n");}
+#line 64 "../src/TP3.l"
+{ insertarElemento(yytext, &listaConstantesCaracter);}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 34 "../src/TP3.l"
-{printf("Encontre un literal cadena \n");}
+#line 65 "../src/TP3.l"
+{ insertarElemento(yytext, &listaLiterales)         ;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 35 "../src/TP3.l"
-{printf("Encontre una palabra reservada \n");}
+#line 66 "../src/TP3.l"
+{ insertarElemento(yytext, &listaPalabrasReservadas);}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 36 "../src/TP3.l"
-{printf("Encontre un operador de puntuacion \n");}
+#line 67 "../src/TP3.l"
+{ insertarOrdenado(yytext, &listaIdentificadores)   ;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 37 "../src/TP3.l"
-{printf("Encontre un comentario corto\n");}
+#line 68 "../src/TP3.l"
+{ insertarOrdenado(yytext, &listaOperadores)        ;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 38 "../src/TP3.l"
-{printf("Encontre un comentario largo\n");}
+#line 69 "../src/TP3.l"
+{ insertarElemento(yytext, &listaComentariosCortos) ;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 39 "../src/TP3.l"
-{printf("Encontre una tabulacion \n");}
+#line 70 "../src/TP3.l"
+{ insertarElemento(yytext, &listaComentariosLargos) ;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 40 "../src/TP3.l"
-{printf("Encontre un salto de linea \n");}
+#line 71 "../src/TP3.l"
+{ lineas++                                          ;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 41 "../src/TP3.l"
-{printf("Encontre un caracter de rechazo \n");}
+#line 72 "../src/TP3.l"
+{                                                   ;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 42 "../src/TP3.l"
-{printf("Encontre una directiva de precompilador \n");}
+#line 73 "../src/TP3.l"
+{ insertarElemento(yytext, &listaNoReconocidos)     ;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 43 "../src/TP3.l"
+#line 74 "../src/TP3.l"
 ECHO;
 	YY_BREAK
-#line 839 "lex.yy.c"
+#line 872 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1721,6 +1754,231 @@ int main()
 	return 0;
 	}
 #endif
-#line 43 "../src/TP3.l"
+#line 74 "../src/TP3.l"
 
 
+
+nodo *obtenerUltimoNodo(nodo *lista){
+    while(lista && lista -> sgte)
+        lista = lista -> sgte;
+    return lista;
+}
+
+char* sacarComillas(char texto[]){
+    char* auxiliar = malloc(strlen(texto));
+    int j = 0;
+    for(int i=0; i < strlen(texto); i++){
+        if(texto[i] != 34){
+            auxiliar[j] = texto[i];
+            j++;
+        }
+    }
+    auxiliar[j] = '\0';
+    return auxiliar;
+}
+
+int existeEnLaLista(char texto[], nodo *lista){
+    nodo *actual = malloc(sizeof(nodo));
+    int encontrado = 0;
+    actual = lista;
+    while (actual && strcmp(actual->info, texto) <= 0){
+	    if (!strcmp(actual->info, texto)){
+		encontrado = 1;
+	    }
+		actual = actual -> sgte;
+	}
+	return encontrado;
+}
+
+void insertarOrdenado(char texto[], nodo **lista){
+    nodo *lista_aux;
+    nodo *nuevo = malloc(sizeof (nodo));
+    nuevo-> info = strdup(texto);
+    nuevo-> cantidad = 1;
+    if (!(*lista) || (*lista && strcmp((*lista)-> info, texto) > 0)){
+        nuevo -> sgte = (*lista);
+        (*lista) = nuevo;
+        }
+    else {
+        lista_aux = *lista;
+        if(existeEnLaLista(texto, *lista)){
+            while(lista_aux && strcmp(lista_aux -> info, texto))
+                lista_aux = lista_aux -> sgte;
+            (lista_aux -> cantidad)++;
+        }
+        else{
+            while (lista_aux && lista_aux->sgte && strcmp(lista_aux->sgte->info, texto) < 0)
+                lista_aux = lista_aux->sgte;
+            nuevo->sgte = lista_aux->sgte;
+            lista_aux->sgte = nuevo;
+        }
+    }
+}
+
+void insertarElemento(char texto[], nodo **lista){
+    for(int i=0; i < strlen(texto); i++){
+        if(texto[i] == '\n')
+            lineas ++;
+    }
+    texto = sacarComillas(texto);
+    nodo *lista_aux;
+        if (*lista){
+            lista_aux = obtenerUltimoNodo(*lista);
+            lista_aux -> sgte = malloc (sizeof (nodo));
+            lista_aux = lista_aux -> sgte;
+            lista_aux -> info = strdup(texto);
+            lista_aux -> cantidad = -1;
+            lista_aux -> posicion = lineas;
+            lista_aux -> sgte = NULL;
+        }
+        else {        
+            *lista = malloc(sizeof (nodo));
+            (*lista) -> info = strdup(texto);
+            (*lista) -> cantidad = -1;
+            (*lista) -> posicion = lineas;
+            (*lista) -> sgte = NULL;
+        }
+    return;
+}
+
+
+void mostrarConPosicion(nodo **lista, char *texto){
+    nodo *lista_aux;
+    if(*lista){
+        printf(texto);
+        while(*lista){
+            printf("%s que aparece en la linea %d\n", (*lista) -> info, (*lista)-> posicion);
+            lista_aux = (*lista) -> sgte;
+            free(*lista);
+            *lista = lista_aux;
+        }
+    printf("\n");
+    }
+
+}
+
+void mostrarLista(nodo **lista, int literalCadena, char *texto){
+    nodo *lista_aux;
+    if(*lista){
+        if(literalCadena){
+            printf("Literales Cadena:\n");
+            while(*lista){
+                printf("%s cuya longitud es %d\n", (*lista) -> info, strlen((*lista) -> info));
+                lista_aux = (*lista) -> sgte;
+                free(*lista);
+                *lista = lista_aux;
+            }
+        }
+        else{
+            printf(texto);
+            while(*lista){
+                if((*lista) -> cantidad != -1)
+                    printf("%s que aparece %d veces\n", (*lista) -> info, (*lista)-> cantidad);
+                else
+                    printf("%s\n", (*lista) -> info);
+                
+                lista_aux = (*lista) -> sgte;
+                free(*lista);
+                *lista = lista_aux;
+            }
+        }
+    printf("\n");
+    }
+}
+
+int hexadecimalToDecimal(char hexVal[]) 
+{    
+    int len = strlen(hexVal); 
+    
+    int base = 1; 
+      
+    int dec_val = 0; 
+      
+    for (int i=len-1; i>=0; i--) 
+    {    
+        if (hexVal[i]>='0' && hexVal[i]<='9') 
+        { 
+            dec_val += (hexVal[i] - 48)*base;       
+            base = base * 16; 
+        } 
+        else if (hexVal[i]>='A' && hexVal[i]<='F') 
+        { 
+            dec_val += (hexVal[i] - 55)*base; 
+            base = base*16; 
+        } 
+        else if (hexVal[i]>='a' && hexVal[i]<='f') 
+        { 
+            dec_val += (hexVal[i] - 87)*base; 
+            base = base*16; 
+        } 
+    } 
+    return dec_val; 
+} 
+
+int convertirNumero(char *texto){
+    int numeroConvertido = 0, numero = atoi(texto), i = 0;
+    if(texto[1] == 'x' || texto[1] == 'X'){
+        numeroConvertido = hexadecimalToDecimal(texto);
+    }else if(texto[0] == '0'){
+        while(numero != 0){
+            numeroConvertido += (numero%10) * pow(8,i);
+            ++i;
+            numero/=10;
+        }
+    }else{
+        numeroConvertido = numero;
+        mostrarTotal = 1;
+    }
+    return numeroConvertido;
+}
+
+void mostrarNumeros(nodo **lista, int real, char *texto){
+    nodo *lista_aux;
+    if(*lista){
+        printf(texto);
+        if(real){
+            while(*lista){
+            float numero = atof((*lista) -> info);
+            printf("Numero: %s\n Su parte mantisa es %lf y su parte entera es %d\n", (*lista) -> info, (numero - (int)numero), (int)numero);
+            lista_aux = (*lista) -> sgte;
+            free(*lista);
+            *lista = lista_aux;
+            }  
+        }
+        else{
+        int suma = 0;
+        mostrarTotal = 0;
+        while(*lista){
+            int numero = convertirNumero((*lista) -> info);
+            suma += numero;
+            printf("Numero: %d\n", numero);
+            lista_aux = (*lista) -> sgte;
+            free(*lista);
+            *lista = lista_aux;
+        }
+            if(mostrarTotal)
+                printf("La suma de todos los numeros decimales es: %d\n", suma);
+        }
+    printf("\n");
+    }
+}
+
+int main() {
+    yyin = fopen("entrada.c", "r");
+    system("color 71");
+    yylex();
+    mostrarLista(&listaDirectivas, 0, "Directivas del Precompilador:\n");
+    mostrarLista(&listaPalabrasReservadas, 0, "Palabras reservadas:\n");
+    mostrarLista(&listaLiterales, 1, "Literales Cadena:\n");
+    mostrarLista(&listaIdentificadores, 0, "Identificadores:\n");
+    mostrarNumeros(&listaOctales, 0, "Constantes Octales:\n");
+    mostrarNumeros(&listaDecimales, 0, "Constantes Decimales:\n");
+    mostrarNumeros(&listaHexa, 0, "Constantes Hexadecimales:\n");
+    mostrarLista(&listaConstantesCaracter, 0, "Constantes Caracter:\n");
+    mostrarLista(&listaOperadores, 0, "Operadores:\n");
+    mostrarLista(&listaComentariosCortos, 0, "Comentarios Cortos:\n");
+    mostrarLista(&listaComentariosLargos, 0, "Comentarios Largos:\n");  
+    mostrarNumeros(&listaReales, 1, "Constantes Reales:\n");  
+    mostrarConPosicion(&listaNoReconocidos,"Caracteres No Reconocidos:\n");
+    getc(stdin);
+}

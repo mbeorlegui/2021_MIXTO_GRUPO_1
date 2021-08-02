@@ -57,7 +57,6 @@ TARGETS:=$(patsubst $(SRCDIR)/%.l,%.$(FILE_EXT),$(SRC))
 	@echo "<<< $@ creado. >>>"
 	@echo ""
 	@echo "<<< $@ corriendo! >>>"
-	./$@
 
 # Para compilar todos los *.l que fueron modificados  'make'
 all: $(TARGETS)

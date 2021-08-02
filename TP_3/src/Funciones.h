@@ -1,34 +1,37 @@
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include <string.h>
 
-// Enum para asignarle un numero a cada tipo de token
-enum tipoToken {palabraReservada = 1, identificador = 2, operadorOCaracterDePuntuacion = 3, literalCadena = 4, constanteOctal = 5};
+struct nodo {
+    char *info;
+    int cantidad;
+    struct nodo *sgte;
+    int posicion;
+};
 
-// Estructura nodo para guardar cada token
-typedef struct nodo
-{
-    int numeroDeLinea;
-    enum tipoToken token;
-    char* texto;
-    int longitudDeTexto;
-    struct nodo* siguiente;   
-}NODO;
+typedef struct nodo nodo;
 
-/* Para que cada token se agregue una sola vez a la lista uso la funcion buscarEnLista que devuelve 0 si 
-   el token NO esta y devuevle 1 si el token SI esta 
-*/
-int buscarEnLista(NODO* lista, char* texto);
+nodo *listaLiterales = NULL;
+nodo *listaPalabrasReservadas = NULL;
+nodo *listaIdentificadores = NULL;
+nodo *listaOctales = NULL;
+nodo *listaHexa = NULL;
+nodo *listaDecimales = NULL;
+nodo *listaConstantesCaracter = NULL;
+nodo *listaOperadores = NULL;
+nodo *listaComentariosCortos = NULL;
+nodo *listaComentariosLargos = NULL;
+nodo *listaReales = NULL;
+nodo *listaNoReconocidos = NULL;
+nodo *listaDirectivas = NULL;
 
-// Para insertar un nodo al final de la lista si NO aparece en la lista
-void insertarAlFinalDeLaLista(NODO**lista, int numeroDeLinea, enum tipoToken token, char* texto, int longitudTexto);
+int mostrarTotal = 0;  //Sumatoria de numeros decimales
+int lineas = 1;        //Cantidad de lineas de codigo
 
-// Longitud maxima del texto de un token, lo voy a usar para alinear la tabla
-int longitudMaximaDeTexto(NODO* lista);
-
-// Imprimo la lista de tokens 
-void imprimirListaEnArchivo(FILE* archivo, NODO* lista);
-
-// Libero memoria ocupada por lista
-void liberarMemoriaOcupadaPorLista(NODO* lista);
+void insertarOrdenado(char texto[], nodo **lista);
+void insertarElemento(char texto[], nodo **lista);
+void mostrarLista(nodo **lista, int literalCadena, char *texto);
+int existeEnLaLista(char texto[], nodo *lista);
+char *sacarComillas(char texto[]);
+nodo *obtenerUltimoNodo(nodo *lista);
