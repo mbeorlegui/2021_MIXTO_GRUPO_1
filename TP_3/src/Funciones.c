@@ -50,9 +50,9 @@ void insertarElemento(char texto[], nodo **lista) {
     return;
 }
 
-void archivarLiteralesCadena(nodo **lista, FILE** aR){
+void archivarLiteralesCadena(nodo **lista, FILE **aR) {
     nodo *lista_aux;
-    
+
     while (*lista) {
         fprintf(*aR, "%s", (*lista)->info);
         fputs(", cuya longitud es ", *aR);
@@ -78,10 +78,15 @@ void mostrarLista(nodo **lista, int literalCadena, char *texto) {
         } else {
             printf(texto);
             while (*lista) {
-                if ((*lista)->cantidad != -1)
-                    printf("%s que aparece %d veces\n", (*lista)->info, (*lista)->cantidad);
-                else
+                if ((*lista)->cantidad != -1) {
+                    printf("%s que aparece %d ", (*lista)->info, (*lista)->cantidad);
+                    if ((*lista)->cantidad == 1)
+                        printf("vez\n");
+                    if ((*lista)->cantidad > 1)
+                        printf("veces\n");
+                } else {
                     printf("%s\n", (*lista)->info);
+                }
 
                 lista_aux = (*lista)->sgte;
                 free(*lista);
@@ -124,21 +129,24 @@ nodo *obtenerUltimoNodo(nodo *lista) {
     return lista;
 }
 
-void archivarIdentificadores(nodo **lista, FILE** aR){
+void archivarIdentificadores(nodo **lista, FILE **aR) {
     nodo *lista_aux;
-    
+
     while (*lista) {
-        if ((*lista)->cantidad != -1){
+        if ((*lista)->cantidad != -1) {
             fprintf(*aR, "%s", (*lista)->info);
             fputs(", que aparece ", *aR);
             fprintf(*aR, "%d", (*lista)->cantidad);
-            fputs(" vez/ces\n", *aR);
-            printf("%s que aparece %d veces\n", (*lista)->info, (*lista)->cantidad);
-        }
-        else
+            printf("%s que aparece %d ", (*lista)->info, (*lista)->cantidad);
+            if ((*lista)->cantidad == 1) {
+                fputs(" vez\n", *aR);
+            }
+            if ((*lista)->cantidad > 1) {
+                fputs(" veces\n", *aR);
+            }
+        } else
             printf("%s\n", (*lista)->info);
 
-        
         lista_aux = (*lista)->sgte;
         free(*lista);
         *lista = lista_aux;

@@ -1,5 +1,5 @@
-a, que aparece 5 vez/ces
-main, que aparece 1 vez/ces
-printf, que aparece 1 vez/ces
+a, que aparece 5 veces
+main, que aparece 1 vez
+printf, que aparece 1 vez
 
 LiteralCadena\n, cuya longitud es 15

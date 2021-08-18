@@ -29,11 +29,11 @@ nodo *listaDirectivas = NULL;
 int mostrarTotal = 0;  //Sumatoria de numeros decimales
 int lineas = 1;        //Cantidad de lineas de codigo
 
-void insertarOrdenado(char [], nodo **);
-void insertarElemento(char [], nodo **);
+void insertarOrdenado(char[], nodo **);
+void insertarElemento(char[], nodo **);
 void mostrarLista(nodo **, int, char *);
-int existeEnLaLista(char [], nodo *);
-char *sacarComillas(char []);
+int existeEnLaLista(char[], nodo *);
+char *sacarComillas(char[]);
 nodo *obtenerUltimoNodo(nodo *);
 void archivarIdentificadores(nodo **, FILE **);
 void archivarLiteralesCadena(nodo **, FILE **);

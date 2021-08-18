@@ -30,7 +30,7 @@ DIRECTIVAS #(include|define).*
 
  /* Para cada categoria lexica debo agregar elementos a la lista con yytext,
     salvo para el identificador y los operadores de puntuacion que deben ir
-    ordenados.
+    ordenados. 
     * Para los saltos de linea debo agregar iterar sobre una varaible,
       asi puedo contar la linea en la que estan las categorias lexicas
  */
