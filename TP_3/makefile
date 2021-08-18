@@ -31,8 +31,11 @@ FFLAGS+=
 # wildcard me busca todos los archivos que cumplan con la condición y los concatena
 SRC:= $(wildcard $(SRCDIR)/*.l)
 # Ej: src/Ejemplo1.l src/Ejemplo2.l ... src/Ejemplo7.l
-DEPS:= $(wildcard $(IDIR)/*.h) $(wildcard $(SRCDIR)/*.c)
+DEPSC:= $(wildcard $(IDIR)/*.c)
 # Ej: src/misfunciones.h
+DEPSH:= $(wildcard $(IDIR)/*.h)
+
+DEPSMOD:=$(patsubst $(IDIR)/%.c,../$(IDIR)/%.c,$(DEPSC))
 
 # $(patsubst param1, param2, param3) agarra param3 y le reemplaza una parte del string (param1) por otra (param2)
 TARGETS:=$(patsubst $(SRCDIR)/%.l,%.$(FILE_EXT),$(SRC))
@@ -46,10 +49,10 @@ TARGETS:=$(patsubst $(SRCDIR)/%.l,%.$(FILE_EXT),$(SRC))
 # 	...
 # 	<tab> comando_a_ejecutarN
 
-%.$(FILE_EXT): $(SRCDIR)/%.l $(DEPS)
+%.$(FILE_EXT): $(SRCDIR)/%.l $(DEPSC) $(DEPSH)
 	@echo "=================[ Build | $@ ]================="
 	@echo "<<< Generando lex.yy.c >>>"
-	mkdir -p $(ODIR) && cd $(ODIR) && flex $(FFLAGS) ../$< && cd ..
+	mkdir -p $(ODIR) && cd $(ODIR) && flex $(FFLAGS) ../$< $(DEPSMOD) && cd ..
 	@echo "<<< lex.yy.c creado. >>>"
 	@echo ""
 	@echo "<<< Compilando y enlazando con libfl.a >>>"
@@ -57,6 +60,7 @@ TARGETS:=$(patsubst $(SRCDIR)/%.l,%.$(FILE_EXT),$(SRC))
 	@echo "<<< $@ creado. >>>"
 	@echo ""
 	@echo "<<< $@ corriendo! >>>"
+	./$@
 
 # Para compilar todos los *.l que fueron modificados  'make'
 all: $(TARGETS)

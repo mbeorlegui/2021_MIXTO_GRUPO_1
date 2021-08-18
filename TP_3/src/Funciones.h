@@ -29,9 +29,13 @@ nodo *listaDirectivas = NULL;
 int mostrarTotal = 0;  //Sumatoria de numeros decimales
 int lineas = 1;        //Cantidad de lineas de codigo
 
-void insertarOrdenado(char texto[], nodo **lista);
-void insertarElemento(char texto[], nodo **lista);
-void mostrarLista(nodo **lista, int literalCadena, char *texto);
-int existeEnLaLista(char texto[], nodo *lista);
-char *sacarComillas(char texto[]);
-nodo *obtenerUltimoNodo(nodo *lista);
+void insertarOrdenado(char [], nodo **);
+void insertarElemento(char [], nodo **);
+void mostrarLista(nodo **, int, char *);
+int existeEnLaLista(char [], nodo *);
+char *sacarComillas(char []);
+nodo *obtenerUltimoNodo(nodo *);
+void archivarIdentificadores(nodo **, FILE **);
+void archivarLiteralesCadena(nodo **, FILE **);
+
+// Definiciones de funciones, variables y estructuras.

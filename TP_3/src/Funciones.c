@@ -1,4 +1,4 @@
-#include "Funciones.h"
+//#include "Funciones.h" -> No hace falta.
 
 // Funcion para insertar ordenado cada elemento en su debida lista
 void insertarOrdenado(char texto[], nodo **lista) {
@@ -48,6 +48,20 @@ void insertarElemento(char texto[], nodo **lista) {
         (*lista)->sgte = NULL;
     }
     return;
+}
+
+void archivarLiteralesCadena(nodo **lista, FILE** aR){
+    nodo *lista_aux;
+    
+    while (*lista) {
+        fprintf(*aR, "%s", (*lista)->info);
+        fputs(", cuya longitud es ", *aR);
+        fprintf(*aR, "%d", strlen((*lista)->info));
+        printf("%s cuya longitud es %d\n", (*lista)->info, strlen((*lista)->info));
+        lista_aux = (*lista)->sgte;
+        free(*lista);
+        *lista = lista_aux;
+    }
 }
 
 void mostrarLista(nodo **lista, int literalCadena, char *texto) {
@@ -108,4 +122,25 @@ nodo *obtenerUltimoNodo(nodo *lista) {
     while (lista && lista->sgte)
         lista = lista->sgte;
     return lista;
+}
+
+void archivarIdentificadores(nodo **lista, FILE** aR){
+    nodo *lista_aux;
+    
+    while (*lista) {
+        if ((*lista)->cantidad != -1){
+            fprintf(*aR, "%s", (*lista)->info);
+            fputs(", que aparece ", *aR);
+            fprintf(*aR, "%d", (*lista)->cantidad);
+            fputs(" vez/ces\n", *aR);
+            printf("%s que aparece %d veces\n", (*lista)->info, (*lista)->cantidad);
+        }
+        else
+            printf("%s\n", (*lista)->info);
+
+        
+        lista_aux = (*lista)->sgte;
+        free(*lista);
+        *lista = lista_aux;
+    }
 }
