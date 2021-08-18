@@ -6,6 +6,7 @@
 
 int main() {
     int a = 0;
+
     printf("LiteralCadena\n");
 
     if (a = 0) {
@@ -14,7 +15,7 @@ int main() {
         a--;
     }
     //ComentarioCorto
-
+    
     /* 
         Comentario
         Largo

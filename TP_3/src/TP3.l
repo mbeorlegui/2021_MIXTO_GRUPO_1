@@ -81,17 +81,20 @@ int main(){
   fputs("COMENTARIOS LARGOS\n", aReportes);
   archivarPalabrasReservadasComentariosYDirectivas(&listaComentariosLargos, &aReportes);
   fprintf(aReportes, "\n");
+
+  //COMENTARIOS NO RECONOCIDOS
+  fputs("CARACTERES NO RECONOCIDOS\n", aReportes);
+  archivarNoReconocidos(&listaNoReconocidos, &aReportes);
+  fprintf(aReportes, "\n");
     
   //PARTE DE LAS DIRECTIVAS
   fputs("DIRECTIVAS\n", aReportes);
   archivarPalabrasReservadasComentariosYDirectivas(&listaDirectivas, &aReportes);
-  fprintf(aReportes, "\n");
 
   /*  
   //PARTE DE LAS CONSTANTES CARACTER
   mostrarLista(&listaConstantesCaracter, 0, "Constantes Caracter:\n"); 
   */
-
 
   fclose(aReportes);
   return 0;

@@ -142,6 +142,32 @@ void archivarPalabrasReservadasComentariosYDirectivas(nodo **lista, FILE **aR){
     }
 }
 
+void archivarNoReconocidos(nodo **lista, FILE **aR){
+    nodo *lista_aux;
+    
+    if(*lista){
+        while (*lista) {
+            printf("%s", (*lista)->info);
+            fprintf(*aR, "%s", (*lista)->info);
+            printf("%d", (*lista)->posicion);
+            fprintf(*aR, "%d", (*lista)->posicion);
+
+            if((*lista)->sgte != NULL){
+                printf(", ");
+                fputs(", ", *aR);
+            }     
+            else{
+                printf(".");
+                fputs(".", *aR);
+            }
+
+            lista_aux = (*lista)->sgte;
+            free(*lista);
+            *lista = lista_aux;
+        }
+    }
+}
+
 /*
 void mostrarLista(nodo **lista, int literalCadena, char *texto, FILE **aR) {
     nodo *lista_aux;

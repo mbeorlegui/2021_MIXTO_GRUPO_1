@@ -38,5 +38,6 @@ nodo *obtenerUltimoNodo(nodo *);
 void archivarIdentificadoresOperadaresYCaracteres(nodo **, FILE **);
 void archivarLiteralesCadena(nodo **, FILE **);
 void archivarPalabrasReservadasComentariosYDirectivas(nodo **, FILE **);
+void archivarNoReconocidos(nodo **, FILE **);
 
 // Definiciones de funciones, variables y estructuras.
