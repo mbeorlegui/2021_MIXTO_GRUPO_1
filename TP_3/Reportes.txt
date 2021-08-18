@@ -1,5 +1,30 @@
+IDENTIFICADORES
 a, que aparece 5 veces
 main, que aparece 1 vez
 printf, que aparece 1 vez
 
+LITERALES CADENA
 LiteralCadena\n, cuya longitud es 15
+PALABRAS RESERVADAS
+int, int, if, else, return.
+
+OPERADORES
+(, que aparece 3 veces
+), que aparece 3 veces
+++, que aparece 1 vez
+--, que aparece 1 vez
+;, que aparece 5 veces
+=, que aparece 2 veces
+{, que aparece 3 veces
+}, que aparece 3 veces
+
+COMENTARIOS CORTOS
+//ComentarioCorto.
+
+COMENTARIOS LARGOS
+/* 
+        Comentario
+        Largo
+    */.
+DIRECTIVAS
+#include <stdio.h>, #include <stdlib.h>, #define A 0, #define B 1.

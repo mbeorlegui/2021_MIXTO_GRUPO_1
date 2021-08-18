@@ -13,5 +13,11 @@ int main() {
     } else {
         a--;
     }
+    //ComentarioCorto
+
+    /* 
+        Comentario
+        Largo
+    */
     return a;
 }

@@ -31,11 +31,12 @@ int lineas = 1;        //Cantidad de lineas de codigo
 
 void insertarOrdenado(char[], nodo **);
 void insertarElemento(char[], nodo **);
-void mostrarLista(nodo **, int, char *);
+//void mostrarLista(nodo **, int, char *, FILE **);
 int existeEnLaLista(char[], nodo *);
 char *sacarComillas(char[]);
 nodo *obtenerUltimoNodo(nodo *);
-void archivarIdentificadores(nodo **, FILE **);
+void archivarIdentificadoresOperadaresYCaracteres(nodo **, FILE **);
 void archivarLiteralesCadena(nodo **, FILE **);
+void archivarPalabrasReservadasComentariosYDirectivas(nodo **, FILE **);
 
 // Definiciones de funciones, variables y estructuras.

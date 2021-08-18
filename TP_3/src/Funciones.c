@@ -1,5 +1,3 @@
-//#include "Funciones.h" -> No hace falta.
-
 // Funcion para insertar ordenado cada elemento en su debida lista
 void insertarOrdenado(char texto[], nodo **lista) {
     nodo *lista_aux;
@@ -50,53 +48,6 @@ void insertarElemento(char texto[], nodo **lista) {
     return;
 }
 
-void archivarLiteralesCadena(nodo **lista, FILE **aR) {
-    nodo *lista_aux;
-
-    while (*lista) {
-        fprintf(*aR, "%s", (*lista)->info);
-        fputs(", cuya longitud es ", *aR);
-        fprintf(*aR, "%d", strlen((*lista)->info));
-        printf("%s cuya longitud es %d\n", (*lista)->info, strlen((*lista)->info));
-        lista_aux = (*lista)->sgte;
-        free(*lista);
-        *lista = lista_aux;
-    }
-}
-
-void mostrarLista(nodo **lista, int literalCadena, char *texto) {
-    nodo *lista_aux;
-    if (*lista) {
-        if (literalCadena) {
-            printf("Literales Cadena:\n");
-            while (*lista) {
-                printf("%s cuya longitud es %d\n", (*lista)->info, strlen((*lista)->info));
-                lista_aux = (*lista)->sgte;
-                free(*lista);
-                *lista = lista_aux;
-            }
-        } else {
-            printf(texto);
-            while (*lista) {
-                if ((*lista)->cantidad != -1) {
-                    printf("%s que aparece %d ", (*lista)->info, (*lista)->cantidad);
-                    if ((*lista)->cantidad == 1)
-                        printf("vez\n");
-                    if ((*lista)->cantidad > 1)
-                        printf("veces\n");
-                } else {
-                    printf("%s\n", (*lista)->info);
-                }
-
-                lista_aux = (*lista)->sgte;
-                free(*lista);
-                *lista = lista_aux;
-            }
-        }
-        printf("\n");
-    }
-}
-
 int existeEnLaLista(char texto[], nodo *lista) {
     nodo *actual = malloc(sizeof(nodo));
     int encontrado = 0;
@@ -129,7 +80,7 @@ nodo *obtenerUltimoNodo(nodo *lista) {
     return lista;
 }
 
-void archivarIdentificadores(nodo **lista, FILE **aR) {
+void archivarIdentificadoresOperadaresYCaracteres(nodo **lista, FILE **aR) {
     nodo *lista_aux;
 
     while (*lista) {
@@ -152,3 +103,83 @@ void archivarIdentificadores(nodo **lista, FILE **aR) {
         *lista = lista_aux;
     }
 }
+
+void archivarLiteralesCadena(nodo **lista, FILE **aR) {
+    nodo *lista_aux;
+
+    while (*lista) {
+        fprintf(*aR, "%s", (*lista)->info);
+        fputs(", cuya longitud es ", *aR);
+        fprintf(*aR, "%d", strlen((*lista)->info));
+        printf("%s cuya longitud es %d\n", (*lista)->info, strlen((*lista)->info));
+        lista_aux = (*lista)->sgte;
+        free(*lista);
+        *lista = lista_aux;
+    }
+}
+
+void archivarPalabrasReservadasComentariosYDirectivas(nodo **lista, FILE **aR){
+    nodo *lista_aux;
+    
+    if(*lista){
+        while (*lista) {
+            printf("%s", (*lista)->info);
+            fprintf(*aR, "%s", (*lista)->info);
+
+            if((*lista)->sgte != NULL){
+                printf(", ");
+                fputs(", ", *aR);
+            }     
+            else{
+                printf(".");
+                fputs(".", *aR);
+            }
+
+            lista_aux = (*lista)->sgte;
+            free(*lista);
+            *lista = lista_aux;
+        }
+    }
+}
+
+/*
+void mostrarLista(nodo **lista, int literalCadena, char *texto, FILE **aR) {
+    nodo *lista_aux;
+    if (*lista) {
+        if (literalCadena) {
+            printf("Literales Cadena:\n");
+            while (*lista) {
+                printf("%s cuya longitud es %d\n", (*lista)->info, strlen((*lista)->info));
+                lista_aux = (*lista)->sgte;
+                free(*lista);
+                *lista = lista_aux;
+            }
+        } else {
+            printf(texto);
+            while (*lista) {
+                if ((*lista)->cantidad != -1) {
+                    printf("%s que aparece %d ", (*lista)->info, (*lista)->cantidad);
+                    fprintf(*aR, "%s", (*lista)->info);
+                    fputs(", que aparece ", *aR);
+                    fprintf(*aR, "%d", (*lista)->cantidad);
+                    if ((*lista)->cantidad == 1){
+                        printf("vez\n");
+                        fputs(" vez\n", *aR);
+                    }
+                    if ((*lista)->cantidad > 1){
+                        printf("veces\n");
+                        fputs(" veces\n", *aR);
+                    }
+                } else {
+                    printf("%s\n", (*lista)->info);
+                }
+
+                lista_aux = (*lista)->sgte;
+                free(*lista);
+                *lista = lista_aux;
+            }
+        }
+        printf("\n");
+    }
+}
+*/

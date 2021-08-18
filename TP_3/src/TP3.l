@@ -1,13 +1,7 @@
 %option noyywrap
 
 %{
-
-/*#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h> */
-
-#include "Funciones.h"
+  #include "Funciones.h"
 %}
 
 CONSTANTE_OCTAL 0[0-7]*
@@ -59,33 +53,46 @@ int main(){
   yylex();
   
   //PARTE DE LOS IDENTIFICADORES
-  archivarIdentificadores(&listaIdentificadores, &aReportes);
-  mostrarLista(&listaIdentificadores, 0, "Identificadores:\n");
+  fputs("IDENTIFICADORES\n", aReportes);
+  archivarIdentificadoresOperadaresYCaracteres(&listaIdentificadores, &aReportes);
   fprintf(aReportes, "\n");
 
   //PARTE DE LOS LITERALES CADENA  
+  fputs("LITERALES CADENA\n", aReportes);
   archivarLiteralesCadena(&listaLiterales, &aReportes);
-  mostrarLista(&listaLiterales, 1, "Literales Cadena:\n");
   fprintf(aReportes, "\n");
-
-  //PARTE DE LAS DIRECTIVAS
-  mostrarLista(&listaDirectivas, 0, "Directivas del Precompilador:\n");
-
+  
   //PARTE DE LAS PALABRAS RESERVADAS
-  mostrarLista(&listaPalabrasReservadas, 0, "Palabras reservadas:\n");
-
-  //PARTE DE LAS CONSTANTES CARACTER
-  mostrarLista(&listaConstantesCaracter, 0, "Constantes Caracter:\n");
+  fputs("PALABRAS RESERVADAS\n", aReportes);
+  archivarPalabrasReservadasComentariosYDirectivas(&listaPalabrasReservadas, &aReportes);
+  fprintf(aReportes, "\n\n");
 
   //PARTE DE LOS OPERADORES
-  mostrarLista(&listaOperadores, 0, "Operadores:\n");
+  fputs("OPERADORES\n", aReportes);
+  archivarIdentificadoresOperadaresYCaracteres(&listaOperadores, &aReportes);
+  fprintf(aReportes, "\n");
 
   //PARTE DE LOS COMENTARIOS CORTOS
-  mostrarLista(&listaComentariosCortos, 0, "Comentarios Cortos:\n");
+  fputs("COMENTARIOS CORTOS\n", aReportes);
+  archivarPalabrasReservadasComentariosYDirectivas(&listaComentariosCortos, &aReportes);
+  fprintf(aReportes, "\n\n");
 
   //PARTE DE LOS COMENTARIOS LARGOS
-  mostrarLista(&listaComentariosLargos, 0, "Comentarios Largos:\n"); 
-  
+  fputs("COMENTARIOS LARGOS\n", aReportes);
+  archivarPalabrasReservadasComentariosYDirectivas(&listaComentariosLargos, &aReportes);
+  fprintf(aReportes, "\n");
+    
+  //PARTE DE LAS DIRECTIVAS
+  fputs("DIRECTIVAS\n", aReportes);
+  archivarPalabrasReservadasComentariosYDirectivas(&listaDirectivas, &aReportes);
+  fprintf(aReportes, "\n");
+
+  /*  
+  //PARTE DE LAS CONSTANTES CARACTER
+  mostrarLista(&listaConstantesCaracter, 0, "Constantes Caracter:\n"); 
+  */
+
+
   fclose(aReportes);
   return 0;
 }
