@@ -1785,9 +1785,9 @@ int main(){
   fputs("CONSTANTES HEXADECIMALES\n", aReportes);
   archivarConstantes(&listaHexa, &aReportes, 16);
   fprintf(aReportes,"\n\n");
-  
+
   fputs("CONSTANTES DECIMALES\n", aReportes);
-  archivarConstantesDecimales(&listaDecimales, &aReportes);
+  archivarConstantes(&listaDecimales, &aReportes, 10);
   
   fputs("CONSTANTES REALES\n", aReportes);
   archivarReales(&listaReales, &aReportes);
@@ -1970,21 +1970,32 @@ void archivarNoReconocidos(nodo **lista, FILE **aR){
 }
 
 void archivarConstantes(nodo **lista, FILE **aR, int base) {
+    int sumatoria = 0;
     char *numPtr;
     nodo *lista_aux;
 
     while (*lista){
         fputs("Para la cadena en base ", *aR);
-        fprintf(*aR, ", %d", base);
+        fprintf(*aR, "%d, ", base);
         fprintf(*aR, "%s", (*lista)->info);
         printf("\nVariable en base %d: %s", base, (*lista)->info);
         fputs(" su valor entero decimal es: ", *aR);
         printf("\nSu valor entero decimal es: %lld\n", strtoll((*lista)->info, NULL, base));
         fprintf(*aR, "%lld\n", strtoll((*lista)->info, NULL , base));
+
+        if(base == 10){
+            int pasarAInt = (int) ((*lista)->info);
+            printf("\n%d\n", pasarAInt);
+            sumatoria += pasarAInt;
+        }
+
         lista_aux = (*lista)->sgte;
         free(*lista);
         *lista = lista_aux;
     }
+
+    if(base == 10)
+        printf("\nLa sumatoria de todos los numeros es: %d", sumatoria);
 }  
 
 void archivarConstantesDecimales(nodo **lista, FILE **aR){

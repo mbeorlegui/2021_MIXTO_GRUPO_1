@@ -7,7 +7,7 @@
 int main() {
     int a = 0;
     int consOctal = 0226;
-    int conHexa = ox78A;
+    int conHexa = 0x78A;
     int consDec = 11, conDec2 = 22;
 
     printf("LiteralCadena\n");

@@ -5,7 +5,6 @@ conHexa, que aparece 1 vez
 consDec, que aparece 1 vez
 consOctal, que aparece 1 vez
 main, que aparece 1 vez
-ox78A, que aparece 1 vez
 printf, que aparece 1 vez
 
 LITERALES CADENA
@@ -38,15 +37,18 @@ DIRECTIVAS
 #include <stdio.h>, #include <stdlib.h>, #define A 0, #define B 1.
 
 CONSTANTES OCTALES
-Para la cadena en base , 80 su valor entero decimal es: 0
-Para la cadena en base , 80226 su valor entero decimal es: 150
-Para la cadena en base , 80 su valor entero decimal es: 0
+Para la cadena en base 8, 0 su valor entero decimal es: 0
+Para la cadena en base 8, 0226 su valor entero decimal es: 150
+Para la cadena en base 8, 0 su valor entero decimal es: 0
 
 
 CONSTANTES HEXADECIMALES
+Para la cadena en base 16, 0x78A su valor entero decimal es: 1930
 
 
 CONSTANTES DECIMALES
+Para la cadena en base 10, 11 su valor entero decimal es: 11
+Para la cadena en base 10, 22 su valor entero decimal es: 22
 CONSTANTES REALES
 
 
