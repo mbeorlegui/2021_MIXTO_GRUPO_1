@@ -178,7 +178,7 @@ void archivarOctales(nodo **lista, FILE **aR) {
         //fprintf(*aR, "%s", (*lista)->info);
         printf("\nVariable Octal: %s", (*lista)->info);
         //fputs(" su valor entero decimal es: ", *aR);
-        printf("\nVariable Octal Transformaada: %lf\n", strtol((*lista)->info, 0, 8));
+        printf("\nVariable Octal Transformaada: %lf\n", strtol((*lista)->info, NULL, 8));
         //fprintf(*aR, "%lf", strtol((*lista)->info, NULL , 10));
         //fprintf( *aR,"Para la cadena Octal \"%s\" su valor entero decima: %lf\n"
         //, numPtr,8, strtol(numPtr, NULL , 8) );

@@ -109,11 +109,6 @@ int main(){
   //archivarCaracteres(&listaConstantesCaracter, &aReportes);
   //fprintf(aReportes,"\n"); 
 
-  /*  
-  //PARTE DE LAS CONSTANTES CARACTER
-  mostrarLista(&listaConstantesCaracter, 0, "Constantes Caracter:\n"); 
-  */
-
   fclose(aReportes);
   return 0;
 }
