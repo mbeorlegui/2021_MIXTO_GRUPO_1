@@ -95,19 +95,23 @@ int main(){
 
   //PARTE DE LAS CONSTANTES CARACTER
   fputs("CONSTANTES OCTALES\n", aReportes);
-  archivarOctales(&listaOctales, &aReportes);
+  archivarConstantes(&listaOctales, &aReportes, 8);
+  fprintf(aReportes, "\n\n");
   
+  fputs("CONSTANTES HEXADECIMALES\n", aReportes);
+  archivarConstantes(&listaHexa, &aReportes, 16);
+  fprintf(aReportes,"\n\n");
   
-  //fprintf(aReportes, "\n");
-  //fputs("CONSTANTES HEXADECIMALES\n", aReportes);
-  //archivarHexa(&listaHexa, &aReportes);
-  //fprintf(aReportes,"\n");
-  //fputs("CONSTANTES REALES\n", aReportes);
-  //archivarReales(&listaReales, &aReportes);
-  //fprintf(aReportes,"\n");
-  //fputs("CONSTANTES CARACTERES\n", aReportes);
-  //archivarCaracteres(&listaConstantesCaracter, &aReportes);
-  //fprintf(aReportes,"\n"); 
+  fputs("CONSTANTES DECIMALES\n", aReportes);
+  archivarConstantesDecimales(&listaDecimales, &aReportes);
+  
+  fputs("CONSTANTES REALES\n", aReportes);
+  archivarReales(&listaReales, &aReportes);
+  fprintf(aReportes,"\n\n");
+  
+  fputs("CONSTANTES CARACTERES\n", aReportes);
+  archivarCaracteres(&listaConstantesCaracter, &aReportes);
+  fprintf(aReportes,"\n"); 
 
   fclose(aReportes);
   return 0;

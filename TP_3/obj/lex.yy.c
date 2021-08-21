@@ -1779,24 +1779,23 @@ int main(){
 
   //PARTE DE LAS CONSTANTES CARACTER
   fputs("CONSTANTES OCTALES\n", aReportes);
-  archivarOctales(&listaOctales, &aReportes);
+  archivarConstantes(&listaOctales, &aReportes, 8);
+  fprintf(aReportes, "\n\n");
   
+  fputs("CONSTANTES HEXADECIMALES\n", aReportes);
+  archivarConstantes(&listaHexa, &aReportes, 16);
+  fprintf(aReportes,"\n\n");
   
-  //fprintf(aReportes, "\n");
-  //fputs("CONSTANTES HEXADECIMALES\n", aReportes);
-  //archivarHexa(&listaHexa, &aReportes);
-  //fprintf(aReportes,"\n");
-  //fputs("CONSTANTES REALES\n", aReportes);
-  //archivarReales(&listaReales, &aReportes);
-  //fprintf(aReportes,"\n");
-  //fputs("CONSTANTES CARACTERES\n", aReportes);
-  //archivarCaracteres(&listaConstantesCaracter, &aReportes);
-  //fprintf(aReportes,"\n"); 
-
-  /*  
-  //PARTE DE LAS CONSTANTES CARACTER
-  mostrarLista(&listaConstantesCaracter, 0, "Constantes Caracter:\n"); 
-  */
+  fputs("CONSTANTES DECIMALES\n", aReportes);
+  archivarConstantesDecimales(&listaDecimales, &aReportes);
+  
+  fputs("CONSTANTES REALES\n", aReportes);
+  archivarReales(&listaReales, &aReportes);
+  fprintf(aReportes,"\n\n");
+  
+  fputs("CONSTANTES CARACTERES\n", aReportes);
+  archivarCaracteres(&listaConstantesCaracter, &aReportes);
+  fprintf(aReportes,"\n"); 
 
   fclose(aReportes);
   return 0;
@@ -1970,38 +1969,42 @@ void archivarNoReconocidos(nodo **lista, FILE **aR){
     }
 }
 
-void archivarOctales(nodo **lista, FILE **aR) {
-    //char *numPtr;
+void archivarConstantes(nodo **lista, FILE **aR, int base) {
+    char *numPtr;
     nodo *lista_aux;
 
     while (*lista){
-        //strcpy(*numPtr, (*lista)->info);
-        //fputs("Para la cadena Octal ", *aR);
-        //fprintf(*aR, "%s", (*lista)->info);
-        printf("\nVariable Octal: %s", (*lista)->info);
-        //fputs(" su valor entero decimal es: ", *aR);
-        printf("\nVariable Octal Transformaada: %lf\n", strtol((*lista)->info, 0, 8));
-        //fprintf(*aR, "%lf", strtol((*lista)->info, NULL , 10));
-        //fprintf( *aR,"Para la cadena Octal \"%s\" su valor entero decima: %lf\n"
-        //, numPtr,8, strtol(numPtr, NULL , 8) );
+        fputs("Para la cadena en base ", *aR);
+        fprintf(*aR, ", %d", base);
+        fprintf(*aR, "%s", (*lista)->info);
+        printf("\nVariable en base %d: %s", base, (*lista)->info);
+        fputs(" su valor entero decimal es: ", *aR);
+        printf("\nSu valor entero decimal es: %lld\n", strtoll((*lista)->info, NULL, base));
+        fprintf(*aR, "%lld\n", strtoll((*lista)->info, NULL , base));
         lista_aux = (*lista)->sgte;
         free(*lista);
         *lista = lista_aux;
     }
-    //printf("\n%s\n", numPtr);
 }  
-void archivarHexa(nodo **lista, FILE **aR) {
-    char *numPtr;
 
+void archivarConstantesDecimales(nodo **lista, FILE **aR){
+    int sumatoria = 0;
     nodo *lista_aux;
-    while (*lista){
-            numPtr = strdup((*lista)->info);
-            fprintf(*aR, " Para la cadena Hexadecimal\"%s\" su valor entero decima: %lf\n", numPtr,16, strtol(numPtr, NULL , 16) );
-            lista_aux = (*lista)->sgte;
-            free(*lista);
-            *lista = lista_aux;
-        } 
-}     
+
+    while(*lista){
+        printf("\nVariable en base 10: %s", (*lista)->info);
+        int pasarAInt = (int) ((*lista)->info);
+        printf("\n%d\n", pasarAInt);
+        sumatoria += pasarAInt;
+
+        lista_aux = (*lista)->sgte;
+        free(*lista);
+        *lista = lista_aux;
+    }
+
+    printf("\nLa sumatoria de todos los numeros es: %d", sumatoria);
+}
+
 void archivarReales(nodo **lista, FILE **aR) {
     nodo *lista_aux; 
     while (*lista){
@@ -2027,45 +2030,3 @@ void archivarCaracteres(nodo**lista, FILE **aR) {
     }
     
 }
-
-/*
-void mostrarLista(nodo **lista, int literalCadena, char *texto, FILE **aR) {
-    nodo *lista_aux;
-    if (*lista) {
-        if (literalCadena) {
-            printf("Literales Cadena:\n");
-            while (*lista) {
-                printf("%s cuya longitud es %d\n", (*lista)->info, strlen((*lista)->info));
-                lista_aux = (*lista)->sgte;
-                free(*lista);
-                *lista = lista_aux;
-            }
-        } else {
-            printf(texto);
-            while (*lista) {
-                if ((*lista)->cantidad != -1) {
-                    printf("%s que aparece %d ", (*lista)->info, (*lista)->cantidad);
-                    fprintf(*aR, "%s", (*lista)->info);
-                    fputs(", que aparece ", *aR);
-                    fprintf(*aR, "%d", (*lista)->cantidad);
-                    if ((*lista)->cantidad == 1){
-                        printf("vez\n");
-                        fputs(" vez\n", *aR);
-                    }
-                    if ((*lista)->cantidad > 1){
-                        printf("veces\n");
-                        fputs(" veces\n", *aR);
-                    }
-                } else {
-                    printf("%s\n", (*lista)->info);
-                }
-
-                lista_aux = (*lista)->sgte;
-                free(*lista);
-                *lista = lista_aux;
-            }
-        }
-        printf("\n");
-    }
-}
-*/

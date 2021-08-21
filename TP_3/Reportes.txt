@@ -1,21 +1,26 @@
 IDENTIFICADORES
 a, que aparece 5 veces
+conDec2, que aparece 1 vez
+conHexa, que aparece 1 vez
+consDec, que aparece 1 vez
 consOctal, que aparece 1 vez
 main, que aparece 1 vez
+ox78A, que aparece 1 vez
 printf, que aparece 1 vez
 
 LITERALES CADENA
 LiteralCadena\n, cuya longitud es 15
 PALABRAS RESERVADAS
-int, int, int, if, else, return.
+int, int, int, int, int, if, else, return.
 
 OPERADORES
 (, que aparece 3 veces
 ), que aparece 3 veces
 ++, que aparece 1 vez
+,, que aparece 1 vez
 --, que aparece 1 vez
-;, que aparece 6 veces
-=, que aparece 3 veces
+;, que aparece 8 veces
+=, que aparece 6 veces
 {, que aparece 3 veces
 }, que aparece 3 veces
 
@@ -33,3 +38,17 @@ DIRECTIVAS
 #include <stdio.h>, #include <stdlib.h>, #define A 0, #define B 1.
 
 CONSTANTES OCTALES
+Para la cadena en base , 80 su valor entero decimal es: 0
+Para la cadena en base , 80226 su valor entero decimal es: 150
+Para la cadena en base , 80 su valor entero decimal es: 0
+
+
+CONSTANTES HEXADECIMALES
+
+
+CONSTANTES DECIMALES
+CONSTANTES REALES
+
+
+CONSTANTES CARACTERES
+
