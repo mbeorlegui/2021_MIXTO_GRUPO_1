@@ -6,6 +6,7 @@
 
 int main() {
     int a = 0;
+    int consOctal = 0226;
 
     printf("LiteralCadena\n");
 

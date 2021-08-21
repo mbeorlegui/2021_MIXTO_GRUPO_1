@@ -45,6 +45,7 @@ DIRECTIVAS #(include|define).*
 {CARACTER_RECHAZO}      { insertarElemento(yytext, &listaNoReconocidos)     ;}
 %%
 
+
 int main(){
   FILE* aReportes = fopen("Reportes.txt", "w");
 
@@ -90,6 +91,23 @@ int main(){
   //PARTE DE LAS DIRECTIVAS
   fputs("DIRECTIVAS\n", aReportes);
   archivarPalabrasReservadasComentariosYDirectivas(&listaDirectivas, &aReportes);
+  fprintf(aReportes, "\n\n");
+
+  //PARTE DE LAS CONSTANTES CARACTER
+  fputs("CONSTANTES OCTALES\n", aReportes);
+  archivarOctales(&listaOctales, &aReportes);
+  
+  
+  //fprintf(aReportes, "\n");
+  //fputs("CONSTANTES HEXADECIMALES\n", aReportes);
+  //archivarHexa(&listaHexa, &aReportes);
+  //fprintf(aReportes,"\n");
+  //fputs("CONSTANTES REALES\n", aReportes);
+  //archivarReales(&listaReales, &aReportes);
+  //fprintf(aReportes,"\n");
+  //fputs("CONSTANTES CARACTERES\n", aReportes);
+  //archivarCaracteres(&listaConstantesCaracter, &aReportes);
+  //fprintf(aReportes,"\n"); 
 
   /*  
   //PARTE DE LAS CONSTANTES CARACTER

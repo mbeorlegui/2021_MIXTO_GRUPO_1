@@ -40,4 +40,9 @@ void archivarLiteralesCadena(nodo **, FILE **);
 void archivarPalabrasReservadasComentariosYDirectivas(nodo **, FILE **);
 void archivarNoReconocidos(nodo **, FILE **);
 
+void archivarOctales(nodo **, FILE **);
+void archivarReales(nodo **, FILE **);
+void archivarHexa(nodo **, FILE **);
+void archivarCaracteres(nodo **, FILE **);
+
 // Definiciones de funciones, variables y estructuras.

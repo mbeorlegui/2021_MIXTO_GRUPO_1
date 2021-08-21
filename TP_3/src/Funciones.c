@@ -168,6 +168,64 @@ void archivarNoReconocidos(nodo **lista, FILE **aR){
     }
 }
 
+void archivarOctales(nodo **lista, FILE **aR) {
+    //char *numPtr;
+    nodo *lista_aux;
+
+    while (*lista){
+        //strcpy(*numPtr, (*lista)->info);
+        //fputs("Para la cadena Octal ", *aR);
+        //fprintf(*aR, "%s", (*lista)->info);
+        printf("\nVariable Octal: %s", (*lista)->info);
+        //fputs(" su valor entero decimal es: ", *aR);
+        printf("\nVariable Octal Transformaada: %lf\n", strtol((*lista)->info, 0, 8));
+        //fprintf(*aR, "%lf", strtol((*lista)->info, NULL , 10));
+        //fprintf( *aR,"Para la cadena Octal \"%s\" su valor entero decima: %lf\n"
+        //, numPtr,8, strtol(numPtr, NULL , 8) );
+        lista_aux = (*lista)->sgte;
+        free(*lista);
+        *lista = lista_aux;
+    }
+    //printf("\n%s\n", numPtr);
+}  
+void archivarHexa(nodo **lista, FILE **aR) {
+    char *numPtr;
+
+    nodo *lista_aux;
+    while (*lista){
+            numPtr = strdup((*lista)->info);
+            fprintf(*aR, " Para la cadena Hexadecimal\"%s\" su valor entero decima: %lf\n", numPtr,16, strtol(numPtr, NULL , 16) );
+            lista_aux = (*lista)->sgte;
+            free(*lista);
+            *lista = lista_aux;
+        } 
+}     
+void archivarReales(nodo **lista, FILE **aR) {
+    nodo *lista_aux; 
+    while (*lista){
+        double mantisa, parteEntera;
+        double numero =atof((*lista)->info);
+        mantisa = modf(numero, &parteEntera);
+        fprintf(*aR,"Parte entera: %f. Parte decimal: %f\n", parteEntera, mantisa);
+        lista_aux = (*lista)->sgte;
+        free(*lista);
+        *lista = lista_aux;
+    }  
+}
+
+void archivarCaracteres(nodo**lista, FILE **aR) {
+    nodo *lista_aux;
+    while (*lista){
+    int i;
+     for(i = 1;(*lista)->info;i++) {
+         fprintf(*aR,"%c caracter que aparece es: \"%s\n", i, (*lista)->info);
+         lista_aux= (*lista)->sgte;
+         *lista = lista_aux;
+     }
+    }
+    
+}
+
 /*
 void mostrarLista(nodo **lista, int literalCadena, char *texto, FILE **aR) {
     nodo *lista_aux;

@@ -1,12 +1,13 @@
 IDENTIFICADORES
 a, que aparece 5 veces
+consOctal, que aparece 1 vez
 main, que aparece 1 vez
 printf, que aparece 1 vez
 
 LITERALES CADENA
 LiteralCadena\n, cuya longitud es 15
 PALABRAS RESERVADAS
-int, int, if, else, return.
+int, int, int, if, else, return.
 
 OPERADORES
 (, que aparece 3 veces
@@ -14,7 +15,7 @@ OPERADORES
 ++, que aparece 1 vez
 --, que aparece 1 vez
 ;, que aparece 6 veces
-=, que aparece 2 veces
+=, que aparece 3 veces
 {, que aparece 3 veces
 }, que aparece 3 veces
 
@@ -30,3 +31,5 @@ CARACTERES NO RECONOCIDOS
 
 DIRECTIVAS
 #include <stdio.h>, #include <stdlib.h>, #define A 0, #define B 1.
+
+CONSTANTES OCTALES
