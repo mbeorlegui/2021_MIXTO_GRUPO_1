@@ -100,6 +100,7 @@ int main(){
   
   fputs("\n\nCONSTANTES CARACTERES\n", aReportes);
   archivarCaracteres(&listaConstantesCaracter, &aReportes);
+  printf("\nLlegie hasta aca2\n");
 
   fclose(aReportes);
   return 0;

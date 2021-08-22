@@ -9,7 +9,7 @@ int main() {
     int consOctal = 0226;
     int conHexa = 0x78A;
     int consDec = 11, conDec2 = 22;
-
+    char constChar = 'a', otrConst = 'b';
     printf("LiteralCadena\n");
 
     if (a = 0) {

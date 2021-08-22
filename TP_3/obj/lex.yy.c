@@ -1784,6 +1784,7 @@ int main(){
   
   fputs("\n\nCONSTANTES CARACTERES\n", aReportes);
   archivarCaracteres(&listaConstantesCaracter, &aReportes);
+  printf("\nLlegie hasta aca2\n");
 
   fclose(aReportes);
   return 0;
@@ -2004,13 +2005,14 @@ void archivarReales(nodo **lista, FILE **aR) {
 
 void archivarCaracteres(nodo**lista, FILE **aR) {
     nodo *lista_aux;
-    while (*lista){
-    int i;
-     for(i = 1;(*lista)->info;i++) {
-         fprintf(*aR,"%c caracter que aparece es: \"%s\n", i, (*lista)->info);
-         lista_aux= (*lista)->sgte;
-         *lista = lista_aux;
-     }
-    }
     
+    while (*lista){
+        fprintf(*aR,"caracter que aparece es: %s\n", (*lista)->info);
+        printf("caracter que aparece es: %s\n", (*lista)->info);
+
+        lista_aux= (*lista)->sgte;
+        free(*lista);
+        *lista = lista_aux;
+    }
+
 }

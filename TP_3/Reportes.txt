@@ -5,7 +5,9 @@ conDec2, que aparece 1 vez
 conHexa, que aparece 1 vez
 consDec, que aparece 1 vez
 consOctal, que aparece 1 vez
+constChar, que aparece 1 vez
 main, que aparece 1 vez
+otrConst, que aparece 1 vez
 printf, que aparece 1 vez
 
 
@@ -13,16 +15,16 @@ LITERALES CADENA
 LiteralCadena\n, cuya longitud es 15
 
 PALABRAS RESERVADAS
-int, int, int, int, int, if, else, return.
+int, int, int, int, int, char, if, else, return.
 
 OPERADORES
 (, que aparece 3 veces
 ), que aparece 3 veces
 ++, que aparece 1 vez
-,, que aparece 1 vez
+,, que aparece 2 veces
 --, que aparece 1 vez
-;, que aparece 8 veces
-=, que aparece 6 veces
+;, que aparece 9 veces
+=, que aparece 8 veces
 {, que aparece 3 veces
 }, que aparece 3 veces
 
@@ -62,3 +64,5 @@ CONSTANTES REALES
 
 
 CONSTANTES CARACTERES
+caracter que aparece es: 'a'
+caracter que aparece es: 'b'
