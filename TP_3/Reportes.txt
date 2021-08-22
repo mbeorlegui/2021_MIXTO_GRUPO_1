@@ -1,3 +1,4 @@
+
 IDENTIFICADORES
 a, que aparece 5 veces
 conDec2, que aparece 1 vez
@@ -7,8 +8,10 @@ consOctal, que aparece 1 vez
 main, que aparece 1 vez
 printf, que aparece 1 vez
 
+
 LITERALES CADENA
 LiteralCadena\n, cuya longitud es 15
+
 PALABRAS RESERVADAS
 int, int, int, int, int, if, else, return.
 
@@ -23,6 +26,7 @@ OPERADORES
 {, que aparece 3 veces
 }, que aparece 3 veces
 
+
 COMENTARIOS CORTOS
 //ComentarioCorto.
 
@@ -31,7 +35,9 @@ COMENTARIOS LARGOS
         Comentario
         Largo
     */.
+
 CARACTERES NO RECONOCIDOS
+
 
 DIRECTIVAS
 #include <stdio.h>, #include <stdlib.h>, #define A 0, #define B 1.
@@ -49,8 +55,10 @@ Para la cadena en base 16, 0x78A su valor entero decimal es: 1930
 CONSTANTES DECIMALES
 Para la cadena en base 10, 11 su valor entero decimal es: 11
 Para la cadena en base 10, 22 su valor entero decimal es: 22
+
+La sumatoria de todos los numeros es: 33
+
 CONSTANTES REALES
 
 
 CONSTANTES CARACTERES
-

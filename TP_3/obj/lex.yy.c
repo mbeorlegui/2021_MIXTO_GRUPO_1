@@ -1738,64 +1738,52 @@ int main(){
   yylex();
   
   //PARTE DE LOS IDENTIFICADORES
-  fputs("IDENTIFICADORES\n", aReportes);
+  fputs("\nIDENTIFICADORES\n", aReportes);
   archivarIdentificadoresOperadaresYCaracteres(&listaIdentificadores, &aReportes);
-  fprintf(aReportes, "\n");
 
   //PARTE DE LOS LITERALES CADENA  
-  fputs("LITERALES CADENA\n", aReportes);
+  fputs("\n\nLITERALES CADENA\n", aReportes);
   archivarLiteralesCadena(&listaLiterales, &aReportes);
-  fprintf(aReportes, "\n");
   
   //PARTE DE LAS PALABRAS RESERVADAS
-  fputs("PALABRAS RESERVADAS\n", aReportes);
+  fputs("\n\nPALABRAS RESERVADAS\n", aReportes);
   archivarPalabrasReservadasComentariosYDirectivas(&listaPalabrasReservadas, &aReportes);
-  fprintf(aReportes, "\n\n");
 
   //PARTE DE LOS OPERADORES
-  fputs("OPERADORES\n", aReportes);
+  fputs("\n\nOPERADORES\n", aReportes);
   archivarIdentificadoresOperadaresYCaracteres(&listaOperadores, &aReportes);
-  fprintf(aReportes, "\n");
 
   //PARTE DE LOS COMENTARIOS CORTOS
-  fputs("COMENTARIOS CORTOS\n", aReportes);
+  fputs("\n\nCOMENTARIOS CORTOS\n", aReportes);
   archivarPalabrasReservadasComentariosYDirectivas(&listaComentariosCortos, &aReportes);
-  fprintf(aReportes, "\n\n");
 
   //PARTE DE LOS COMENTARIOS LARGOS
-  fputs("COMENTARIOS LARGOS\n", aReportes);
+  fputs("\n\nCOMENTARIOS LARGOS\n", aReportes);
   archivarPalabrasReservadasComentariosYDirectivas(&listaComentariosLargos, &aReportes);
-  fprintf(aReportes, "\n");
 
   //COMENTARIOS NO RECONOCIDOS
-  fputs("CARACTERES NO RECONOCIDOS\n", aReportes);
+  fputs("\n\nCARACTERES NO RECONOCIDOS\n", aReportes);
   archivarNoReconocidos(&listaNoReconocidos, &aReportes);
-  fprintf(aReportes, "\n");
     
   //PARTE DE LAS DIRECTIVAS
-  fputs("DIRECTIVAS\n", aReportes);
+  fputs("\n\nDIRECTIVAS\n", aReportes);
   archivarPalabrasReservadasComentariosYDirectivas(&listaDirectivas, &aReportes);
-  fprintf(aReportes, "\n\n");
 
   //PARTE DE LAS CONSTANTES CARACTER
-  fputs("CONSTANTES OCTALES\n", aReportes);
+  fputs("\n\nCONSTANTES OCTALES\n", aReportes);
   archivarConstantes(&listaOctales, &aReportes, 8);
-  fprintf(aReportes, "\n\n");
   
-  fputs("CONSTANTES HEXADECIMALES\n", aReportes);
+  fputs("\n\nCONSTANTES HEXADECIMALES\n", aReportes);
   archivarConstantes(&listaHexa, &aReportes, 16);
-  fprintf(aReportes,"\n\n");
 
-  fputs("CONSTANTES DECIMALES\n", aReportes);
+  fputs("\n\nCONSTANTES DECIMALES\n", aReportes);
   archivarConstantes(&listaDecimales, &aReportes, 10);
   
-  fputs("CONSTANTES REALES\n", aReportes);
+  fputs("\n\nCONSTANTES REALES\n", aReportes);
   archivarReales(&listaReales, &aReportes);
-  fprintf(aReportes,"\n\n");
   
-  fputs("CONSTANTES CARACTERES\n", aReportes);
+  fputs("\n\nCONSTANTES CARACTERES\n", aReportes);
   archivarCaracteres(&listaConstantesCaracter, &aReportes);
-  fprintf(aReportes,"\n"); 
 
   fclose(aReportes);
   return 0;
@@ -1984,7 +1972,7 @@ void archivarConstantes(nodo **lista, FILE **aR, int base) {
         fprintf(*aR, "%lld\n", strtoll((*lista)->info, NULL , base));
 
         if(base == 10){
-            int pasarAInt = (int) ((*lista)->info);
+            int pasarAInt = atoi((*lista)->info);
             printf("\n%d\n", pasarAInt);
             sumatoria += pasarAInt;
         }
@@ -1994,27 +1982,12 @@ void archivarConstantes(nodo **lista, FILE **aR, int base) {
         *lista = lista_aux;
     }
 
-    if(base == 10)
+    if(base == 10){
         printf("\nLa sumatoria de todos los numeros es: %d", sumatoria);
-}  
-
-void archivarConstantesDecimales(nodo **lista, FILE **aR){
-    int sumatoria = 0;
-    nodo *lista_aux;
-
-    while(*lista){
-        printf("\nVariable en base 10: %s", (*lista)->info);
-        int pasarAInt = (int) ((*lista)->info);
-        printf("\n%d\n", pasarAInt);
-        sumatoria += pasarAInt;
-
-        lista_aux = (*lista)->sgte;
-        free(*lista);
-        *lista = lista_aux;
+        fputs("\nLa sumatoria de todos los numeros es: ", *aR);
+        fprintf(*aR, "%d", sumatoria);
     }
-
-    printf("\nLa sumatoria de todos los numeros es: %d", sumatoria);
-}
+}  
 
 void archivarReales(nodo **lista, FILE **aR) {
     nodo *lista_aux; 

@@ -41,6 +41,5 @@ void archivarNoReconocidos(nodo **, FILE **);
 void archivarConstantes(nodo **, FILE **, int);
 void archivarReales(nodo **, FILE **);
 void archivarCaracteres(nodo **, FILE **);
-void archivarConstantesDecimales(nodo **, FILE **);
 
 // Definiciones de funciones, variables y estructuras.

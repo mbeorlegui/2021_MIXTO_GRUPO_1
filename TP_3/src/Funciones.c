@@ -183,7 +183,7 @@ void archivarConstantes(nodo **lista, FILE **aR, int base) {
         fprintf(*aR, "%lld\n", strtoll((*lista)->info, NULL , base));
 
         if(base == 10){
-            int pasarAInt = (int) ((*lista)->info);
+            int pasarAInt = atoi((*lista)->info);
             printf("\n%d\n", pasarAInt);
             sumatoria += pasarAInt;
         }
@@ -193,27 +193,12 @@ void archivarConstantes(nodo **lista, FILE **aR, int base) {
         *lista = lista_aux;
     }
 
-    if(base == 10)
+    if(base == 10){
         printf("\nLa sumatoria de todos los numeros es: %d", sumatoria);
-}  
-
-void archivarConstantesDecimales(nodo **lista, FILE **aR){
-    int sumatoria = 0;
-    nodo *lista_aux;
-
-    while(*lista){
-        printf("\nVariable en base 10: %s", (*lista)->info);
-        int pasarAInt = (int) ((*lista)->info);
-        printf("\n%d\n", pasarAInt);
-        sumatoria += pasarAInt;
-
-        lista_aux = (*lista)->sgte;
-        free(*lista);
-        *lista = lista_aux;
+        fputs("\nLa sumatoria de todos los numeros es: ", *aR);
+        fprintf(*aR, "%d", sumatoria);
     }
-
-    printf("\nLa sumatoria de todos los numeros es: %d", sumatoria);
-}
+}  
 
 void archivarReales(nodo **lista, FILE **aR) {
     nodo *lista_aux; 

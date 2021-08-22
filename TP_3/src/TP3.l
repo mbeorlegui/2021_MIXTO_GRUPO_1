@@ -97,11 +97,9 @@ int main(){
   
   fputs("\n\nCONSTANTES REALES\n", aReportes);
   archivarReales(&listaReales, &aReportes);
-  fprintf(aReportes,"\n\n");
   
-  fputs("CONSTANTES CARACTERES\n", aReportes);
+  fputs("\n\nCONSTANTES CARACTERES\n", aReportes);
   archivarCaracteres(&listaConstantesCaracter, &aReportes);
-  fprintf(aReportes,"\n"); 
 
   fclose(aReportes);
   return 0;
