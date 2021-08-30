@@ -1,6 +1,8 @@
 %option noyywrap
 
+
 %{
+  //Incluimos las funciones en el archivo
   #include "Funciones.h"
 %}
 
@@ -47,61 +49,77 @@ DIRECTIVAS #(include|define).*
 
 
 int main(){
-  FILE* aReportes = fopen("Reportes.txt", "w");
+  
+  //Creo el archivo REPORTES en modo escritura
+  FILE* aReportes = fopen("Reportes.txt", "w"); 
 
+  //Hago que la variable de tipo puntero yyin apunte a la cadena de entrada a ser procesada, en este caso entrada.c
   yyin = fopen("entrada.c", "r");
   system("color 71");
-  yylex();
+  yylex(); 
   
   //PARTE DE LOS IDENTIFICADORES
   fputs("\nIDENTIFICADORES\n", aReportes);
+  printf("\nIDENTIFICADORES\n");
   archivarIdentificadoresOperadaresYCaracteres(&listaIdentificadores, &aReportes);
 
   //PARTE DE LOS LITERALES CADENA  
   fputs("\n\nLITERALES CADENA\n", aReportes);
+  printf("\n\nLITERALES CADENA\n");
   archivarLiteralesCadena(&listaLiterales, &aReportes);
   
   //PARTE DE LAS PALABRAS RESERVADAS
   fputs("\n\nPALABRAS RESERVADAS\n", aReportes);
+  printf("\n\nPALABRAS RESERVADAS\n");
   archivarPalabrasReservadasComentariosYDirectivas(&listaPalabrasReservadas, &aReportes);
 
   //PARTE DE LOS OPERADORES
-  fputs("\n\nOPERADORES\n", aReportes);
+  fputs("\n\nOPERADORES\n", aReportes); 
+  printf("\n\nOPERADORES\n");
   archivarIdentificadoresOperadaresYCaracteres(&listaOperadores, &aReportes);
 
   //PARTE DE LOS COMENTARIOS CORTOS
   fputs("\n\nCOMENTARIOS CORTOS\n", aReportes);
+  printf("\n\nCOMENTARIOS CORTOS\n");
   archivarPalabrasReservadasComentariosYDirectivas(&listaComentariosCortos, &aReportes);
 
   //PARTE DE LOS COMENTARIOS LARGOS
   fputs("\n\nCOMENTARIOS LARGOS\n", aReportes);
+  printf("\n\nCOMENTARIOS LARGOS\n");
   archivarPalabrasReservadasComentariosYDirectivas(&listaComentariosLargos, &aReportes);
 
   //COMENTARIOS NO RECONOCIDOS
   fputs("\n\nCARACTERES NO RECONOCIDOS\n", aReportes);
+  printf("\n\nCARACTERES NO RECONOCIDOS\n");
   archivarNoReconocidos(&listaNoReconocidos, &aReportes);
     
   //PARTE DE LAS DIRECTIVAS
-  fputs("\n\nDIRECTIVAS\n", aReportes);
+  fputs("\n\nDIRECTIVAS DE PRECOMPILADOR\n", aReportes);
+  printf("\n\nDIRECTIVAS DE PRECOMPILADOR\n");
   archivarPalabrasReservadasComentariosYDirectivas(&listaDirectivas, &aReportes);
 
   //PARTE DE LAS CONSTANTES CARACTER
   fputs("\n\nCONSTANTES OCTALES\n", aReportes);
+  printf("\n\nCONSTANTES OCTALES\n");
   archivarConstantes(&listaOctales, &aReportes, 8);
   
   fputs("\n\nCONSTANTES HEXADECIMALES\n", aReportes);
+  printf("\n\nCONSTANTES HEXADECIMALES");
   archivarConstantes(&listaHexa, &aReportes, 16);
 
   fputs("\n\nCONSTANTES DECIMALES\n", aReportes);
+  printf("\n\nCONSTANTES DECIMALES");
   archivarConstantes(&listaDecimales, &aReportes, 10);
   
   fputs("\n\nCONSTANTES REALES\n", aReportes);
+  printf("\n\nCONSTANTES REALES");
   archivarReales(&listaReales, &aReportes);
   
   fputs("\n\nCONSTANTES CARACTERES\n", aReportes);
+  printf("\n\nCONSTANTES CARACTERES\n");
   archivarCaracteres(&listaConstantesCaracter, &aReportes);
-  printf("\nLlegie hasta aca2\n");
 
   fclose(aReportes);
   return 0;
+
 }

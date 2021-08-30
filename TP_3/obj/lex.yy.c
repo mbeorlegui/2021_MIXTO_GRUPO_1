@@ -515,9 +515,10 @@ static char *yy_last_accepting_cpos;
 char *yytext;
 #line 1 "../src/TP3.l"
 #define INITIAL 0
-#line 4 "../src/TP3.l"
+#line 5 "../src/TP3.l"
+  //Incluimos las funciones en el archivo
   #include "Funciones.h"
-#line 521 "lex.yy.c"
+#line 522 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -668,7 +669,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 23 "../src/TP3.l"
+#line 25 "../src/TP3.l"
 
 
  /* Para cada categoria lexica debo agregar elementos a la lista con yytext,
@@ -677,7 +678,7 @@ YY_DECL
     * Para los saltos de linea debo agregar iterar sobre una varaible,
       asi puedo contar la linea en la que estan las categorias lexicas
  */
-#line 681 "lex.yy.c"
+#line 682 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -762,85 +763,85 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 31 "../src/TP3.l"
+#line 33 "../src/TP3.l"
 { insertarElemento(yytext, &listaDirectivas)        ;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 32 "../src/TP3.l"
+#line 34 "../src/TP3.l"
 { insertarElemento(yytext, &listaOctales)           ;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 33 "../src/TP3.l"
+#line 35 "../src/TP3.l"
 { insertarElemento(yytext, &listaDecimales)         ;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 34 "../src/TP3.l"
+#line 36 "../src/TP3.l"
 { insertarElemento(yytext, &listaHexa)              ;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 35 "../src/TP3.l"
+#line 37 "../src/TP3.l"
 { insertarElemento(yytext, &listaReales)            ;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 36 "../src/TP3.l"
+#line 38 "../src/TP3.l"
 { insertarElemento(yytext, &listaConstantesCaracter);}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 37 "../src/TP3.l"
+#line 39 "../src/TP3.l"
 { insertarElemento(yytext, &listaLiterales)         ;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 38 "../src/TP3.l"
+#line 40 "../src/TP3.l"
 { insertarElemento(yytext, &listaPalabrasReservadas);}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 39 "../src/TP3.l"
+#line 41 "../src/TP3.l"
 { insertarOrdenado(yytext, &listaIdentificadores)   ;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 40 "../src/TP3.l"
+#line 42 "../src/TP3.l"
 { insertarOrdenado(yytext, &listaOperadores)        ;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 41 "../src/TP3.l"
+#line 43 "../src/TP3.l"
 { insertarElemento(yytext, &listaComentariosCortos) ;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 42 "../src/TP3.l"
+#line 44 "../src/TP3.l"
 { insertarElemento(yytext, &listaComentariosLargos) ;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 43 "../src/TP3.l"
+#line 45 "../src/TP3.l"
 { lineas++                                          ;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 44 "../src/TP3.l"
+#line 46 "../src/TP3.l"
 {                                                   ;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 45 "../src/TP3.l"
+#line 47 "../src/TP3.l"
 { insertarElemento(yytext, &listaNoReconocidos)     ;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 46 "../src/TP3.l"
+#line 48 "../src/TP3.l"
 ECHO;
 	YY_BREAK
-#line 844 "lex.yy.c"
+#line 845 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1726,84 +1727,107 @@ int main()
 	return 0;
 	}
 #endif
-#line 46 "../src/TP3.l"
+#line 48 "../src/TP3.l"
 
 
 
 int main(){
-  FILE* aReportes = fopen("Reportes.txt", "w");
+  
+  //Creo el archivo REPORTES en modo escritura
+  FILE* aReportes = fopen("Reportes.txt", "w"); 
 
+  //Hago que la variable de tipo puntero yyin apunte a la cadena de entrada a ser procesada, en este caso entrada.c
   yyin = fopen("entrada.c", "r");
   system("color 71");
-  yylex();
+  yylex(); 
   
   //PARTE DE LOS IDENTIFICADORES
   fputs("\nIDENTIFICADORES\n", aReportes);
+  printf("\nIDENTIFICADORES\n");
   archivarIdentificadoresOperadaresYCaracteres(&listaIdentificadores, &aReportes);
 
   //PARTE DE LOS LITERALES CADENA  
   fputs("\n\nLITERALES CADENA\n", aReportes);
+  printf("\n\nLITERALES CADENA\n");
   archivarLiteralesCadena(&listaLiterales, &aReportes);
   
   //PARTE DE LAS PALABRAS RESERVADAS
   fputs("\n\nPALABRAS RESERVADAS\n", aReportes);
+  printf("\n\nPALABRAS RESERVADAS\n");
   archivarPalabrasReservadasComentariosYDirectivas(&listaPalabrasReservadas, &aReportes);
 
   //PARTE DE LOS OPERADORES
-  fputs("\n\nOPERADORES\n", aReportes);
+  fputs("\n\nOPERADORES\n", aReportes); 
+  printf("\n\nOPERADORES\n");
   archivarIdentificadoresOperadaresYCaracteres(&listaOperadores, &aReportes);
 
   //PARTE DE LOS COMENTARIOS CORTOS
   fputs("\n\nCOMENTARIOS CORTOS\n", aReportes);
+  printf("\n\nCOMENTARIOS CORTOS\n");
   archivarPalabrasReservadasComentariosYDirectivas(&listaComentariosCortos, &aReportes);
 
   //PARTE DE LOS COMENTARIOS LARGOS
   fputs("\n\nCOMENTARIOS LARGOS\n", aReportes);
+  printf("\n\nCOMENTARIOS LARGOS\n");
   archivarPalabrasReservadasComentariosYDirectivas(&listaComentariosLargos, &aReportes);
 
   //COMENTARIOS NO RECONOCIDOS
   fputs("\n\nCARACTERES NO RECONOCIDOS\n", aReportes);
+  printf("\n\nCARACTERES NO RECONOCIDOS\n");
   archivarNoReconocidos(&listaNoReconocidos, &aReportes);
     
   //PARTE DE LAS DIRECTIVAS
-  fputs("\n\nDIRECTIVAS\n", aReportes);
+  fputs("\n\nDIRECTIVAS DE PRECOMPILADOR\n", aReportes);
+  printf("\n\nDIRECTIVAS DE PRECOMPILADOR\n");
   archivarPalabrasReservadasComentariosYDirectivas(&listaDirectivas, &aReportes);
 
   //PARTE DE LAS CONSTANTES CARACTER
   fputs("\n\nCONSTANTES OCTALES\n", aReportes);
+  printf("\n\nCONSTANTES OCTALES\n");
   archivarConstantes(&listaOctales, &aReportes, 8);
   
   fputs("\n\nCONSTANTES HEXADECIMALES\n", aReportes);
+  printf("\n\nCONSTANTES HEXADECIMALES");
   archivarConstantes(&listaHexa, &aReportes, 16);
 
   fputs("\n\nCONSTANTES DECIMALES\n", aReportes);
+  printf("\n\nCONSTANTES DECIMALES");
   archivarConstantes(&listaDecimales, &aReportes, 10);
   
   fputs("\n\nCONSTANTES REALES\n", aReportes);
+  printf("\n\nCONSTANTES REALES");
   archivarReales(&listaReales, &aReportes);
   
   fputs("\n\nCONSTANTES CARACTERES\n", aReportes);
+  printf("\n\nCONSTANTES CARACTERES\n");
   archivarCaracteres(&listaConstantesCaracter, &aReportes);
-  printf("\nLlegie hasta aca2\n");
 
   fclose(aReportes);
   return 0;
-}// Funcion para insertar ordenado cada elemento en su debida lista
+
+}
+// Funcion para insertar ordenado cada elemento en su debida lista
 void insertarOrdenado(char texto[], nodo **lista) {
-    nodo *lista_aux;
-    nodo *nuevo = malloc(sizeof(nodo));
+    nodo *lista_aux;                     //creo lista
+    nodo *nuevo = malloc(sizeof(nodo));  //creo nuevo nodo y solicito memoria
     nuevo->info = strdup(texto);
     nuevo->cantidad = 1;
+    //si la lista esta vacía o el texto leido es mayor al que esta en el tope de la lista, el nuevo nodo estara en el tope
     if (!(*lista) || (*lista && strcmp((*lista)->info, texto) > 0)) {
         nuevo->sgte = (*lista);
         (*lista) = nuevo;
+        //si la lista no esta vacia y el texto leido no es mayot al del tope:
     } else {
         lista_aux = *lista;
+        //si el texto leido ya existe en la lista
         if (existeEnLaLista(texto, *lista)) {
+            //sumo uno a la cantidad
             while (lista_aux && strcmp(lista_aux->info, texto))
                 lista_aux = lista_aux->sgte;
             (lista_aux->cantidad)++;
+            //si no existe en la lista
         } else {
+            //coloco el nodo donde corresponde
             while (lista_aux && lista_aux->sgte && strcmp(lista_aux->sgte->info, texto) < 0)
                 lista_aux = lista_aux->sgte;
             nuevo->sgte = lista_aux->sgte;
@@ -1814,12 +1838,16 @@ void insertarOrdenado(char texto[], nodo **lista) {
 
 // Funcion para insertar cada elemento en su debida lista, sin contemplar orden
 void insertarElemento(char texto[], nodo **lista) {
+    //cuento las lineas
     for (int i = 0; i < strlen(texto); i++) {
         if (texto[i] == '\n')
             lineas++;
     }
+    //saco las comillas
     texto = sacarComillas(texto);
+
     nodo *lista_aux;
+    //si hay algo en la lista, inserto un nodo nuevo luego del ultimo y lo "lleno"
     if (*lista) {
         lista_aux = obtenerUltimoNodo(*lista);
         lista_aux->sgte = malloc(sizeof(nodo));
@@ -1828,6 +1856,7 @@ void insertarElemento(char texto[], nodo **lista) {
         lista_aux->cantidad = -1;
         lista_aux->posicion = lineas;
         lista_aux->sgte = NULL;
+        //si la lista esta vacia, simplemente creo el nodo y lo "lleno"
     } else {
         *lista = malloc(sizeof(nodo));
         (*lista)->info = strdup(texto);
@@ -1839,21 +1868,26 @@ void insertarElemento(char texto[], nodo **lista) {
 }
 
 int existeEnLaLista(char texto[], nodo *lista) {
-    nodo *actual = malloc(sizeof(nodo));
-    int encontrado = 0;
+    nodo *actual = malloc(sizeof(nodo));  //creo un nodo y solicito memoria
+    int encontrado = 0;                   //creo un "flag" que se hará uno si el texto fue encontrado
     actual = lista;
+
+    //voy recorriendo la lista
     while (actual && strcmp(actual->info, texto) <= 0) {
+        //si en algun momento encuentro el texto en la lista, pongo el flag en 1
         if (!strcmp(actual->info, texto)) {
             encontrado = 1;
         }
         actual = actual->sgte;
     }
+
     return encontrado;
 }
 
 char *sacarComillas(char texto[]) {
-    char *auxiliar = malloc(strlen(texto));
+    char *auxiliar = malloc(strlen(texto));  //creo un puntero a char y solicito el largo del texto
     int j = 0;
+    //recorro el texto y lo copio en auxiliar mientras no tenga comillas
     for (int i = 0; i < strlen(texto); i++) {
         if (texto[i] != 34) {
             auxiliar[j] = texto[i];
@@ -1861,6 +1895,7 @@ char *sacarComillas(char texto[]) {
         }
     }
     auxiliar[j] = '\0';
+    //finalmente retorno el texto sin comillas
     return auxiliar;
 }
 
@@ -1881,10 +1916,13 @@ void archivarIdentificadoresOperadaresYCaracteres(nodo **lista, FILE **aR) {
             printf("%s que aparece %d ", (*lista)->info, (*lista)->cantidad);
             if ((*lista)->cantidad == 1) {
                 fputs(" vez\n", *aR);
+                printf(" vez\n");
             }
             if ((*lista)->cantidad > 1) {
                 fputs(" veces\n", *aR);
+                printf(" veces\n");
             }
+
         } else
             printf("%s\n", (*lista)->info);
 
@@ -1897,30 +1935,33 @@ void archivarIdentificadoresOperadaresYCaracteres(nodo **lista, FILE **aR) {
 void archivarLiteralesCadena(nodo **lista, FILE **aR) {
     nodo *lista_aux;
 
+    //Mientras la lista no este vacia, imprimo los literales cadena y sus longitudes
     while (*lista) {
         fprintf(*aR, "%s", (*lista)->info);
         fputs(", cuya longitud es ", *aR);
         fprintf(*aR, "%d", strlen((*lista)->info));
-        printf("%s cuya longitud es %d\n", (*lista)->info, strlen((*lista)->info));
+        printf("%s cuya longitud es %d\n", (*lista)->info), strlen((*lista)->info);
         lista_aux = (*lista)->sgte;
         free(*lista);
         *lista = lista_aux;
     }
 }
 
-void archivarPalabrasReservadasComentariosYDirectivas(nodo **lista, FILE **aR){
+void archivarPalabrasReservadasComentariosYDirectivas(nodo **lista, FILE **aR) {
     nodo *lista_aux;
-    
-    if(*lista){
+
+    //si la lista no esta vacia, se muestra el elemento
+
+    if (*lista) {
         while (*lista) {
             printf("%s", (*lista)->info);
             fprintf(*aR, "%s", (*lista)->info);
 
-            if((*lista)->sgte != NULL){
+            //Si no es el ultimo elemento separar por coma, sino por punto
+            if ((*lista)->sgte != NULL) {
                 printf(", ");
                 fputs(", ", *aR);
-            }     
-            else{
+            } else {
                 printf(".");
                 fputs(".", *aR);
             }
@@ -1932,29 +1973,30 @@ void archivarPalabrasReservadasComentariosYDirectivas(nodo **lista, FILE **aR){
     }
 }
 
-void archivarNoReconocidos(nodo **lista, FILE **aR){
+void archivarNoReconocidos(nodo **lista, FILE **aR) {
     nodo *lista_aux;
-    
-    if(*lista){
-        while (*lista) {
-            printf("%s", (*lista)->info);
-            fprintf(*aR, "%s", (*lista)->info);
-            printf("%d", (*lista)->posicion);
-            fprintf(*aR, "%d", (*lista)->posicion);
 
-            if((*lista)->sgte != NULL){
-                printf(", ");
-                fputs(", ", *aR);
-            }     
-            else{
-                printf(".");
-                fputs(".", *aR);
-            }
+    //si la lista no esta vacia, se muestra el caracter no reconocido y su posicion
+    while (*lista) {
+        printf("No se reconocio: %s", (*lista)->info);
+        fputs("No se reconocio ", *aR);
+        fprintf(*aR, "%s", (*lista)->info);
+        printf(" en la linea %d", (*lista)->posicion);
+        fputs(" en la linea ", *aR);
+        fprintf(*aR, "%d", (*lista)->posicion);
 
-            lista_aux = (*lista)->sgte;
-            free(*lista);
-            *lista = lista_aux;
+        //Si no es el ultimo elemento separar por coma, sino por punto
+        if ((*lista)->sgte != NULL) {
+            printf(".\n");
+            fputs(".\n", *aR);
+        } else {
+            printf(".");
+            fputs(".", *aR);
         }
+
+        lista_aux = (*lista)->sgte;
+        free(*lista);
+        *lista = lista_aux;
     }
 }
 
@@ -1963,56 +2005,57 @@ void archivarConstantes(nodo **lista, FILE **aR, int base) {
     char *numPtr;
     nodo *lista_aux;
 
-    while (*lista){
-        fputs("Para la cadena en base ", *aR);
+    //voy recorriendo la lista, de las constantes hexa y octales se indica el valor decimal
+
+    while (*lista) {
+        fputs("Para la constante en base ", *aR);
         fprintf(*aR, "%d, ", base);
         fprintf(*aR, "%s", (*lista)->info);
         printf("\nVariable en base %d: %s", base, (*lista)->info);
         fputs(" su valor entero decimal es: ", *aR);
         printf("\nSu valor entero decimal es: %lld\n", strtoll((*lista)->info, NULL, base));
-        fprintf(*aR, "%lld\n", strtoll((*lista)->info, NULL , base));
-
-        if(base == 10){
-            int pasarAInt = atoi((*lista)->info);
-            printf("\n%d\n", pasarAInt);
-            sumatoria += pasarAInt;
-        }
+        fprintf(*aR, "%lld\n", strtoll((*lista)->info, NULL, base));
 
         lista_aux = (*lista)->sgte;
         free(*lista);
         *lista = lista_aux;
     }
 
-    if(base == 10){
+    //de las decimales hago la sumatoria
+
+    if (base == 10) {
         printf("\nLa sumatoria de todos los numeros es: %d", sumatoria);
         fputs("\nLa sumatoria de todos los numeros es: ", *aR);
         fprintf(*aR, "%d", sumatoria);
     }
-}  
+}
 
 void archivarReales(nodo **lista, FILE **aR) {
-    nodo *lista_aux; 
-    while (*lista){
+    nodo *lista_aux;  //recorro constantes reales mostrando el valor de su mantisa y parte entera
+    if (*lista == NULL) {
+        printf("\nEl archivo de entrada no presenta constantes reales\n");
+        fputs("El archivo de entrada no presenta constantes reales\n", *aR);
+    }
+    while (*lista) {
         double mantisa, parteEntera;
-        double numero =atof((*lista)->info);
+        double numero = atof((*lista)->info);
         mantisa = modf(numero, &parteEntera);
-        fprintf(*aR,"Parte entera: %f. Parte decimal: %f\n", parteEntera, mantisa);
+        fprintf(*aR, "Parte entera: %f. Parte decimal: %f\n", parteEntera, mantisa);
         lista_aux = (*lista)->sgte;
         free(*lista);
         *lista = lista_aux;
-    }  
+    }
 }
 
-void archivarCaracteres(nodo**lista, FILE **aR) {
+void archivarCaracteres(nodo **lista, FILE **aR) {
     nodo *lista_aux;
-    
-    while (*lista){
-        fprintf(*aR,"caracter que aparece es: %s\n", (*lista)->info);
-        printf("caracter que aparece es: %s\n", (*lista)->info);
+    //voy recorriendo la lista y mostrando las constantes caracter
+    while (*lista) {
+        fprintf(*aR, "Caracter que aparece es: %s\n", (*lista)->info);
+        printf("Caracter que aparece es: %s\n", (*lista)->info);
 
-        lista_aux= (*lista)->sgte;
+        lista_aux = (*lista)->sgte;
         free(*lista);
         *lista = lista_aux;
     }
-
 }

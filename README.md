@@ -17,11 +17,17 @@
 
 <div align="center">
 
-| Nombre        			| Mail           					| Curso		| Usuario  	|
-| ------------- 			|-------------						|--------	| -----		|
-| Matías Beorlegui      	| mbeorlegui@frba.utn.edu.ar 		|	K2002	| [@mbeorlegui](https://github.com/mbeorlegui) |
-| Olaf Querol				| olafquerol@frba.utn.edu.ar    	| 	K2001	| [@olafq](https://github.com/olafq)|
-| Lucas Rodriguez 			| lucasrodriguez@frba.utn.edu.ar	|   K2001	| [@lucasirod](https://github.com/lucasirod) |
-| Felipe Alborch			| falborchdeguzman@frba.utn.edu.ar  |   K2002	| [@felipealborch](https://github.com/FelipeAlborch) |
+| Nombre           | Mail                             | Curso | Usuario                                            |
+| ---------------- | -------------------------------- | ----- | -------------------------------------------------- |
+| Matías Beorlegui | mbeorlegui@frba.utn.edu.ar       | K2002 | [@mbeorlegui](https://github.com/mbeorlegui)       |
+| Olaf Querol      | olafquerol@frba.utn.edu.ar       | K2001 | [@olafq](https://github.com/olafq)                 |
+| Lucas Rodriguez  | lucasrodriguez@frba.utn.edu.ar   | K2001 | [@lucasirod](https://github.com/lucasirod)         |
+| Felipe Alborch   | falborchdeguzman@frba.utn.edu.ar | K2002 | [@felipealborch](https://github.com/FelipeAlborch) |
 
 </div>
+
+#### Trabajos prácticos
+
+1. [Implementación de un Automata Finito Deterministico para gramaticas regulares](https://github.com/mbeorlegui/2021_MIXTO_GRUPO_1/tree/master/TP_1)
+2. [Implementación de un Automata de Pila para expresiones aritméticas](https://github.com/mbeorlegui/2021_MIXTO_GRUPO_1/tree/master/TP_2)
+3. [Implementación de Analizador Léxico en FLEX](https://github.com/mbeorlegui/2021_MIXTO_GRUPO_1/tree/master/TP_3)

@@ -39,30 +39,32 @@ COMENTARIOS LARGOS
     */.
 
 CARACTERES NO RECONOCIDOS
+No se reconocio $ en la linea 9.
+No se reconocio $ en la linea 14.
 
-
-DIRECTIVAS
+DIRECTIVAS DE PRECOMPILADOR
 #include <stdio.h>, #include <stdlib.h>, #define A 0, #define B 1.
 
 CONSTANTES OCTALES
-Para la cadena en base 8, 0 su valor entero decimal es: 0
-Para la cadena en base 8, 0226 su valor entero decimal es: 150
-Para la cadena en base 8, 0 su valor entero decimal es: 0
+Para la constante en base 8, 0 su valor entero decimal es: 0
+Para la constante en base 8, 0256 su valor entero decimal es: 174
+Para la constante en base 8, 0 su valor entero decimal es: 0
 
 
 CONSTANTES HEXADECIMALES
-Para la cadena en base 16, 0x78A su valor entero decimal es: 1930
+Para la constante en base 16, 0x78A su valor entero decimal es: 1930
 
 
 CONSTANTES DECIMALES
-Para la cadena en base 10, 11 su valor entero decimal es: 11
-Para la cadena en base 10, 22 su valor entero decimal es: 22
+Para la constante en base 10, 11 su valor entero decimal es: 11
+Para la constante en base 10, 22 su valor entero decimal es: 22
 
-La sumatoria de todos los numeros es: 33
+La sumatoria de todos los numeros es: 0
 
 CONSTANTES REALES
+El archivo de entrada no presenta constantes reales
 
 
 CONSTANTES CARACTERES
-caracter que aparece es: 'a'
-caracter que aparece es: 'b'
+Caracter que aparece es: 'a'
+Caracter que aparece es: 'b'
