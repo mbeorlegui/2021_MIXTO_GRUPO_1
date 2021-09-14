@@ -1,0 +1,102 @@
+Terminals unused in grammar
+
+   NUM_REAL
+   NUM
+   IDENTIFICADOR
+   TIPO_DATO
+   ERROR
+   LITERAL_CADENA
+   OPERADOR_ASIGNACION
+   OPERADOR_RELACIONAL
+   OPERADOR_IGUALDAD
+   OPERADOR_UNARIO
+   OPERADOR_OR
+   OPERADOR_AND
+   SIZEOF
+   OPERADOR_MULTIPLICATIVO
+   VOID
+   IF
+   ELSE
+   FOR
+   WHILE
+   DO
+   SWITCH
+   RETURN
+
+
+Rules useless in parser due to conflicts
+
+    2 programa: programa
+
+
+Estado 1 conflictos: 1 desplazamiento(s)/reducción(ones)
+
+
+Gramática
+
+    0 $accept: programa $end
+
+    1 programa: /* vacío */
+    2         | programa
+
+
+Terminales con las reglas donde aparecen
+
+$end (0) 0
+error (256)
+NUM_REAL (258)
+NUM (259)
+IDENTIFICADOR (260)
+TIPO_DATO (261)
+ERROR (262)
+LITERAL_CADENA (263)
+OPERADOR_ASIGNACION (264)
+OPERADOR_RELACIONAL (265)
+OPERADOR_IGUALDAD (266)
+OPERADOR_UNARIO (267)
+OPERADOR_OR (268)
+OPERADOR_AND (269)
+SIZEOF (270)
+OPERADOR_MULTIPLICATIVO (271)
+VOID (272)
+IF (273)
+ELSE (274)
+FOR (275)
+WHILE (276)
+DO (277)
+SWITCH (278)
+RETURN (279)
+
+
+No terminales con las reglas donde aparecen
+
+$accept (25)
+    en la izquierda: 0
+programa (26)
+    en la izquierda: 1 2, en la derecha: 0 2
+
+
+estado 0
+
+    0 $accept: . programa $end
+
+    $default  reduce usando la regla 1 (programa)
+
+    programa  ir al estado 1
+
+
+estado 1
+
+    0 $accept: programa . $end
+    2 programa: programa .
+
+    $end  desplazar e ir al estado 2
+
+    $end  [reduce usando la regla 2 (programa)]
+
+
+estado 2
+
+    0 $accept: programa $end .
+
+    $default  aceptar
