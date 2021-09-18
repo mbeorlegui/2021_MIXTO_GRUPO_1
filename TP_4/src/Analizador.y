@@ -1,4 +1,4 @@
-/* Calculadora NOTACION INFIJA */
+
 
 %{
 #include <math.h>
@@ -54,11 +54,18 @@ extern int yylineno;
 %% /* Reglas y acciones */
 
 programa:    /* vacio */
-        | programa {flagError = 0;}
+        | programa {flagError = 0;}line 
 ;
 
-/* EXPRESION */ 
+line: sentenciaDeclaracion 
+    | sentencia
+;
 
+sentenciaDeclaracion: {printf("hola\n");};
+sentencia: IF {printf("chau\n");};
+
+
+/* EXPRESION */
 
 
 %%
@@ -66,7 +73,7 @@ void yyerror (char const *s) {
    fprintf (stderr, "Error sintactico en la linea %d\n", yylineno);
 }
 
-void main(){
+int main(){
   #ifdef BISON_DEBUG
     yydebug = 1;
   #endif    
@@ -80,4 +87,6 @@ void main(){
 	yyparse();
 
   getchar();
+
+  return 0;
 }

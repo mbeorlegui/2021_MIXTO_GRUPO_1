@@ -3,8 +3,9 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "Ejemplo_Calculadora_Notacion_Infija.tab.h"
+#include "Analizador.tab.h"
 
+void errorLexico(void);
 
 
 %}
@@ -80,7 +81,7 @@ IDENTIFICADOR [A-Za-z_][A-Za-z_0-9]*
 ";"     {return ';';}
 \n
 [\t ]
-.       {} // Error Lexico
+.       {errorLexico();} // Error Lexico
 
 %%
 
@@ -89,3 +90,9 @@ IDENTIFICADOR [A-Za-z_][A-Za-z_0-9]*
     Para los que son numeros, lo almacenamos en el campo entero
     Para el resto lo almacenamos en el campo cadena 
 */
+
+void errorLexico(void){
+	printf("Error lexico: caracter %s invalido. En linea %d.", yytext, yylineno);
+    getchar();
+    exit(0);
+}

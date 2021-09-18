@@ -68,7 +68,7 @@
 /* Copy the first part of user declarations.  */
 
 /* Line 189 of yacc.c  */
-#line 3 "../src/Ejemplo_Calculadora_Notacion_Infija.y"
+#line 3 "../src/Analizador.y"
 
 #include <math.h>
 #include <stdio.h>
@@ -88,7 +88,7 @@ extern int yylineno;
 
 
 /* Line 189 of yacc.c  */
-#line 92 "Ejemplo_Calculadora_Notacion_Infija.tab.c"
+#line 92 "Analizador.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -147,7 +147,7 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 20 "../src/Ejemplo_Calculadora_Notacion_Infija.y"
+#line 20 "../src/Analizador.y"
 
   char cadena[30];
   int entero;
@@ -156,7 +156,7 @@ typedef union YYSTYPE
 
 
 /* Line 214 of yacc.c  */
-#line 160 "Ejemplo_Calculadora_Notacion_Infija.tab.c"
+#line 160 "Analizador.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -168,7 +168,7 @@ typedef union YYSTYPE
 
 
 /* Line 264 of yacc.c  */
-#line 172 "Ejemplo_Calculadora_Notacion_Infija.tab.c"
+#line 172 "Analizador.tab.c"
 
 #ifdef short
 # undef short
@@ -383,16 +383,16 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  2
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   0
+#define YYLAST   1
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  25
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  2
+#define YYNNTS  6
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  3
+#define YYNRULES  8
 /* YYNRULES -- Number of states.  */
-#define YYNSTATES  3
+#define YYNSTATES  8
 
 /* YYTRANSLATE(YYLEX) -- Bison symbol number corresponding to YYLEX.  */
 #define YYUNDEFTOK  2
@@ -439,19 +439,20 @@ static const yytype_uint8 yytranslate[] =
    YYRHS.  */
 static const yytype_uint8 yyprhs[] =
 {
-       0,     0,     3,     4
+       0,     0,     3,     4,     5,     9,    11,    13,    14
 };
 
 /* YYRHS -- A `-1'-separated list of the rules' RHS.  */
 static const yytype_int8 yyrhs[] =
 {
-      26,     0,    -1,    -1,    26,    -1
+      26,     0,    -1,    -1,    -1,    26,    27,    28,    -1,    29,
+      -1,    30,    -1,    -1,    18,    -1
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    56,    56,    57
+       0,    56,    56,    57,    57,    60,    61,    64,    65
 };
 #endif
 
@@ -465,7 +466,8 @@ static const char *const yytname[] =
   "OPERADOR_RELACIONAL", "OPERADOR_IGUALDAD", "OPERADOR_UNARIO",
   "OPERADOR_OR", "OPERADOR_AND", "SIZEOF", "OPERADOR_MULTIPLICATIVO",
   "VOID", "IF", "ELSE", "FOR", "WHILE", "DO", "SWITCH", "RETURN",
-  "$accept", "programa", 0
+  "$accept", "programa", "$@1", "line", "sentenciaDeclaracion",
+  "sentencia", 0
 };
 #endif
 
@@ -483,13 +485,13 @@ static const yytype_uint16 yytoknum[] =
 /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,    25,    26,    26
+       0,    25,    26,    27,    26,    28,    28,    29,    30
 };
 
 /* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
-       0,     2,     0,     1
+       0,     2,     0,     0,     3,     1,     1,     0,     1
 };
 
 /* YYDEFACT[STATE-NAME] -- Default rule to reduce with in state
@@ -497,27 +499,27 @@ static const yytype_uint8 yyr2[] =
    means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       2,     0,     1
+       2,     3,     1,     7,     8,     4,     5,     6
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     1
+      -1,     1,     3,     5,     6,     7
 };
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
-#define YYPACT_NINF -1
+#define YYPACT_NINF -18
 static const yytype_int8 yypact[] =
 {
-      -1,     0,    -1
+     -18,     0,   -18,   -17,   -18,   -18,   -18,   -18
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-      -1,    -1
+     -18,   -18,   -18,   -18,   -18,   -18
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
@@ -527,19 +529,19 @@ static const yytype_int8 yypgoto[] =
 #define YYTABLE_NINF -1
 static const yytype_uint8 yytable[] =
 {
-       2
+       2,     4
 };
 
 static const yytype_uint8 yycheck[] =
 {
-       0
+       0,    18
 };
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
    symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,    26,     0
+       0,    26,     0,    27,    18,    28,    29,    30
 };
 
 #define yyerrok		(yyerrstatus = 0)
@@ -1353,14 +1355,28 @@ yyreduce:
         case 3:
 
 /* Line 1455 of yacc.c  */
-#line 57 "../src/Ejemplo_Calculadora_Notacion_Infija.y"
+#line 57 "../src/Analizador.y"
     {flagError = 0;;}
+    break;
+
+  case 7:
+
+/* Line 1455 of yacc.c  */
+#line 64 "../src/Analizador.y"
+    {printf("hola\n");;}
+    break;
+
+  case 8:
+
+/* Line 1455 of yacc.c  */
+#line 65 "../src/Analizador.y"
+    {printf("chau\n");;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1364 "Ejemplo_Calculadora_Notacion_Infija.tab.c"
+#line 1380 "Analizador.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1572,13 +1588,13 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 64 "../src/Ejemplo_Calculadora_Notacion_Infija.y"
+#line 71 "../src/Analizador.y"
 
 void yyerror (char const *s) {
    fprintf (stderr, "Error sintactico en la linea %d\n", yylineno);
 }
 
-void main(){
+int main(){
   #ifdef BISON_DEBUG
     yydebug = 1;
   #endif    
@@ -1592,5 +1608,7 @@ void main(){
 	yyparse();
 
   getchar();
+
+  return 0;
 }
 

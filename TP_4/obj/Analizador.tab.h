@@ -71,7 +71,7 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 20 "../src/Ejemplo_Calculadora_Notacion_Infija.y"
+#line 20 "../src/Analizador.y"
 
   char cadena[30];
   int entero;
@@ -80,7 +80,7 @@ typedef union YYSTYPE
 
 
 /* Line 1676 of yacc.c  */
-#line 84 "Ejemplo_Calculadora_Notacion_Infija.tab.h"
+#line 84 "Analizador.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

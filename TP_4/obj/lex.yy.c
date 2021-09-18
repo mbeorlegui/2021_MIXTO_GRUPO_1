@@ -480,17 +480,18 @@ goto find_rule; \
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 1 "../src/Analizador.l"
 #define INITIAL 0
-#line 3 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 3 "../src/Analizador.l"
 
 #include <stdlib.h>
 #include <string.h>
-#include "Ejemplo_Calculadora_Notacion_Infija.tab.h"
+#include "Analizador.tab.h"
+
+void errorLexico(void);
 
 
-
-#line 494 "lex.yy.c"
+#line 495 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -641,12 +642,12 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 40 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 41 "../src/Analizador.l"
 
 
 
 
-#line 650 "lex.yy.c"
+#line 651 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -739,205 +740,205 @@ do_action:	/* This label is used only to access EOF actions. */
 	{ /* beginning of action switch */
 case 1:
 YY_RULE_SETUP
-#line 44 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 45 "../src/Analizador.l"
 {strcpy(yylval.cadena, yytext); return IF;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 45 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 46 "../src/Analizador.l"
 {strcpy(yylval.cadena, yytext); return ELSE;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 46 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 47 "../src/Analizador.l"
 {strcpy(yylval.cadena, yytext); return FOR;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 47 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 48 "../src/Analizador.l"
 {strcpy(yylval.cadena, yytext); return WHILE;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 48 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 49 "../src/Analizador.l"
 {strcpy(yylval.cadena, yytext); return DO;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 49 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 50 "../src/Analizador.l"
 {strcpy(yylval.cadena, yytext); return SWITCH;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 50 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 51 "../src/Analizador.l"
 {strcpy(yylval.cadena, yytext); return VOID;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 51 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 52 "../src/Analizador.l"
 {strcpy(yylval.cadena, yytext); return RETURN;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 52 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 53 "../src/Analizador.l"
 {strcpy(yylval.cadena, yytext); return OPERADOR_MULTIPLICATIVO;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 53 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 54 "../src/Analizador.l"
 {strcpy(yylval.cadena, yytext); return OPERADOR_ASIGNACION;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 54 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 55 "../src/Analizador.l"
 {strcpy(yylval.cadena, yytext); return OPERADOR_RELACIONAL;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 55 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 56 "../src/Analizador.l"
 {strcpy(yylval.cadena, yytext); return OPERADOR_IGUALDAD;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 56 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 57 "../src/Analizador.l"
 {strcpy(yylval.cadena, yytext); return OPERADOR_UNARIO;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 57 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 58 "../src/Analizador.l"
 {strcpy(yylval.cadena, yytext); return OPERADOR_OR;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 58 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 59 "../src/Analizador.l"
 {strcpy(yylval.cadena, yytext); return OPERADOR_AND;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 59 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 60 "../src/Analizador.l"
 {strcpy(yylval.cadena, yytext); return SIZEOF;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 60 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 61 "../src/Analizador.l"
 {strcpy(yylval.cadena, yytext); return LITERAL_CADENA;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 61 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 62 "../src/Analizador.l"
 {yylval.entero = yytext[1]; return NUM;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 62 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 63 "../src/Analizador.l"
 {yylval.real = atof(yytext); return NUM_REAL;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 63 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 64 "../src/Analizador.l"
 {yylval.entero = strtol(yytext, NULL, 0); return NUM;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 64 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 65 "../src/Analizador.l"
 {yylval.entero = strtol(yytext, NULL, 0);  return NUM;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 65 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 66 "../src/Analizador.l"
 {yylval.entero = atoi(yytext);  return NUM;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 66 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 67 "../src/Analizador.l"
 {strcpy(yylval.cadena,yytext); return TIPO_DATO;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 67 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 68 "../src/Analizador.l"
 {strcpy(yylval.cadena,yytext); return IDENTIFICADOR;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 69 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 70 "../src/Analizador.l"
 {return '+';}     
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 70 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 71 "../src/Analizador.l"
 {return '?';}     
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 71 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 72 "../src/Analizador.l"
 {return ':';}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 72 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 73 "../src/Analizador.l"
 {return '(';}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 73 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 74 "../src/Analizador.l"
 {return ')';}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 74 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 75 "../src/Analizador.l"
 {return '[';}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 75 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 76 "../src/Analizador.l"
 {return ']';}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 76 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 77 "../src/Analizador.l"
 {return '{';}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 77 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 78 "../src/Analizador.l"
 {return '}';}     
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 78 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 79 "../src/Analizador.l"
 {return ',';}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 79 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 80 "../src/Analizador.l"
 {return '=';}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 80 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 81 "../src/Analizador.l"
 {return ';';}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 81 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 82 "../src/Analizador.l"
 
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 82 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 83 "../src/Analizador.l"
 
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 83 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
-{} // Error Lexico
+#line 84 "../src/Analizador.l"
+{errorLexico();} // Error Lexico
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 85 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 86 "../src/Analizador.l"
 ECHO;
 	YY_BREAK
-#line 941 "lex.yy.c"
+#line 942 "lex.yy.c"
 			case YY_STATE_EOF(INITIAL):
 				yyterminate();
 
@@ -1821,7 +1822,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 85 "../src/Ejemplo_Calculadora_Notacion_Infija.l"
+#line 86 "../src/Analizador.l"
 
 
 /*  yytext es lo que lee del archivo de entrada en nuestro caso
@@ -1829,3 +1830,9 @@ int main()
     Para los que son numeros, lo almacenamos en el campo entero
     Para el resto lo almacenamos en el campo cadena 
 */
+
+void errorLexico(void){
+	printf("Error lexico: caracter %s invalido. En linea %d.", yytext, yylineno);
+    getchar();
+    exit(0);
+}

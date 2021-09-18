@@ -1,0 +1,160 @@
+Terminals unused in grammar
+
+   NUM_REAL
+   NUM
+   IDENTIFICADOR
+   TIPO_DATO
+   ERROR
+   LITERAL_CADENA
+   OPERADOR_ASIGNACION
+   OPERADOR_RELACIONAL
+   OPERADOR_IGUALDAD
+   OPERADOR_UNARIO
+   OPERADOR_OR
+   OPERADOR_AND
+   SIZEOF
+   OPERADOR_MULTIPLICATIVO
+   VOID
+   ELSE
+   FOR
+   WHILE
+   DO
+   SWITCH
+   RETURN
+
+
+Estado 1 conflictos: 1 desplazamiento(s)/reducción(ones)
+Estado 3 conflictos: 1 desplazamiento(s)/reducción(ones)
+
+
+Gramática
+
+    0 $accept: programa $end
+
+    1 programa: /* vacío */
+
+    2 $@1: /* vacío */
+
+    3 programa: programa $@1 line
+
+    4 line: sentenciaDeclaracion
+    5     | sentencia
+
+    6 sentenciaDeclaracion: /* vacío */
+
+    7 sentencia: IF
+
+
+Terminales con las reglas donde aparecen
+
+$end (0) 0
+error (256)
+NUM_REAL (258)
+NUM (259)
+IDENTIFICADOR (260)
+TIPO_DATO (261)
+ERROR (262)
+LITERAL_CADENA (263)
+OPERADOR_ASIGNACION (264)
+OPERADOR_RELACIONAL (265)
+OPERADOR_IGUALDAD (266)
+OPERADOR_UNARIO (267)
+OPERADOR_OR (268)
+OPERADOR_AND (269)
+SIZEOF (270)
+OPERADOR_MULTIPLICATIVO (271)
+VOID (272)
+IF (273) 7
+ELSE (274)
+FOR (275)
+WHILE (276)
+DO (277)
+SWITCH (278)
+RETURN (279)
+
+
+No terminales con las reglas donde aparecen
+
+$accept (25)
+    en la izquierda: 0
+programa (26)
+    en la izquierda: 1 3, en la derecha: 0 3
+$@1 (27)
+    en la izquierda: 2, en la derecha: 3
+line (28)
+    en la izquierda: 4 5, en la derecha: 3
+sentenciaDeclaracion (29)
+    en la izquierda: 6, en la derecha: 4
+sentencia (30)
+    en la izquierda: 7, en la derecha: 5
+
+
+estado 0
+
+    0 $accept: . programa $end
+
+    $default  reduce usando la regla 1 (programa)
+
+    programa  ir al estado 1
+
+
+estado 1
+
+    0 $accept: programa . $end
+    3 programa: programa . $@1 line
+
+    $end  desplazar e ir al estado 2
+
+    $end      [reduce usando la regla 2 ($@1)]
+    $default  reduce usando la regla 2 ($@1)
+
+    $@1  ir al estado 3
+
+
+estado 2
+
+    0 $accept: programa $end .
+
+    $default  aceptar
+
+
+estado 3
+
+    3 programa: programa $@1 . line
+
+    IF  desplazar e ir al estado 4
+
+    IF        [reduce usando la regla 6 (sentenciaDeclaracion)]
+    $default  reduce usando la regla 6 (sentenciaDeclaracion)
+
+    line                  ir al estado 5
+    sentenciaDeclaracion  ir al estado 6
+    sentencia             ir al estado 7
+
+
+estado 4
+
+    7 sentencia: IF .
+
+    $default  reduce usando la regla 7 (sentencia)
+
+
+estado 5
+
+    3 programa: programa $@1 line .
+
+    $default  reduce usando la regla 3 (programa)
+
+
+estado 6
+
+    4 line: sentenciaDeclaracion .
+
+    $default  reduce usando la regla 4 (line)
+
+
+estado 7
+
+    5 line: sentencia .
+
+    $default  reduce usando la regla 5 (line)
