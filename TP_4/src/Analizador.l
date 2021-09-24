@@ -8,6 +8,7 @@
 void errorLexico(void);
 
 
+
 %}
 
 %option yylineno

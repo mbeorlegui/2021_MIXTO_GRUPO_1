@@ -1,5 +1,5 @@
 
 if
     if
-        if
-            if
+        for
+            while

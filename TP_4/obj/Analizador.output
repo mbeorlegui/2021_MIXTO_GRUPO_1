@@ -23,8 +23,12 @@ Terminals unused in grammar
    RETURN
 
 
-Estado 1 conflictos: 1 desplazamiento(s)/reducción(ones)
-Estado 3 conflictos: 1 desplazamiento(s)/reducción(ones)
+Rules useless in parser due to conflicts
+
+    7 sentencia: IF
+
+
+Estado 4 conflictos: 2 reducción(ones)/reducción(ones)
 
 
 Gramática
@@ -40,7 +44,7 @@ Gramática
     4 line: sentenciaDeclaracion
     5     | sentencia
 
-    6 sentenciaDeclaracion: /* vacío */
+    6 sentenciaDeclaracion: IF
 
     7 sentencia: IF
 
@@ -64,7 +68,7 @@ OPERADOR_AND (269)
 SIZEOF (270)
 OPERADOR_MULTIPLICATIVO (271)
 VOID (272)
-IF (273) 7
+IF (273) 6 7
 ELSE (274)
 FOR (275)
 WHILE (276)
@@ -105,7 +109,6 @@ estado 1
 
     $end  desplazar e ir al estado 2
 
-    $end      [reduce usando la regla 2 ($@1)]
     $default  reduce usando la regla 2 ($@1)
 
     $@1  ir al estado 3
@@ -124,9 +127,6 @@ estado 3
 
     IF  desplazar e ir al estado 4
 
-    IF        [reduce usando la regla 6 (sentenciaDeclaracion)]
-    $default  reduce usando la regla 6 (sentenciaDeclaracion)
-
     line                  ir al estado 5
     sentenciaDeclaracion  ir al estado 6
     sentencia             ir al estado 7
@@ -134,9 +134,14 @@ estado 3
 
 estado 4
 
+    6 sentenciaDeclaracion: IF .
     7 sentencia: IF .
 
-    $default  reduce usando la regla 7 (sentencia)
+    $end      reduce usando la regla 6 (sentenciaDeclaracion)
+    $end      [reduce usando la regla 7 (sentencia)]
+    IF        reduce usando la regla 6 (sentenciaDeclaracion)
+    IF        [reduce usando la regla 7 (sentencia)]
+    $default  reduce usando la regla 6 (sentenciaDeclaracion)
 
 
 estado 5

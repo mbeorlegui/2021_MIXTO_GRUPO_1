@@ -36,7 +36,7 @@ extern int yylineno;
 %token <cadena> OPERADOR_IGUALDAD
 %token <cadena> OPERADOR_UNARIO
 %token <cadena> OPERADOR_OR
-%token <cadena> OPERADOR_AND
+%token <cadena> OPERADOR_AND        //TERMINALES
 %token <cadena> SIZEOF
 %token <cadena> OPERADOR_MULTIPLICATIVO
 %token <cadena> VOID
@@ -47,6 +47,7 @@ extern int yylineno;
 %token <cadena> DO
 %token <cadena> SWITCH
 %token <cadena> RETURN
+%token <cadena> BREAK
 
 
 %start programa
@@ -61,8 +62,72 @@ line: sentenciaDeclaracion
     | sentencia
 ;
 
+expresion: expresionAsignacion
+         | expresion ', ' expresionAsignacion   //HAY QUE SEGUIR CONSTRUYENDO LOS != TIPOS DE EXPRESIONES
+
 sentenciaDeclaracion: {printf("hola\n");};
-sentencia: IF {printf("chau\n");};
+sentencia: sentenciaExpresion
+           | sentenciaCompuesta
+           | sentenciaSeleccion
+           | sentenciaIteracion
+           | sentenciaSalto
+;
+
+sentenciaExpresion: expresionOpcional ';'
+;
+
+expresionOpcional:   /* Vacio */
+               | expresion
+;
+
+sentenciaCompuesta: '{' listaCompuesta '}'
+;
+
+listaCompuesta: listaDeclaracionesOpcional listaSentenciasOpcional
+              | listaCompuesta listaDeclaracionesOpcional listaSentenciasOpcional
+; //HAY QUE HACER LOS != TIPOS DE LISTAS
+
+listaDeclaracionesOpcional:   /* Vacio */
+                         | listaDeclaraciones
+;
+
+listaSentenciasOpcional:   /* Vacio */
+                      | listaSentencias
+;
+
+listaDeclaraciones:   declaracion ';'
+                     | listaDeclaraciones declaracion ';'
+;
+
+listaSentencias:   sentencia
+                  | listaSentencias sentencia
+;
+
+sentenciaSeleccion: IF '(' expresion ')' sentencia {fprintf(yyout, "Se encontro la sentencia IF\n");}
+                  | IF '(' expresion ')' sentencia ELSE sentencia {fprintf(yyout, "Se encontro la sentencia IF y ELSE\n");}
+                  | SWITCH '(' expresion ')' sentencia {fprintf(yyout, "Se encontro la sentencia SWITCH\n");}
+;
+
+sentenciaIteracion: WHILE '(' expresion ')' sentencia {fprintf(yyout, "Se encontro la sentencia WHILE\n");}                                         
+                  | DO sentencia WHILE '(' expresion ')' ';' {fprintf(yyout, "Se encontro la sentencia DO WHILE\n");}                                  
+                  | FOR '(' forOpcional ';' expresionOpcional ';' expresionOpcional ')' sentencia {fprintf(yyout, "Se encontro la sentencia FOR\n");}
+;
+
+forOpcional:   /* Vacio */
+         | expresion
+         | declaracion
+;
+
+sentenciaSalto: BREAK ';'
+              | RETURN expresionOpcional ';'
+;
+
+
+/* IF {printf("Hay un IF\n");}
+         | WHILE {printf("Hay un WHILE\n");}
+         | FOR {printf("Hay un FOR\n");}
+         | SWITCH {printf("Hay un SWITCH\n");}
+*/
 
 
 /* EXPRESION */
