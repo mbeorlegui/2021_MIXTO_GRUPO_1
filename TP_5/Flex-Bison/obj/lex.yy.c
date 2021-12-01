@@ -1096,47 +1096,47 @@ YY_RULE_SETUP
 case 40:
 /* rule 40 can match eol */
 YY_RULE_SETUP
-#line 64 "../src/Analizador.l"
+#line 66 "../src/Analizador.l"
 {strcpy(yylval.cadena, yytext); return LITERAL_CADENA;}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 65 "../src/Analizador.l"
+#line 67 "../src/Analizador.l"
 {yylval.entero = yytext[1]; return NUM;}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 66 "../src/Analizador.l"
+#line 68 "../src/Analizador.l"
 {yylval.real = atof(yytext); return NUM_REAL;}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 67 "../src/Analizador.l"
+#line 69 "../src/Analizador.l"
 {yylval.entero = strtol(yytext, NULL, 0); return NUM;}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 68 "../src/Analizador.l"
+#line 70 "../src/Analizador.l"
 {yylval.entero = strtol(yytext, NULL, 0);  return NUM;}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 69 "../src/Analizador.l"
+#line 71 "../src/Analizador.l"
 {yylval.entero = atoi(yytext);  return NUM;}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 70 "../src/Analizador.l"
+#line 72 "../src/Analizador.l"
 {strcpy(yylval.cadena,yytext); return IDENTIFICADOR;}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 71 "../src/Analizador.l"
-{printf("\nDetecto error lexico\n"); strcpy(yylval.cadena, yytext); return ERROR_LEXICO;}
+#line 73 "../src/Analizador.l"
+{strcpy(yylval.cadena, yytext); return ERROR_LEXICO;}
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 74 "../src/Analizador.l"
+#line 76 "../src/Analizador.l"
 ECHO;
 	YY_BREAK
 #line 1143 "lex.yy.c"
@@ -2156,7 +2156,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 74 "../src/Analizador.l"
+#line 76 "../src/Analizador.l"
 
 
 /*  yytext es lo que lee del archivo de entrada en nuestro caso

@@ -21,7 +21,7 @@ BFLAGS+=-v -d
 FFLAGS+=
 
 SRC:= $(wildcard $(SRCDIR)/*.l)
-DEPS:= $(wildcard $(IDIR)/*.h) $(wildcard $(SRCDIR)/*.c)
+DEPS:= $(wildcard $(SRCDIR)/*.c) $(wildcard $(IDIR)/*.h) 
 
 TARGETS:=$(patsubst $(SRCDIR)/%.l,%.$(FILE_EXT),$(SRC))
 
@@ -36,7 +36,7 @@ TARGETS:=$(patsubst $(SRCDIR)/%.l,%.$(FILE_EXT),$(SRC))
 	@echo "<<< lex.yy.c creado. >>>"
 	@echo ""
 	@echo "<<< Compilando y enlazando con libfl.a y liby.a >>>"
-	$(CC) $(CFLAGS) $(patsubst $(SRCDIR)/%.l,$(ODIR)/%.tab.c,$<) $(patsubst $(SRCDIR)/%.l,$(ODIR)/%.tab.h,$<) $(ODIR)/lex.yy.c src/Funciones.c src/Funciones.h $(LIBS) -o $@ 
+	$(CC) $(CFLAGS) $(patsubst $(SRCDIR)/%.l,$(ODIR)/%.tab.c,$<) $(patsubst $(SRCDIR)/%.l,$(ODIR)/%.tab.h,$<) $(ODIR)/lex.yy.c $(DEPS) $(LIBS) -o $@ 
 	@echo "<<< $@ creado. >>>"
 	@echo ""
 	@echo "<<< $@ corriendo! >>>"
