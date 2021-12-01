@@ -31,3 +31,5 @@
 1. [Implementación de un Automata Finito Deterministico para gramaticas regulares](https://github.com/mbeorlegui/2021_MIXTO_GRUPO_1/tree/master/TP_1)
 2. [Implementación de un Automata de Pila para expresiones aritméticas](https://github.com/mbeorlegui/2021_MIXTO_GRUPO_1/tree/master/TP_2)
 3. [Implementación de Analizador Léxico en FLEX](https://github.com/mbeorlegui/2021_MIXTO_GRUPO_1/tree/master/TP_3)
+4. [Reconocimiento de expresiones en Flex/Bison](https://github.com/mbeorlegui/2021_MIXTO_GRUPO_1/tree/master/TP_4)
+5. [Compilador YACC de C](https://github.com/mbeorlegui/2021_MIXTO_GRUPO_1/tree/master/TP_5)
